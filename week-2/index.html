@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 2: Data audit</title>
 <meta name="description" content="Is Northwood&#x27;s climate data good enough to disclose to LPs and to survive a buyer&#x27;s diligence, and what must be fixed first?">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Week 2: Data audit">
+<meta property="og:description" content="Is Northwood&#x27;s climate data good enough to disclose to LPs and to survive a buyer&#x27;s diligence, and what must be fixed first?">
+<meta property="og:url" content="https://vetsk01.github.io/week-2/">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/harvest-brand-v1.css">
@@ -35,6 +45,7 @@
 <li><a href="files/requests/baseline-data-request-keystone-2026-09-v4.md" target="_blank" rel="noopener">Data request: Keystone</a><span class="kind">Markdown</span><span>The baseline data Kith needs from this company, with tiers set by what blocks the Week 3 baseline.</span></li>
 <li><a href="files/requests/baseline-data-request-meridian-2026-09-v4.md" target="_blank" rel="noopener">Data request: Meridian</a><span class="kind">Markdown</span><span>The baseline data Kith needs from this company, with tiers set by what blocks the Week 3 baseline.</span></li>
 <li><a href="files/requests/baseline-data-request-novacare-2026-09-v4.md" target="_blank" rel="noopener">Data request: Novacare</a><span class="kind">Markdown</span><span>The baseline data Kith needs from this company, with tiers set by what blocks the Week 3 baseline.</span></li>
+</ul><details class="more-files"><summary>Show all 14</summary><ul class="files">
 <li><a href="files/requests/baseline-data-request-patriot-2026-09-v4.md" target="_blank" rel="noopener">Data request: Patriot</a><span class="kind">Markdown</span><span>The baseline data Kith needs from this company, with tiers set by what blocks the Week 3 baseline.</span></li>
 <li><a href="files/requests/baseline-data-request-pinnacle-2026-09-v4.md" target="_blank" rel="noopener">Data request: Pinnacle</a><span class="kind">Markdown</span><span>The baseline data Kith needs from this company, with tiers set by what blocks the Week 3 baseline.</span></li>
 <li><a href="files/requests/baseline-data-request-ridgeline-2026-09-v4.md" target="_blank" rel="noopener">Data request: Ridgeline</a><span class="kind">Markdown</span><span>The baseline data Kith needs from this company, with tiers set by what blocks the Week 3 baseline.</span></li>
@@ -43,7 +54,7 @@
 <li><a href="files/requests/data-request-northwood-fund-level-2026-09-v4.md" target="_blank" rel="noopener">Fund-level data request</a><span class="kind">Markdown</span><span>The items only Northwood can answer, plus the plan for issuing the company requests.</span></li>
 <li><a href="files/presentation-script-sarah-2026-09-v2.md" target="_blank" rel="noopener">Presentation script</a><span class="kind">Markdown</span><span>The talking notes for walking Sarah through the deck.</span></li>
 <li><a href="files/cover-email-sarah-2026-09-v2.md" target="_blank" rel="noopener">Cover email to Sarah</a><span class="kind">Markdown</span><span>The email that accompanied the memo and deck.</span></li>
-</ul>
+</ul></details>
 <h2>How it was built</h2><ul class="bul"><li>The work ran through scripts, not manual re-entry: raw files, then checks, then the memo figures. The scripts use only the Python standard library, so Northwood can re-run them.</li><li>A verification script re-runs the pipeline and tests the memo&#x27;s figures against fresh outputs. At the last recorded run 133 of 136 checks passed; the 3 fails were deck citations to an older memo version, declared as known.</li><li>All ten questionnaires were extracted twice and compared: 151 shared figures, 0 mismatches.</li><li>Read-only review agents challenged the draft memo. Later, opening five files nobody had read changed the exit date and settled a name ambiguity.</li><li>Limits are stated. I set the readiness weights and materiality thresholds after the first findings were known, so they are held fixed until responses arrive.</li></ul>
 <div class="two"><div class="panel"><h3>My part</h3><ul><li>I approved the audit at the method&#x27;s final, consultant sign-off stage, after the reviewers&#x27; fixes were in.</li><li>I accepted the priority call: rank issues by value at stake, not by data urgency.</li><li>I stopped client-facing edits made without my approval and had the open item run through a decision-review process before going further.</li></ul></div><div class="panel"><h3>The AI's part</h3><ul><li>Claude Code wrote the pipeline scripts, the logs of findings and assumptions, and drafted the memo, deck and eleven data requests.</li><li>Review agents (assurance, client-voice, deck-quality, process) read the drafts and raised the fixes I decided on.</li></ul></div></div>
 <h2>Across the engagement</h2>

@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How I Built It</title>
 <meta name="description" content="How Daniel Vetsko built six weeks of climate consulting work with Claude Code, and how the quality-assurance practice around it grew from nothing to gated, independently checked delivery.">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="How I built it with AI">
+<meta property="og:description" content="How Daniel Vetsko built six weeks of climate consulting work with Claude Code, and how the quality-assurance practice around it grew from nothing to gated, independently checked delivery.">
+<meta property="og:url" content="https://vetsk01.github.io/how-i-built-it/">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/harvest-brand-v1.css">
@@ -73,6 +83,7 @@ th{font-weight:600;color:var(--muted)}
 <div class="stat"><span class="figure">435 findings</span><span class="muted">raised by reviewers, code reviews and checks, Weeks 3 to 6; 21 not closed</span></div>
 <div class="stat"><span class="figure">34 of 79</span><span class="muted">gate-check runs failed before a final pass, Weeks 4 to 6</span></div>
 </div>
+<p class="note" style="margin-top:12px;font-size:15px;color:var(--muted)">What the counts mean: a failed run is a check doing its job, since it stopped the gate until the problem was fixed, and the last run of each week passed in full. Of the 278 findings in Weeks 4 to 6, 82 were must-fix; the rest were should-fix.</p>
 
 <h2>The short version</h2>
 <p>AI made it fast to produce analysis. It did not make the analysis right. Early on, the same session that wrote a number also checked it, and that is not a check. Most of what I learned was about separating those two jobs: writing down the rules before seeing the results, giving reviewers their own narrow briefs and no power to edit, making every check prove it can fail, and keeping a record that a sceptical reader could follow from a headline figure back to its source.</p>

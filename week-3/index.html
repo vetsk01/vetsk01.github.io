@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 3: Carbon inventory and ESG scorecard</title>
 <meta name="description" content="What are the ten companies&#x27; Scope 1 and 2 emissions, can Northwood defend the number to a buyer or LP, and what should it act on?">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Week 3: Carbon inventory and ESG scorecard">
+<meta property="og:description" content="What are the ten companies&#x27; Scope 1 and 2 emissions, can Northwood defend the number to a buyer or LP, and what should it act on?">
+<meta property="og:url" content="https://vetsk01.github.io/week-3/">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/harvest-brand-v1.css">
@@ -34,7 +44,7 @@
 <li><a href="files/05-re-run-guide-v7.html" target="_blank" rel="noopener">Re-run guide</a><span>The steps for Northwood to update the inventory next quarter without Kith.</span></li>
 <li><a href="files/06-reference-data-pack-guide-v3.html" target="_blank" rel="noopener">Reference data pack guide</a><span>Where each outside number (emission factors and similar) comes from, in plain English.</span></li>
 </ul>
-<h2>How it was built</h2><ul class="bul"><li>Every tonne is a reported quantity times a published factor. Lines run through a ledger of 529 lines, with each figure linked to its parent and source row.</li><li>Fourteen method rules were locked before the inventory was built. Each later amendment is logged, and decisions taken with results in view are named in the methodology note.</li><li>The calculation was rebuilt independently from the raw templates. All 376 base and 153 sensitivity lines agree, and the run log is hash-chained so an edited entry shows.</li><li>Reviewers and a code-review agent tested the build at each stage and raised 157 findings; all but 10 were closed. One caught a gate check printing &#x27;ALL PASS&#x27; while three checks did not exist. It was fixed.</li><li>Four checkpoints were signed. The last one, covering the client deck and scorecard, was never run because Week 4 began. The deck was independently reviewed later for this portfolio, and says so.</li></ul>
+<h2>How it was built</h2><ul class="bul"><li>Every tonne is a reported quantity times a published factor. Lines run through a ledger of 529 lines, with each figure linked to its parent and source row.</li><li>Scope 2 is location-based (regional grid averages). Market-based is not calculated because no company reported contract data; the re-run guide says how to add it.</li><li>Fourteen method rules were locked before the inventory was built. Each later amendment is logged, and decisions taken with results in view are named in the methodology note.</li><li>The calculation was rebuilt independently from the raw templates. All 376 base and 153 sensitivity lines agree, and the run log is hash-chained so an edited entry shows.</li><li>Reviewers and a code-review agent tested the build at each stage and raised 157 findings; all but 10 were closed. One caught a gate check printing &#x27;ALL PASS&#x27; while three checks did not exist. It was fixed.</li><li>Four checkpoints were signed. The last one, covering the client deck and scorecard, was never run because Week 4 began. The deck was independently reviewed later for this portfolio, and says so.</li></ul>
 <div class="two"><div class="panel"><h3>My part</h3><ul><li>I set the framing: lead every output with the financial risk, and require an ESG scorecard even though the course slides called it optional.</li><li>I ruled on method calls, including reporting Scope 2 as location-based only and carrying two unusual fleet figures as submitted with a flag.</li><li>I gave ten comments on the fourth draft of the client deck that shaped the final one, and signed the four checkpoints that ran.</li></ul></div><div class="panel"><h3>The AI's part</h3><ul><li>Claude Code built the calculation, the dashboard, the client deck, the scorecard and the evidence view.</li><li>It also wrote the checks, ran the independent recalculation and the reviewer packets, and recorded the findings.</li></ul></div></div>
 <h2>Across the engagement</h2>
 <p><strong>From Week 2.</strong> The Week 2 audit supplied the ten companies, the 138 facility rows and a provisional rule for late data. The priority four from Week 1 stay marked throughout.</p>

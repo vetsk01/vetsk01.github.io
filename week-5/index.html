@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 5: Physical climate risk</title>
 <meta name="description" content="What could hurricanes, floods, drought, heat and storms cost Northwood&#x27;s ten companies before each exit, and what should Northwood do about it?">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Week 5: Physical climate risk">
+<meta property="og:description" content="What could hurricanes, floods, drought, heat and storms cost Northwood&#x27;s ten companies before each exit, and what should Northwood do about it?">
+<meta property="og:url" content="https://vetsk01.github.io/week-5/">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/harvest-brand-v1.css">
@@ -30,6 +40,7 @@
 <li><a href="files/03-method-note-v2.html" target="_blank" rel="noopener">Method note</a><span>How every figure is built, from hazard to exposure to vulnerability to cost, and the limits.</span></li>
 <li><a href="files/04-re-run-note-v2.html" target="_blank" rel="noopener">Re-run note</a><span>How an analyst at Northwood updates the analysis with no Kith access.</span></li>
 <li><a href="files/05-vulnerability-register-v3.html" target="_blank" rel="noopener">Vulnerability register</a><span>One row per dependency, 223 rows, searchable and sortable.</span></li>
+</ul><details class="more-files"><summary>Show all 13</summary><ul class="files">
 <li><a href="files/06-scenario-outputs-v2.html" target="_blank" rel="noopener">Scenario outputs</a><span>Every preset figure by company, channel and layer, with sources.</span></li>
 <li><a href="files/07-lever-results-v2.html" target="_blank" rel="noopener">Lever results</a><span>Each lever with value protected, cost, tail protection, timing and verdict.</span></li>
 <li><a href="files/08-assumption-ledger-v2.html" target="_blank" rel="noopener">Assumption ledger</a><span>Every assumption with its basis, how it was tested and its status.</span></li>
@@ -37,7 +48,7 @@
 <li><a href="files/10-reference-data-index-v2.html" target="_blank" rel="noopener">Reference data index</a><span>Every input the build reads, tagged seeded, fetched, synthesised or assumed.</span></li>
 <li><a href="files/11-data-requests-v3.html" target="_blank" rel="noopener">Data requests</a><span>Each gap filled for now by a synthesised or assumed input, with who holds the answer.</span></li>
 <li><a href="files/12-week6-handoff-v2.html" target="_blank" rel="noopener">Week 6 hand-off</a><span>The historical hand-off note to the disclosure work.</span></li>
-</ul>
+</ul></details>
 <h2>Data and method</h2><p class="note">The method notes, data and re-run steps that let the client reproduce the work without us.</p><ul class="files">
 <li><a href="files/data/method-note-v1.md" target="_blank" rel="noopener">Method note (markdown)</a><span class="kind">Markdown</span><span>The method note as a plain text file.</span></li>
 <li><a href="files/data/re-run-note-v1.md" target="_blank" rel="noopener">Re-run note (markdown)</a><span class="kind">Markdown</span><span>Update steps, script order and checks.</span></li>
@@ -45,6 +56,7 @@
 <li><a href="files/data/vulnerability-register-v2.csv" target="_blank" rel="noopener">Vulnerability register</a><span class="kind">CSV</span><span>All 223 rows as data.</span></li>
 <li><a href="files/data/outputs-v1.csv" target="_blank" rel="noopener">Scenario outputs</a><span class="kind">CSV</span><span>Every preset figure as data.</span></li>
 <li><a href="files/data/lever-results-v1.csv" target="_blank" rel="noopener">Lever results</a><span class="kind">CSV</span><span>Lever results as data.</span></li>
+</ul><details class="more-files"><summary>Show all 14</summary><ul class="files">
 <li><a href="files/data/assumption-ledger-v1.csv" target="_blank" rel="noopener">Assumption ledger</a><span class="kind">CSV</span><span>The assumptions as data.</span></li>
 <li><a href="files/data/sensitivity-v1.csv" target="_blank" rel="noopener">Sensitivity</a><span class="kind">CSV</span><span>The sensitivity runs as data.</span></li>
 <li><a href="files/data/reference-data-index-v1.csv" target="_blank" rel="noopener">Reference data index</a><span class="kind">CSV</span><span>Inputs with size and checksum.</span></li>
@@ -53,7 +65,7 @@
 <li><a href="files/data/grid-hazard-v1.json" target="_blank" rel="noopener">Scenario grid, hazard</a><span class="kind">JSON</span><span>The precomputed grid behind the dashboard&#x27;s builder.</span></li>
 <li><a href="files/data/grid-dependency-v1.json" target="_blank" rel="noopener">Scenario grid, dependency</a><span class="kind">JSON</span><span>The dependency-level grid behind the builder.</span></li>
 <li><a href="files/delivery-lineage-v2.csv" target="_blank" rel="noopener">Delivery lineage</a><span class="kind">CSV</span><span>Which source file each delivered page came from.</span></li>
-</ul>
+</ul></details>
 <h2>How it was built</h2><ul class="bul"><li>The register has one row per site or supplier dependency, 223 rows for ten companies. Own sites are placed from the data room&#x27;s coordinates (138 of 139; one office has only a city).</li><li>The engine is a bottom-up stress model, not a catastrophe model. Hazard frequencies come from public FEMA data and flood damage from published depth-damage curves. Every result is low, central and high, and gross of insurance; insurance is shown separately.</li><li>The data room had no insurance schedules, so the insurance programme is synthesised by stated rules and flagged as the weakest assumption. Assumptions are listed in a ledger with a data request to close each gap.</li><li>I replayed nine events the companies reported, with severity fixed beforehand. The first run passed five of nine; two assumptions were narrowed, two events could not be tested, and the final run passed all seven tested. This is in-sample and the pages say so.</li><li>Independent check scripts and a clean-folder re-run sit behind the build. Before publishing, a further check script passed 101 of 101 checks on the dashboard&#x27;s figures, and three deliberately changed inputs (for example the buyer&#x27;s years) were all detected. At the cohort&#x27;s gate review, 14 of 14 presentation findings were fixed; the portfolio edition then had two further review rounds.</li></ul>
 <div class="two"><div class="panel"><h3>My part</h3><ul><li>I set the scope to all ten companies, asked for a scenario builder alongside pre-set scenarios, and ruled that upside and downside are shown gross and never netted.</li><li>I decided which hazards to include (adding convective storms) and which switches the builder needed, and I deferred the red-team step.</li><li>I challenged the builder&#x27;s claim that the 138 coordinates were only city-level; the course slides said otherwise. I reversed the call, and 13 conflicts between company statements and flood maps became findings.</li><li>For this portfolio, I approved restating the expected loss as a lower bound and the $18.2M as a stress scenario, not a probability.</li></ul></div><div class="panel"><h3>The AI's part</h3><ul><li>Claude built the register, the scenario engine, the dashboard and the twelve pages.</li><li>Claude synthesised the insurance programme and the other missing inputs, and listed each as an assumption or data request.</li><li>Claude wrote the independent check scripts and ran the reviewers.</li><li>Claude&#x27;s own wrong premise about the coordinates and some claims it added itself (for example that each step was checked before the next) were caught in review and corrected.</li></ul></div></div>
 <h2>Across the engagement</h2>

@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Week 4: Materiality and initiatives</title>
 <meta name="description" content="Which climate exposures at Northwood&#x27;s ten companies actually move what a buyer pays, and what should Northwood do about them first?">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Week 4: Materiality and initiatives">
+<meta property="og:description" content="Which climate exposures at Northwood&#x27;s ten companies actually move what a buyer pays, and what should Northwood do about them first?">
+<meta property="og:url" content="https://vetsk01.github.io/week-4/">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/harvest-brand-v1.css">
@@ -39,6 +49,7 @@
 <li><a href="files/data/exposure-lines-v6.csv" target="_blank" rel="noopener">Exposure lines</a><span class="kind">CSV</span><span>Every exposure line per company, with impact, chance and expected loss.</span></li>
 <li><a href="files/data/exposure-summary-v6.csv" target="_blank" rel="noopener">Exposure summary</a><span class="kind">CSV</span><span>Expected loss by company.</span></li>
 <li><a href="files/data/d4-matrix-v5.csv" target="_blank" rel="noopener">Materiality matrix</a><span class="kind">CSV</span><span>Each exposure&#x27;s place on the matrix.</span></li>
+</ul><details class="more-files"><summary>Show all 14</summary><ul class="files">
 <li><a href="files/data/d4-summary-v5.csv" target="_blank" rel="noopener">Matrix summary</a><span class="kind">CSV</span><span>Counts per matrix cell.</span></li>
 <li><a href="files/data/d5-initiatives-v6.csv" target="_blank" rel="noopener">Initiatives</a><span class="kind">CSV</span><span>The sized initiatives with cost, payback and value.</span></li>
 <li><a href="files/data/d5-ranking-v6.csv" target="_blank" rel="noopener">Initiative ranking</a><span class="kind">CSV</span><span>The ranked backlog.</span></li>
@@ -47,7 +58,7 @@
 <li><a href="files/data/revision-benchmarks-v1.csv" target="_blank" rel="noopener">Revision benchmarks</a><span class="kind">CSV</span><span>The published benchmarks behind the cost estimates.</span></li>
 <li><a href="files/data/revision-validation-v1.csv" target="_blank" rel="noopener">Revision validation</a><span class="kind">CSV</span><span>Cross-checks of those estimates.</span></li>
 <li><a href="files/delivery-lineage-v1.csv" target="_blank" rel="noopener">Delivery lineage</a><span class="kind">CSV</span><span>Which source file each delivered page was built from.</span></li>
-</ul>
+</ul></details>
 <h2>How it was built</h2><ul class="bul"><li>I started from the Week 3 emissions and the data room&#x27;s financials, and the footprint carried over matches exactly (23,437 t for the full year; 21,778 t over the ownership period).</li><li>Each company got six exposure lines (weather, energy price, insurance, supplier concentration, customer data requests, carbon price). Expected loss is the impact times the yearly chance. Every figure has a grade A, B or C; 51 of the 56 dollar lines are Kith estimates and are marked with a dagger.</li><li>Where the data room was silent I used published benchmarks and cross-checked them. The cross-check on lighting paybacks held for 2 of 2 companies; it was not possible for solar or HVAC, and the deck says so.</li><li>The build had 87 check scripts, and each check names a deliberately wrong input it must reject. 54 completion checks were run along the way, 23 of them failed before the work was fixed; the last run passed 16 of 16.</li><li>Independent reviewers read it in four roles (method, evidence, audience, process) and raised 38 findings in the last round, all fixed. The handoff states a clean-folder re-run rebuilds all 77 delivered outputs byte for byte.</li></ul>
 <div class="two"><div class="panel"><h3>My part</h3><ul><li>I set the scope and order of work: do the five brief deliverables first, treat the brief&#x27;s numbers as illustrative and take financials from the data room.</li><li>I fixed the report date, the financial basis and which outside datasets could be downloaded.</li><li>I approved the process changes when the review cycle proved too heavy.</li><li>I approved recording conflicting monthly figures as they stand rather than resolving them.</li></ul></div><div class="panel"><h3>The AI's part</h3><ul><li>Claude built the connected dataset, the exposure model, the matrix, the ranking and the explorer, using 24 scripts run in a fixed order.</li><li>Claude wrote the check scripts and the tests that try to break them.</li><li>Claude ran the independent reviewers, applied their fixes, and found that two tests named superseded files and so could not fail.</li><li>Reviewers caught that Ridgeline&#x27;s $120,000 hail loss belonged to the building owner, and that one saving used an unnamed fuel price instead of the signed one. Both were corrected.</li></ul></div></div>
 <h2>Across the engagement</h2>
