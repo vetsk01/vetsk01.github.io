@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LP report guide</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/lp-report/README-v2.md</span></div>
+<div class="doc"><h1>D3: anonymised LP climate report (v2)</h1>
+<p>Portfolio edition: Kith Climate cohort case, fictional client. Final version. Nothing here has been sent: Investor Relations reviews the report before it reaches LPs (protocol LP Disclosure rule 4), and sending is Northwood's decision. The v1 draft files in this folder are kept as frozen; use the v2 files.</p>
+<h2>Files</h2>
+<div class="tw"><table><thead><tr><th>File</th><th>What it is</th></tr></thead><tbody><tr><td><code>northwood-lp-climate-report-v2.md</code></td><td>The report in TCFD order: Basis of preparation (with the protocol's qualification sentence), Governance, Strategy, Risk management, Metrics and targets, aggregate data rows</td></tr><tr><td><code>content-index-&lt;framework&gt;-v2.csv</code></td><td>For IFRS S2, ESRS E1, SFDR PAI and EDCI: each requirement, whether this report meets it, and where</td></tr><tr><td><code>qa-result-v2.md</code></td><td>The 22 QA checks on this version (18 pass, 4 not applicable, none fail)</td></tr></tbody></table></div>
+<p>The sign-off list and the company-level data table are internal. They are written to the case's <code>out/</code> folder (<code>internal-signoff-v2.md</code>, <code>internal-data-table-v2.md</code>) and are never copied here. The builder refuses to copy if QA fails or if any company name, slug, first word or internal id appears in a copied file.</p>
+<h2>What changed from v1</h2>
+<ul><li>The Before release list is closed: the report date is the delivery date, the governance paragraph names Sarah Mitchell as the responsible executive and says that Northwood's formal confirmation of the arrangements is on its list of actions, and the source wording stands as approved by the engagement owner.</li><li>The physical-risk exposure is split by fund: Fund I $1.9M and Fund II $10.7M of the $12.6M central case, each with its range.</li><li>Scope 3 is estimated from spend: about 289,434 tCO2e on the ownership basis, range 267,614 to 303,981 tCO2e (pay assumption only), grade C.</li><li>Financed emissions under PCAF: 12,494 tCO2e (Fund I 5,380, Fund II 7,114).</li><li>Content indices: IFRS S2 7 of 18 met as delivered (v1: 6); 6 on portfolio review, SFDR PAI 4 of 10 (v1: 2) (as delivered; 1 on portfolio review), EDCI 3 of 7 (v1: 2) (as delivered; 1 on portfolio review), ESRS E1 2 of 13 (as delivered; 1 on portfolio review).</li></ul>
+<h2>How it is made</h2>
+<p>Figures and counts are tokens resolved from the data table, never typed: <code>{{fig:&lt;concept&gt;}}</code>, <code>{{count:&lt;concept&gt;=&lt;answer&gt;}}</code>, <code>{{range:&lt;concept&gt;}}</code>, <code>{{row:&lt;id&gt;}}</code>. The narrative is a reviewed file (<code>my-work/week-6/pipeline/narrative-v2.json</code>); descriptors are in <code>my-work/week-6/pipeline/descriptors-v1.csv</code> (a Fund I portfolio company, four; a Fund II portfolio company, six; minimum group size 3). Where a fund roll-up row exists the report uses it and does not add the company rows to it (QA Q22). By-fund rows are fund-only concepts named in the settings, so they are never summed with company rows. The Scope 3 and PCAF method is <code>my-work/week-6/fund-level/library/methodology/scope3-pcaf-method-v1.md</code>.</p>
+<h2>Re-run next year (no Kith)</h2>
+<p>Follow <code>my-work/week-6/fund-level/rerun-note-v2.md</code>: intake, engine, applicability, QA, then <code>my-work/week-6/pipeline/build-d3-v1.py</code>. Edit the narrative only in the narrative file; change a descriptor only with the group-size rule in mind (QA Q21 checks it); set the report date in the manifest.</p>
+<h2>What the report says plainly, and what remains open</h2>
+<ul><li>It states the absences: no board oversight, no dedicated climate role, no target (ten of ten companies).</li><li>Not in the report: market-based Scope 2 (needs electricity contracts, DR6-05), Scope 3 by category (needs supplier spend, DR6-16), internal carbon price, climate-linked pay, renewable share, the portfolio data-quality distribution.</li><li>Six QA checks still pass inputs a reader would call wrong (a meaningless source, a number typed in words, a forward claim with no trigger word, an empty boundary line, a lower-case citation, a location beside a descriptor). Sign-off reading covers them.</li></ul></div>
+</div></body></html>

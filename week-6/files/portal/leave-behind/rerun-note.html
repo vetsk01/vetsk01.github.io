@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Re-run note</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/rerun-note-v2.md</span></div>
+<div class="doc"><h1>Re-run note (v2): update Northwood's disclosure next year with no Kith</h1>
+<p>Plain-language steps to rebuild every output from the client's files. Run each command from the project folder (the one that holds <code>data/</code> and <code>my-work/</code>), in this order. Each step names what it makes. The clean re-run check reads the commands in the table below, so keep its format if you edit it. Version 2 adds the Scope 3 estimate, PCAF financed emissions and the exposure by fund; the method is in <code>my-work/week-6/fund-level/library/methodology/scope3-pcaf-method-v1.md</code>.</p>
+<h2>Who does what</h2>
+<p>An analyst or IT colleague runs the commands below: they are programs, not spreadsheets. Sarah's part is the review at the end: open the dashboard, read the headline numbers against last year's, check the LP report, and decide which data requests to send. Nothing here needs Kith.</p>
+<h2>Before you start</h2>
+<ol><li>Put the new year's files in the data room: the carbon collection file, the ten climate questionnaires, the company spine and financials, and the frozen emissions, exposure and physical-risk outputs your update produces. The manifest (<code>my-work/week-6/manifest-v*.json</code>) lists every input and its fingerprint; a changed input needs a new manifest version.</li><li>Update <code>my-work/week-6/pipeline/questionnaire-reads-v1.csv</code>: each row is an answer with a quote that the intake step checks word for word against the questionnaire.</li><li>For the Scope 3 estimate, re-read the BLS average pay figures (<code>my-work/week-6/pipeline/bls-average-pay-v1.csv</code> gives the URL of each) and check the spend map (<code>my-work/week-6/pipeline/scope3-spend-map-v2.csv</code>) still fits each company. Save changed files as new versions.</li><li>Set the report date in the manifest settings. No script holds a date.</li><li>Re-read the framework sources whose re-check date has passed (<code>my-work/week-6/fund-level/library/framework-freshness-v1.csv</code>) and record what you read in the verification log.</li></ol>
+<h2>The steps</h2>
+<div class="tw"><table><thead><tr><th>Step</th><th>Command</th><th>What it makes</th></tr></thead><tbody><tr><td>1</td><td><code>python3 -I my-work/week-6/pipeline/intake-v1.py . my-work/week-6/fund-level/case-northwood-cy2025-v2</code></td><td>The case: data table (including Scope 3, financed emissions and the by-fund rows), settings, facts, company map</td></tr><tr><td>2</td><td><code>python3 -I my-work/week-6/fund-level/engine/link_register.py</code></td><td>Links each disclosure concept to the framework requirements</td></tr><tr><td>3</td><td><code>python3 -I my-work/week-6/fund-level/engine/run_engine.py --case my-work/week-6/fund-level/case-northwood-cy2025-v2</code></td><td>The filled register, coverage matrix, framework content indices and the LP report text</td></tr><tr><td>4</td><td><code>python3 -I my-work/week-6/fund-level/engine/run_applicability.py --case my-work/week-6/fund-level/case-northwood-cy2025-v2</code></td><td>Which frameworks apply: yes, no, unknown, monitor</td></tr><tr><td>5</td><td><code>python3 -I my-work/week-6/fund-level/qa/run_qa.py --case my-work/week-6/fund-level/case-northwood-cy2025-v2</code></td><td>The 22 quality checks on the report; it must say QA PASS</td></tr><tr><td>6</td><td><code>python3 -I my-work/week-6/pipeline/build-d2-v1.py .</code></td><td>D2: evidence map, data requests, applicability and coverage files</td></tr><tr><td>7</td><td><code>python3 -I my-work/week-6/pipeline/build-d3-v1.py .</code></td><td>D3: the LP report folder (refuses to copy if QA failed or a company is identifiable)</td></tr><tr><td>8</td><td><code>python3 -I my-work/week-6/pipeline/build-d4-v1.py .</code></td><td>D4: the dashboard page, its data and the query pack</td></tr><tr><td>9</td><td><code>python3 -I my-work/week-6/pipeline/build-d5-v1.py .</code></td><td>D5: the ten board pages</td></tr></tbody></table></div>
+<p>For a new year, use a new case folder and output version: use a new case folder whose name ends in the next version number and change the <code>V</code> setting at the top of the four build scripts. The engine and QA name their outputs after the case folder.</p>
+<h2>After the steps</h2>
+<ul><li>Run <code>python3 -I my-work/week-6/fund-level/dashboard/check_dashboard.py .</code> and <code>python3 -I my-work/week-6/fund-level/board-pages/check_board_pages.py .</code>; both must end in PASS.</li><li>Run the three test files in <code>my-work/week-6/fund-level/tests/</code> to prove every check can still fail.</li><li>Read <code>my-work/week-6/fund-level/register/northwood-data-requests-v2.md</code> and send the requests you decide to send (nothing is sent by the scripts).</li><li>Edit the narrative only in <code>my-work/week-6/pipeline/narrative-v2.json</code>. The scripts resolve every figure from the data; never type a figure into the text.</li></ul></div>
+<p class="note" style="margin-top:32px">Portfolio edition: Kith Climate cohort case, fictional client.</p></div></body></html>

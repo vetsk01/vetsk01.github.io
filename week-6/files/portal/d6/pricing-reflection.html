@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pricing reflection</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/process-log/pricing-reflection-v2.md</span></div>
+<div class="doc"><h1>Pricing reflection (v2)</h1><p class="note"><strong>Record ids.</strong> D-6-n is a Week 6 decision, J-n a journal entry, F-0n a review finding, DR6-n a data request, A-n an assumption; all are in the engagement record.</p>
+<p>D6, part 3 of 3. Final version. Daniel Vetsko (engagement owner) set the order (D-6-8): pricing comes after the build. Version 2 records his choice: <strong>option A, an annual refresh retainer</strong> (D-6-8 closed at close-out). It states what the Week 1 proposal priced, what was delivered, which work is fixed and which scales with the number of companies, and why option A fits. No fee is set here; effort hours were not measured (process log).</p>
+<h2>1. What the proposal priced</h2>
+<p>Fixed fee of $220,000 for six weeks: $70,000 for the fund-level workstream and $37,500 for each of four companies (Sterling, Clearview, Harvest Ridge, Meridian), billed half at kickoff and half at Week 6. Additional companies were quoted at the same $37,500 each, with a recurring quarterly cadence suggested afterwards. The proposal's central claim was that AI-native depth is "priced once, in the build", so extending to more companies is "closer to marginal cost than fixed cost".</p>
+<h2>2. What was delivered against that</h2>
+<ul><li>All ten companies, not four, were carried through Weeks 3 to 6.</li><li>At the proposal's own rate, the six extra companies would price at $225,000, more than the entire proposed fee.</li><li>Week 6 produced a library any client can use, plus the Northwood engagement run on it, now including Scope 3, PCAF financed emissions and the exposure by fund.</li></ul>
+<h2>3. What is fixed work and what scales per company</h2>
+<p>Fixed, paid once: the reference library and its verification; the engine, register and 22 quality checks with their failing-case tests; the dashboard and query pack; the gate process and the clean re-run check; the Scope 3 and PCAF method.</p>
+<p>Per company, repeated each cycle: reading one questionnaire, the data join, one set of figures checked against the frozen inputs, one board page and its checks, one set of data requests, and, in the field, the contact with the company's CFO or operating lead for data and sign-off.</p>
+<p>The record supports the proposal's claim for the build work: one pipeline handled ten companies, and the close-out additions were one change each. It does not show how long the per-company contact work takes.</p>
+<h2>4. The choice: option A, annual refresh retainer</h2>
+<div class="tw"><table><thead><tr><th>Option</th><th>Structure</th><th>Status</th></tr></thead><tbody><tr><td><strong>A. Annual refresh retainer</strong></td><td>A fixed annual fee for re-running the ten companies on the protocol's cycle, with the fixed work already built; reviewer gate included</td><td><strong>Chosen (D-6-8)</strong></td></tr><tr><td>B. Per-company onboarding</td><td>A lower per-company rate for each new company, plus the annual refresh</td><td>Not chosen; can be added when Northwood acquires a company</td></tr><tr><td>C. Self-service with a review gate</td><td>Northwood's analyst runs the re-run; Kith reviews and signs the gate</td><td>Not chosen; the leave-behind still makes it possible</td></tr><tr><td>D. Hold the proposal's per-company rate</td><td>$37,500 per additional company</td><td>Not chosen</td></tr></tbody></table></div>
+<p><strong>Why A fits.</strong> It matches the protocol's own annual cycle (templates in January, data by mid-March, footprint by mid-April, board reviews in the fourth quarter); it prices the fixed work once, as the proposal claimed; and it suits a COO who should not have to run Python. <strong>The risk to manage:</strong> it is underpriced if data chasing is heavier than the build suggests, so the first cycle should be timed and the fee reset from it.</p>
+<p><strong>What the quote should say.</strong> Which items are fixed and which scale, so Northwood can see that the structure is the one the proposal claimed; that new companies are priced separately; and what the retainer includes from the open list (re-verifying frameworks, the SB 253 re-check, turning DR6-16 answers into a category-level Scope 3).</p></div>
+<p class="note" style="margin-top:32px">Portfolio edition: Kith Climate cohort case, fictional client.</p></div></body></html>

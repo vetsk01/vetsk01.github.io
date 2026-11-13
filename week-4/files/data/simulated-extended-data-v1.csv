@@ -1,0 +1,23 @@
+company_slug,plant,city,parameter,value,unit,central,range_low,range_high,anchor,label,seed,preregistered_by,preregistration_date
+harvest-ridge-foods,HRF-001,Nashville,annual_water_use,7398391,gallons a year,7681034,5760776,9601293,judgment (headcount share of the reported remainder),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-002,Murfreesboro,annual_water_use,4878281,gallons a year,4810345,3607759,6012931,judgment (headcount share of the reported remainder),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-003,Bowling Green,annual_water_use,10000000,gallons a year,10000000,10000000,10000000,"reported (questionnaire Section 7, about 10M)",SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-004,Chattanooga,annual_water_use,5723328,gallons a year,5508621,4131466,6885776,judgment (headcount share of the reported remainder),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,all,all plants,summer_peak_factor,1.024,ratio of summer-month use to the annual monthly average,1.25,1,1.562,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-003,Bowling Green,cip_share_of_water,0.4752,share of plant water used for clean-in-place,0.6,0.45,0.75,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-001,Nashville,summer_month_water_use,631589,"gallons a month, derived from the two values above",770666,616533,963332,judgment (derived),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-002,Murfreesboro,summer_month_water_use,416451,"gallons a month, derived from the two values above",508154,406523,635193,judgment (derived),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-003,Bowling Green,summer_month_water_use,853684,"gallons a month, derived from the two values above",1041667,833333,1302083,judgment (derived),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-004,Chattanooga,summer_month_water_use,488591,"gallons a month, derived from the two values above",596180,476944,745225,judgment (derived),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-001,Nashville,site_area,23.3,acres,20,10,30,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-001,Nashville,impervious_share,72.52,percent of site,70,35,100,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-001,Nashville,distance_to_surface_water,1059,metres,800,400,1200,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-002,Murfreesboro,site_area,25.83,acres,20,10,30,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-002,Murfreesboro,impervious_share,51.17,percent of site,70,35,100,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-002,Murfreesboro,distance_to_surface_water,769.4,metres,800,400,1200,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-003,Bowling Green,site_area,23.57,acres,20,10,30,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-003,Bowling Green,impervious_share,90.32,percent of site,70,35,100,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-003,Bowling Green,distance_to_surface_water,303.2,metres,400,200,600,judgment (questionnaire: industrial park near a small creek),SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-004,Chattanooga,site_area,16.84,acres,20,10,30,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-004,Chattanooga,impervious_share,99.67,percent of site,70,35,100,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09
+harvest-ridge-foods,HRF-004,Chattanooga,distance_to_surface_water,830.1,metres,800,400,1200,judgment,SIMULATED,20261009,D-4-59; D-4-63,2026-10-09

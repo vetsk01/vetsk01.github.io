@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Board pages guide</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/board-pages/README-v2.md</span></div>
+<div class="doc"><h1>D5: ten board-tier climate pages (v2)</h1>
+<p>Portfolio edition: Kith Climate cohort case, fictional client. In the case, each page is for one company's board and holds that company's data only. Nothing has been sent. At gate G2 the v1 Meridian and Keystone pages were hashed; the G4 freeze hashes the v2 pages for those two. The other v1 pages are kept unedited. Use the v2 pages. Four gates were signed; the G4 freeze hashes 85 files, including 2 of the 10 board pages; the other eight pages come from the same builder and passed checks B01 to B09.</p>
+<h2>Where the pages are</h2>
+<p>One page per company, at <code>my-work/week-6/&lt;company folder&gt;/board-page-v2.html</code>, with <code>board-page-data-v2.json</code> beside it (every figure on the page). All ten companies get the same page.</p>
+<h2>What changed from v1</h2>
+<p>The pages carry the delivery report date instead of a provisional draft date. Their figures are unchanged: the Scope 3 estimate and financed emissions are portfolio disclosures and are not shown on company board pages.</p>
+<h2>What each page holds (protocol Tier 3)</h2>
+<p>What the board needs to know (three dollar figures); emissions and energy, each beside its cost; risk profile in dollars as a share of EBITDA; the action plan; peers; what Northwood asks of management. Plain language: no framework names or unit jargon. Dollar amounts follow the deliverable standards ($X.XM); below $50K a figure is shown as $XK, because the standard would print a false $0.0M.</p>
+<h2>Rules the pages follow, and the checks</h2>
+<p><code>check_board_pages.py</code> (B01 to B09) re-derives each page from the case data and the frozen Week 3 to 5 files and tests: figures recompute; this company's data only; every metric beside a financial effect or a stated reason; confidentiality footer; peer section; plain language; number format; self-contained; data grade equals Week 3. <code>my-work/week-6/fund-level/tests/test_board_pages.py</code> proves each check can fail.</p>
+<h2>Points for the deal leads (Northwood actions)</h2>
+<ul><li><strong>Keystone data note.</strong> The Keystone page says its therapy-session data is inconsistent with its revenue. Keystone management should see and agree that wording before the board does.</li><li><strong>Meeting date.</strong> The pages carry no board meeting date; the protocol ties the review to the Q4 board meeting. The deal lead sets it.</li><li><strong>Peers.</strong> Public ENERGY STAR data supports a comparison for three office sites at two companies (Meridian head office 1.7 times the US office median; Ridgeline Denver 2.3x and Phoenix 1.4x). The other eight pages state why none can be calculated. Floor area and the bills may cover different space; management has not confirmed.</li><li><strong>Carbon price and customer line.</strong> The Week 4 carbon-price line overlaps the energy line and is not shown on its own; the customer carbon-data figure is an upper what-if, never added to the expected-cost total.</li></ul>
+<h2>Rebuild</h2>
+<p><code>python3 -I my-work/week-6/pipeline/build-d5-v1.py &lt;repo-root&gt;</code> after the case is rebuilt, then <code>python3 -I my-work/week-6/fund-level/board-pages/check_board_pages.py &lt;repo-root&gt;</code>.</p></div>
+</div></body></html>

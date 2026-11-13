@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I Built It</title>
+<meta name="description" content="How Daniel Vetsko built six weeks of climate consulting work with Claude Code, and how the quality-assurance practice around it grew from nothing to gated, independently checked delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/harvest-brand-v1.css">
+<style>
+main{max-width:860px;margin:0 auto;padding:0 28px 48px}
+.hero{padding:48px 0 24px}
+.hero .kicker{margin:0 0 10px;font-size:16px}
+.hero h1{font-size:clamp(32px,5vw,48px);margin:0 0 16px;max-width:20ch}
+.lede{font-size:19px;line-height:1.55;margin:0;max-width:62ch}
+h2{font-size:clamp(24px,3.4vw,30px);margin:56px 0 14px}
+h3{font-size:20px;margin:28px 0 6px}
+p{margin:0 0 14px;max-width:68ch}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px}
+.stat,.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat .figure{display:block;font-size:30px;line-height:1.1}
+.stat .muted{display:block;margin-top:4px;font-size:14px;line-height:1.4}
+/* timeline */
+.tl{list-style:none;margin:20px 0 0;padding:0;border-left:2px solid var(--line)}
+.tl li{position:relative;padding:0 0 22px 22px}
+.tl li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl .label{display:block}
+.tl h3{margin:2px 0 4px}
+.tl p{margin:0 0 6px;font-size:16px}
+.tl .muted{font-size:15px}
+/* CLAUDE.md bars */
+.bars{margin:18px 0 6px;display:grid;gap:6px}
+.bar{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;font-size:14px}
+.bar div{background:var(--tint);border-radius:4px;overflow:hidden}
+.bar span{display:block;background:var(--accent);color:var(--bg);padding:2px 8px;white-space:nowrap;font-size:13px;min-width:max-content}
+.vers{margin:14px 0 0;padding-left:20px}
+.vers li{margin:0 0 8px;max-width:66ch}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:18px 0 0}
+.card{border-top:3px solid var(--accent)}
+.card h3{font-size:18px;margin:4px 0 6px}
+.card p{font-size:15.5px;line-height:1.5;margin:0}
+.card .src{display:block;margin-top:8px;font-size:13px}
+.tablewrap{overflow-x:auto;margin:14px 0 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted)}
+.principles{counter-reset:p;list-style:none;padding:0;margin:18px 0 0}
+.principles li{counter-increment:p;position:relative;padding:0 0 14px 40px;max-width:68ch}
+.principles li::before{content:counter(p);position:absolute;left:0;top:0;font-weight:600;color:var(--accent);font-size:22px;line-height:1.2}
+.principles strong{display:block}
+.edition{padding:14px 28px}
+@media (max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.stats{grid-template-columns:1fr}}
+@media (max-width:600px){.nav,.edition{padding-left:16px;padding-right:16px}main{padding:0 16px 40px}}
+</style>
+<link rel="stylesheet" href="../assets/site-v1.css">
+</head>
+<body>
+<div class="nav"><a class="wordmark" href="../index.html">Daniel <b>Vetsko</b></a><ul><li><a href="../index.html#work">Work</a></li><li><a href="../how-i-built-it/index.html" aria-current="page">How I built it</a></li><li><a href="../index.html#about">About</a></li><li><button class="theme" type="button" aria-label="Switch colour theme">Dark</button></li></ul></div>
+
+<main>
+<div class="hero">
+<p class="kicker">Capstone, Kith Climate cohort</p>
+<h1>How I built it with AI</h1>
+<p class="lede">Over six weeks I delivered a climate engagement for a fictional mid-market private equity fund, working with Claude Code throughout. The deliverables are on the week pages. This page is about the other thing I built along the way: a way of working that makes AI-produced analysis checkable, and how it grew from no review at all to gated, independently checked delivery.</p>
+</div>
+
+<div class="stats">
+<div class="stat"><span class="figure">8 versions</span><span class="muted">of the project's standing instructions to Claude (CLAUDE.md), each one archived</span></div>
+<div class="stat"><span class="figure">6 reviewers</span><span class="muted">read-only AI agents, each with one job, none able to edit what it reviews</span></div>
+<div class="stat"><span class="figure">435 findings</span><span class="muted">raised by reviewers, code reviews and checks, Weeks 3 to 6; 21 not closed</span></div>
+<div class="stat"><span class="figure">34 of 79</span><span class="muted">gate-check runs failed before a final pass, Weeks 4 to 6</span></div>
+</div>
+
+<h2>The short version</h2>
+<p>AI made it fast to produce analysis. It did not make the analysis right. Early on, the same session that wrote a number also checked it, and that is not a check. Most of what I learned was about separating those two jobs: writing down the rules before seeing the results, giving reviewers their own narrow briefs and no power to edit, making every check prove it can fail, and keeping a record that a sceptical reader could follow from a headline figure back to its source.</p>
+<p>By the last weeks the work ran on a small framework: a manifest of gates, a hash-chained audit log of every script run, registers of every decision and finding, review packets sized to each reviewer, and freezes that pin the signed files. The point of all of it is the same as the point of the climate work: numbers a buyer's diligence team can trust.</p>
+
+<h2>How the practice grew, week by week</h2>
+<ol class="tl">
+<li><span class="label">Week 1: inquiry and pitch</span>
+<h3>No review step</h3>
+<p>Week 1 had no recorded review. When I reviewed it for this portfolio, two independent reviewers found the pitch offered the other six companies at "a fraction of the cost" or close to marginal cost on three slides, while another slide quoted them at the same rate. A small error, and the reason everything after it changed.</p></li>
+<li><span class="label">Week 2: data audit</span>
+<h3>The first review rewrote the process</h3>
+<p>Six read-only reviews, by four kinds of reviewer agent, went over the audit memo, the data requests and the deck. They returned 44 items: 17 must-fix, 10 decisions for me, 9 should-fix and 8 changes to the method. The process reviewer's core point: everything had been built and checked by the same pass. I revised the audit method around it: thresholds registered before any data is reviewed, a produced inventory of every file with its data vintage, and a final stage split into running the checks and reviewing the work.</p></li>
+<li><span class="label">Week 3: carbon inventory, 138 sites</span>
+<h3>Rules locked before the numbers</h3>
+<p>Fourteen calculation rules were pre-registered and locked before the inventory was built; every later amendment was logged. Script runs went into a hash-chained audit log. An independent recalculation rebuilt 376 base and 153 sensitivity lines from the raw template. Four gates were signed and frozen with file hashes.</p>
+<p class="muted">The last gate, G6, which covers the client deck and the ESG scorecard, was not run because Week 4 began; the Week 3 deck says so.</p></li>
+<li><span class="label">Week 4: materiality and initiatives</span>
+<h3>From a process to a framework</h3>
+<p>I turned the Week 3 process into a reusable kit: a manifest of gates and review lanes, a check registry, per-reviewer packets and freezes. Every check had to name a deliberately wrong input it must reject. All eight gates, G0 to G7, were signed. The first gate took four reviewer passes and about ten document versions, which led to the next change.</p></li>
+<li><span class="label">Week 5: physical risk</span>
+<h3>Checks that do not share the builder's blind spots</h3>
+<p>Kernel v2 added a pre-review lint and required checks written independently of the code they test. The physical-loss model was replayed against nine events the companies had reported, with severity fixed in advance: five passed on the first run. Two assumptions were then narrowed and two events left untested, after which all seven tested events pass. The method note reports the first run, because the final seven is a tuned fit, not a validation.</p></li>
+<li><span class="label">Week 6: LP disclosure</span>
+<h3>Delivery as a repeatable service</h3>
+<p>The LP report ran a 22-item QA (18 pass, 4 not applicable, none failing), checks re-ran the whole build from pinned inputs in a fresh folder, and all four of its gates were signed.</p></li>
+<li><span class="label">After the cohort: this portfolio</span>
+<h3>Reviewing my own work for a public reader</h3>
+<p>Each week was reviewed again for public use, with assurance and presentation reviewers, method review for the calculation weeks, and a browser check on a phone-width screen. For the last week I delegated the whole review to Claude as orchestrator: it chose a model for each task (the stronger one for method review, a faster one for tracing and building) and checked each reviewer claim against its source before acting on it, and I signed off the result.</p></li>
+</ol>
+
+<h2>The operating system: CLAUDE.md</h2>
+<p>CLAUDE.md is the file Claude Code reads at the start of every session: the project's standing rules. Mine went through eight versions. It got shorter as it got stricter, because detail moved into reference files and every rule had to earn its place in the context window.</p>
+<div class="bars" role="img" aria-label="CLAUDE.md size by version: v1 13.2 KB, v2 4.1, v3 5.1, v4 5.6, v5 4.0, v6 4.3, v7 4.9, v8 5.3">
+<div class="bar"><span class="label">v1</span><div><span style="width:100%">13.2 KB</span></div></div>
+<div class="bar"><span class="label">v2</span><div><span style="width:31%">4.1</span></div></div>
+<div class="bar"><span class="label">v3</span><div><span style="width:39%">5.1</span></div></div>
+<div class="bar"><span class="label">v4</span><div><span style="width:42%">5.6</span></div></div>
+<div class="bar"><span class="label">v5</span><div><span style="width:30%">4.0</span></div></div>
+<div class="bar"><span class="label">v6</span><div><span style="width:33%">4.3</span></div></div>
+<div class="bar"><span class="label">v7</span><div><span style="width:37%">4.9</span></div></div>
+<div class="bar"><span class="label">v8</span><div><span style="width:41%">5.3</span></div></div>
+</div>
+<ul class="vers">
+<li><strong>v1 to v2:</strong> 13 KB to 4 KB without losing a rule. Folder layout and week-by-week tooling moved to reference files.</li>
+<li><strong>v3:</strong> a dating convention, because the case data room runs on its own fictional clock while the cohort runs on the real one.</li>
+<li><strong>v4:</strong> an order of authority for when documents conflict. Adding it changed a file that a previous gate had frozen, so the next gate's check failed and needed a logged override: the rules file is itself evidence.</li>
+<li><strong>v5 and v6:</strong> a context-economy section. The live build record had reached about 110,000 tokens, so "do not read it whole" became a rule and lookup-by-id tools were built the same day. The full v4 wording was kept in a reference file, with a script that proves nothing was lost.</li>
+<li><strong>v7 and v8:</strong> sessions start from the active week's generated state file (about 700 tokens), and files may be edited in place with a logged change until they enter a review or a freeze.</li>
+</ul>
+<p>Three rules never changed: every claim must move EBITDA, reduce deal risk or support exit readiness; every deliverable ships with its method and data so the client can re-run it without us; and "run the council" with no context means ask which council.</p>
+
+<h2>Two councils, and the reviewers</h2>
+<p>I used two kinds of review and kept them apart. For open decisions, a council of five advisors argues the question and a chair gives a verdict. For deliverables, six project agents each check one thing, with read-only access so they can report but never quietly fix.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Reviewer</th><th>Checks</th></tr></thead>
+<tbody>
+<tr><td>Assurance audit</td><td>Every number, claim and citation against its source</td></tr>
+<tr><td>Method review</td><td>Whether the calculation is right and conforms to the GHG Protocol</td></tr>
+<tr><td>Process review</td><td>How the work was scoped, sequenced, verified and packaged</td></tr>
+<tr><td>Deck quality</td><td>Whether the deliverable answers the brief in the client's language</td></tr>
+<tr><td>Client voice</td><td>How it lands with the named client reader</td></tr>
+<tr><td>Sweep adjudicator</td><td>A blind, quote-backed reading of ambiguous data-room passages</td></tr>
+</tbody></table></div>
+<p style="margin-top:14px">From Week 3 on, every change to an agent's instructions was shown to me and approved before it was saved.</p>
+
+<h2>What the checks caught</h2>
+<div class="cards">
+<div class="card"><span class="label">Week 3</span><h3>A gate that printed "ALL PASS"</h3><p>while three of its checks had not been built. A code review found it; the runner was rebuilt to run every check and read every verdict. A green light can mean the test was too small.</p><span class="src muted">Finding F-037</span></div>
+<div class="card"><span class="label">Week 2</span><h3>An overrun that was a saving</h3><p>A $1.3M workers' compensation figure, read as a cost overrun, was the budgeted reduction. The process review caught it before the memo reached the client.</p><span class="src muted">Review consolidation, item A4</span></div>
+<div class="card"><span class="label">Week 4</span><h3>A hail loss that was not the company's</h3><p>A $120,000 hail loss had been borne by the property owner, not the portfolio company, and a $1.49M impact assigned to one event was a combined figure: split by days, about $0.96M.</p><span class="src muted">Findings F-143, F-144</span></div>
+<div class="card"><span class="label">Week 4</span><h3>Tests that could not fail</h3><p>I found that two seeded failure tests pointed at superseded files, so they passed whatever happened. After the fix, all 44 independence seeds failed as intended.</p><span class="src muted">Finding F-176</span></div>
+<div class="card"><span class="label">Week 5</span><h3>The AI's premise was wrong</h3><p>The build assumed the site coordinates were city-level only. I pointed to the course material saying we held coordinates for all 138 facilities; the decision was reversed and 13 location conflicts became client findings.</p><span class="src muted">Decisions D-5-55, D-5-56</span></div>
+<div class="card"><span class="label">Week 6</span><h3>13.7 that did not reconcile</h3><p>The report printed an intensity of 13.7, but the emissions and revenue printed beside it gave 12.7. The 13.7 used full-year emissions that were not shown. The audience reviewer did the division, and the report now prints the numerator and explains the difference.</p><span class="src muted">Finding F-001, gate G2</span></div>
+</div>
+
+<h2>What I would keep</h2>
+<ol class="principles">
+<li><strong>Separate building from checking.</strong> A different reviewer, a narrow brief, no power to edit.</li>
+<li><strong>Every check must be able to fail.</strong> Seed a wrong input and confirm the check catches it; otherwise a pass means nothing.</li>
+<li><strong>Write the rules before seeing the results.</strong> Pre-registered thresholds stop the analysis bending toward a convenient answer.</li>
+<li><strong>Record decisions in the owner's words, when they are made.</strong> The conversation does not survive; the log does.</li>
+<li><strong>Treat context as a budget.</strong> Small state files, lookup by id, packets sized to each reviewer.</li>
+<li><strong>Keep judgment human.</strong> The AI drafted, built and checked at speed; the calls that mattered, including overruling it, were mine.</li>
+</ol>
+
+<h2>Honest limits</h2>
+<p>Week 1 had no review during the cohort. Week 3's last gate, covering the client deck and scorecard, was never run. Week 5's planned red-team review was deferred. Twenty-one findings, 10 in Week 3 and 11 in Week 4, were left not closed when each week ended. In Week 6, the framework indices claimed 16 of 48 disclosure points as met; on review for this portfolio, 9 of 48 hold, and the pages now show both. The finding counts above are from each week's record; the portfolio review's own findings are not included.</p>
+</main>
+<div class="edition">Portfolio edition: Kith Climate cohort case, fictional client.</div>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement;
+try{var t=localStorage.getItem('theme');if(t)r.dataset.theme=t}catch(x){}
+function s(){var d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;b.textContent=d?'Light':'Dark'}
+b.onclick=function(){var t=b.textContent.toLowerCase();r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};s()})();
+</script>
+</body>
+</html>

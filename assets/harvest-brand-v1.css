@@ -1,0 +1,64 @@
+/* Daniel Vetsko portfolio brand: Harvest (v1, 2026-11-13)
+   Decisions: P-43 (Harvest palette; colour, not font changes, for differentiation),
+              P-44 (serif throughout: Fraunces for all text).
+   Scope: the portfolio shell only (home, week pages, capstone). Deliverables keep the Kith look (P-15).
+   Load the font in each page's <head>:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+   Contrast (WCAG): every text colour is at least 4.5:1 on --bg and --surface, in both themes.
+   See brand-guide-v1.md for the ratios and usage rules. */
+
+:root {
+  --font: "Fraunces", Georgia, "Times New Roman", serif;
+
+  /* light (default) */
+  --bg: #FBF6EC;        /* cream page */
+  --surface: #FFFDF8;   /* cards, tiles */
+  --tint: #F5E9D6;      /* footer band, subtle fills */
+  --line: #E8DCC6;      /* borders, rules (not for text) */
+  --ink: #2B2118;       /* body text, headings        14.6 */
+  --muted: #6B5847;     /* secondary text              6.3 */
+  --accent: #A4531A;    /* burnt orange: links, kickers, figures   5.1 */
+  --accent-2: #8C6A12;  /* mustard: small labels       4.7 */
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1E1914; --surface: #28211A; --tint: #30271F; --line: #3B3128;
+    --ink: #F4EBDD;      /* 14.8 */
+    --muted: #BFAE98;    /*  8.1 */
+    --accent: #E08A4C;   /*  6.6 */
+    --accent-2: #D9B45A; /*  8.8 */
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1E1914; --surface: #28211A; --tint: #30271F; --line: #3B3128;
+  --ink: #F4EBDD; --muted: #BFAE98; --accent: #E08A4C; --accent-2: #D9B45A;
+  color-scheme: dark;
+}
+
+/* base type: one family; hierarchy by size, weight and colour only */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-optical-sizing: auto;
+  font-size: 17px;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: var(--font); font-weight: 600; line-height: 1.15; color: var(--ink); }
+a { color: var(--accent); text-underline-offset: 3px; }
+.kicker { font-weight: 600; color: var(--accent); }   /* sentence case, no letter-spacing */
+.label  { font-weight: 600; color: var(--accent-2); font-size: .85em; }
+.muted  { color: var(--muted); }
+.figure { font-weight: 600; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; }
+
+/* wordmark: "Daniel" in ink, "Vetsko" in accent */
+.wordmark { font-family: var(--font); font-weight: 600; font-size: 22px; color: var(--ink); text-decoration: none; }
+.wordmark b { font-weight: inherit; color: var(--accent); }
+
+/* edition line, required on every public page */
+.edition { background: var(--tint); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }

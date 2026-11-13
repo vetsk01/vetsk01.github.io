@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reference data pack guide | Kith Consulting</title><style>:root{--paper:#f6f2ea;--ink:#241f1b;--muted:#6f6459;--line:#e2d9c8;--wash:#efe7d8;--accent:#b5622e;--deep:#241a2c}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+.top{background:var(--deep);color:#f1ebde;padding:12px 24px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+main{max-width:880px;margin:0 auto;padding:32px 24px 72px}
+.copy{font-size:13px;color:var(--muted);border:1px solid var(--line);background:#fff8;border-radius:6px;padding:10px 14px;margin-bottom:24px}
+h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(28px,5vw,38px);line-height:1.15}
+h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:24px;margin-top:40px;padding-top:14px;border-top:1px solid var(--line)}
+h3{font-size:17px;color:#8c4a1f}code,pre{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--wash);border-radius:4px}
+code{padding:1px 4px;overflow-wrap:anywhere}pre{padding:12px;overflow-x:auto}
+.tbl{overflow-x:auto;margin:14px 0}table{border-collapse:collapse;font-size:14px;width:100%}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--wash)}
+.ref{font:11px ui-monospace,Menlo,monospace;color:var(--muted);background:var(--wash);border-radius:3px;padding:0 4px;white-space:nowrap}
+@media (max-width:600px){main{padding:24px 16px 56px}.top{padding:10px 16px}}</style></head><body><div class="top">Kith Consulting &middot; Week 3 leave-behind</div><main><div class="copy">Rendered copy of the signed reference data pack guide (<code>reference-data-pack-plain-guide-v2.md</code>, sha256 f6115f8aa77c). Portfolio edition: Kith Climate cohort case, fictional client. Small grey tags such as <span class="ref">J-081</span> point to entries in the project record (journal, findings, decisions), so every statement can be traced.</div><h1>The reference data pack in plain English</h1>
+<p>Version 2, 4 October 2026 (replaces v1; adds the traceability pass, in which each statement that rests on a fact, number or rule carries a tag such as [G-07] pointing to its row in the claims register, and a separate check re-tests every row against the record). This is a short, non-technical guide to the reference data pack. The fuller readme beside it (<code>reference-data-pack-readme-v2.md</code>) has the detail; this one answers four questions: what is it, why does it matter, how do I use it, and what should I not trust blindly?</p>
+<h2>What it is</h2>
+<p>Northwood&#x27;s carbon inventory does not invent its own numbers for things like &quot;how much carbon dioxide does a gallon of diesel produce&quot;. It takes those numbers from published sources: the US Environmental Protection Agency (EPA), the Intergovernmental Panel on Climate Change (IPCC), the Federal Highway Administration, the California Air Resources Board, and a few others.</p>
+<p>The reference data pack is the <strong>shopping list and receipt</strong> for those outside numbers. For each source it records:</p>
+<ul>
+<li>what it is and who published it,</li>
+<li>which edition (the &quot;vintage&quot;),</li>
+<li>where it came from and when we downloaded it,</li>
+<li>a <strong>fingerprint</strong> of the file, so anyone can tell whether it has been changed,</li>
+<li>what the inventory uses it for, and</li>
+<li>how to refresh it.</li>
+</ul>
+<h2>Why it matters</h2>
+<p>Northwood asked for a system that keeps working after Kith leaves. If a number on the dashboard looks wrong, someone needs to answer &quot;where did that come from, and is it still current?&quot; without phoning us. The pack answers that for every outside number. It also tells you exactly which files to replace when a new edition comes out.</p>
+<h2>What is in it</h2>
+<p>Three files you will use, plus the source files themselves in the <code>_reference</code> folder:</p>
+<div class="tbl"><table><tr><th>File</th><th>In plain terms</th></tr><tr><td><code>reference-data-registry-v1.csv</code></td><td>The master list: 14 sources, one per row [G-02]</td></tr><tr><td><code>reference-values-v1.csv</code></td><td>A list of the 16 outside numbers the calculation actually uses, each pointing to its source [G-03]</td></tr><tr><td><code>verify-reference-pack-v1.py</code></td><td>A checker that confirms every file is present and unchanged</td></tr></table></div>
+<p>The 14 sources fall into seven groups: [G-04]</p>
+<ol>
+<li><strong>Emission factors</strong> (EPA): how much carbon each fuel and each unit of electricity produces.</li>
+<li><strong>Electricity regions</strong> (EPA): maps that tell us which part of the US power grid each site sits in, because grids differ.</li>
+<li><strong>Refrigerant leakage</strong> (EPA): typical yearly leak rates for air-conditioning and cooling equipment, used when a company has no service record.</li>
+<li><strong>Vehicle fuel use</strong> (federal highway data): the average fuel a vehicle burns, used only to spot fleet figures that look far too high or too low.</li>
+<li><strong>Carbon prices</strong> (California, the EU auction market, the European Central Bank): three scenario prices used to show what emissions could cost.</li>
+<li><strong>Warming strength of gases</strong> (IPCC, GHG Protocol): how much more a tonne of methane or a refrigerant warms the planet than a tonne of carbon dioxide.</li>
+<li><strong>Sector background</strong> (Kith research): context for the materiality work. It does not feed any figure.</li>
+</ol>
+<h2>How to use it</h2>
+<p><strong>Check nothing has changed.</strong> Open the <code>reference-data</code> folder, and run:</p>
+<pre>python3 verify-reference-pack-v1.py</pre>
+<p>You should see 14 lines saying <code>ok</code>. If any line says <code>CHANGED</code> or <code>MISSING</code>, stop and find out why before trusting the numbers. [G-05]</p>
+<p><strong>Refresh it each year.</strong> Roughly once a year, or before each report:</p>
+<ol>
+<li>Look for a newer edition of each source (the readme says where).</li>
+<li>Download the new file next to the old one. Never replace the old one.</li>
+<li>Add or update its row in <code>reference-sources-v1.csv</code>.</li>
+<li>Rebuild the registry (the re-run note gives the exact command), which stamps fresh fingerprints and dates.</li>
+<li>For carbon prices, also update the three price numbers in the settings file.</li>
+</ol>
+<p>The re-run note walks through the whole update, including these steps.</p>
+<h2>What we checked, and what we did not</h2>
+<p><strong>Checked on 4 October 2026 against the original source:</strong> [G-01]</p>
+<ul>
+<li>The warming strength of the old refrigerant R-22 (1,760) matches the IPCC table and the GHG Protocol list. [G-06]</li>
+<li>The warming strengths for the four refrigerant gases behind the two common blends match, and the blends follow from them.</li>
+<li>All 11 leak-rate rows match EPA&#x27;s table. [G-07]</li>
+<li>Every emission factor matched the EPA workbook when the calculation was built. [G-13]</li>
+</ul>
+<p><strong>Known gaps. Please do not paper over these:</strong></p>
+<ul>
+<li><strong>Electricity region maps.</strong> We did not record when or from which exact web address they were downloaded. The registry says &quot;not recorded&quot; and leaves it that way. [G-12]</li>
+<li><strong>Methane.</strong> The inventory uses one warming strength for all methane (28). The GHG Protocol gives a higher figure (30) for methane from fossil fuels. Methane is a small part of the total, so the effect is small. [G-08, G-09]</li>
+<li><strong>Newer gas values.</strong> The GHG Protocol recommends its newest set of gas values (AR6). We stay on the previous set (AR5) to match the EPA, and we add a newer-set check for any company where refrigerant leakage passes 5 percent of its emissions. That did not happen for any company. [G-10]</li>
+<li><strong>Carbon prices are scenarios, not forecasts.</strong> And the EU price is a benchmark for how a European buyer might think; no Northwood company pays it.</li>
+<li><strong>The leak-rate PDF&#x27;s file name</strong> says 2020-12, but the document itself is dated December 2023. We kept the old name so its fingerprint stays valid. [G-11]</li>
+</ul>
+<h2>Where to go next</h2>
+<ul>
+<li>For the full detail on each source: <code>reference-data-pack-readme-v2.md</code>.</li>
+<li>For how the numbers are used in calculations: the methodology note.</li>
+<li>For how to repeat the whole process: the re-run note.</li>
+</ul></main></body></html>

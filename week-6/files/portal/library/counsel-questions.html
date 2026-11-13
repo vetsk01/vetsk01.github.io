@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Counsel questions</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/library/applicability/counsel-questions-csrd-pe-v1.md</span></div>
+<div class="doc"><h1>Questions for counsel: CSRD scope for a US private-equity structure (v1)</h1><p class="note"><strong>Record ids.</strong> D-6-n is a Week 6 decision, J-n a journal entry, F-0n a review finding, DR6-n a data request, A-n an assumption; all are in the engagement record.</p>
+<p><strong>For:</strong> Sarah, for reference and answer. <strong>Prepared:</strong> 2026-10-23 by the consultancy's build team. Draft; not sent. <strong>Status of every question:</strong> open. <strong>Answer register:</strong> <code>counsel-questions-csrd-pe-v1.csv</code>. Each answer is recorded there with its date and source, and the applicability screen is updated from it.</p>
+<h2>Why we are asking</h2>
+<p>We advise US mid-market private-equity managers on climate disclosure. The managers have US and EU investors. Some portfolio companies have EU subsidiaries or branches.</p>
+<p>We need to know when, if ever, the EU Corporate Sustainability Reporting Directive (CSRD) reaches such a structure after the Omnibus I amendments. Our working reading is that it usually does not, because the turnover tests are not met. But six points decide the answer, and the text does not settle them.</p>
+<p>That reading was made by our team and then tested by an independent AI desk review (not a lawyer). Both are summarised below for context only. <strong>Neither is legal advice. We are asking for yours.</strong></p>
+<h2>The structure we have in mind (typical, not a specific client)</h2>
+<ul><li>A US-domiciled buyout fund: a non-EU limited partnership, managed by a US manager through a GP entity.</li><li>About ten portfolio companies across unrelated sectors, held with majority voting rights and board control. Some strategies are buy-and-build (a platform company acquiring add-ons in the same sector).</li><li>How the manager works with portfolio companies:<ul class="sub"><li>appoints board members;</li><li>places operating partners to work with management on value-creation plans;</li><li>approves annual budgets;</li><li>sometimes replaces management;</li><li>charges monitoring or advisory fees.</li></ul></li><li>The fund reports as an investment company under US GAAP (ASC 946). It does not consolidate the portfolio companies.</li><li>Some managers also run an EU parallel fund (for example a Luxembourg vehicle) for EU investors.</li></ul>
+<h2>Texts we relied on (EUR-Lex, read 2026-10-23)</h2>
+<ul><li><strong>Directive (EU) 2026/470 (Omnibus I):</strong><ul class="sub"><li>Art 1(13), amending Art 40a(1) of Directive 2013/34/EU: thresholds of EUR 200m for the subsidiary or branch, and EUR 450m EU turnover for each of the last two years; the financial-holding derogation.</li><li>Art 5(1): transposition by 19 March 2027.</li><li>Recitals 17 and 26.</li></ul></li><li><strong>Directive (EU) 2022/2464 (CSRD):</strong><ul class="sub"><li>Art 40a as inserted.</li><li>Art 2(5) as replaced: for Art 40a undertakings, "net turnover" is revenue under their own financial reporting framework.</li><li>Art 5(2): Art 40a applies from financial years starting on or after 1 January 2028.</li></ul></li><li><strong>Directive 2013/34/EU:</strong> Art 2(9) to (11) (parent, subsidiary, group), Art 2(15) (financial holding undertaking), Art 22 (control).</li></ul>
+<hr>
+<h2>Q-C1. Who is the "ultimate parent undertaking"?</h2>
+<p><strong>Question.</strong> For Art 40a, which entity is the "ultimate parent undertaking" of a portfolio company's EU subsidiary: the fund (the LP vehicle), its GP, the manager, or a sponsor holding company above them? Does the control analysis of Art 22 apply by analogy to these non-EU vehicles under the law of the member state where the EU subsidiary sits?</p>
+<p><strong>Why it matters.</strong> Art 40a measures turnover "at the group level of that ultimate third-country parent undertaking". If the parent sits above the fund, the group could span several funds.</p>
+<p><strong>Our working assumption.</strong> The controlling fund is at least <em>a</em> parent, and plausibly the ultimate one. The term is undefined, so we cannot rule out a higher entity. (Our assumptions A-L1, A-L2 and A-L13.)</p>
+<p><strong>What your answer changes.</strong> Which entity's turnover is measured, and whether several funds are counted together.</p>
+<h2>Q-C2. How is "net turnover in the Union" measured for an investment-entity parent?</h2>
+<p><strong>Question.</strong> Where the ultimate parent prepares its accounts as an investment company (US GAAP ASC 946, or the IFRS 10 investment-entity exception) and does not consolidate portfolio companies, is "net turnover in the Union at its group level" (Art 40a(1)):</p>
+<ul><li>(a) the parent's own revenue under that framework, essentially investment income; or</li><li>(b) the EU net turnover of the controlled portfolio companies, added up?</li></ul>
+<p>If (b), are sales between portfolio companies eliminated?</p>
+<p><strong>Why it matters.</strong> Under (a), the EUR 450m test is almost never met. Under (b), a portfolio with large EU sales could meet it. Art 2(5), as replaced by Directive (EU) 2022/2464, says net turnover for these undertakings is revenue "within the meaning of the financial reporting framework" of the undertaking, which points towards (a). "Group level" points towards (b).</p>
+<p><strong>Our working assumption.</strong> Undecided by the text (A-L3, A-L4, A-L12). For screening we use (b), because it is the cautious option.</p>
+<p><strong>What your answer changes.</strong> Whether the turnover test can be met at all for a buyout fund.</p>
+<h2>Q-C3. Is a buyout fund a "financial holding undertaking"?</h2>
+<p><strong>Question.</strong> On the facts above (operating partners, budget approval, management replacement, monitoring fees), does the fund meet the definition in Art 2(15)? The definition requires a sole object of acquiring, managing and profiting from holdings, "without involving themselves directly or indirectly in the management", without prejudice to shareholder rights. Recital 17 treats voting at general meetings, including on board appointments, as shareholder rights. Does the relevant national law add criteria?</p>
+<p><strong>Why it matters.</strong> Only a financial holding undertaking can use the Art 40a derogation, which lets EU subsidiaries and branches decide not to publish.</p>
+<p><strong>Our working assumption.</strong> A typical control buyout fund probably fails the "no involvement in management" condition. Board appointments by shareholder vote alone would not disqualify it. (A-L6.)</p>
+<p><strong>What your answer changes.</strong> Whether the derogation is available at all. Our screen counts it only on your written confirmation.</p>
+<h2>Q-C4. How is "independent of one another" assessed?</h2>
+<p><strong>Question.</strong> The derogation requires the subsidiaries' "business models and operations" to be independent of one another. Recital 17 excludes subsidiaries that are closely interconnected, for example where one enables or directly supports another.</p>
+<ul><li>Is this assessed across the whole portfolio, so that one connected pair removes the derogation for the group?</li><li>Or can the connected companies be set aside?</li><li>How is a platform-plus-add-on structure treated, and what about shared services or trading between portfolio companies?</li></ul>
+<p><strong>Why it matters.</strong> Many mid-market strategies are buy-and-build.</p>
+<p><strong>Our working assumption.</strong> The test applies to the group as a whole, with no company-by-company carve-out (A-L8, as corrected by the review).</p>
+<p><strong>What your answer changes.</strong> Whether a fund with even one buy-and-build platform can rely on the derogation.</p>
+<h2>Q-C5. How has the derogation been transposed?</h2>
+<p><strong>Question.</strong> Member states must transpose Omnibus I by 19 March 2027, and Art 40a applies from financial years starting on or after 1 January 2028. For the member states where our clients' EU subsidiaries or branches are located:</p>
+<ul><li>How has the derogation been (or will it be) transposed?</li><li>What is the procedure for a subsidiary or branch to "decide" not to publish (a statement, a notification, a filing)?</li><li>Are any national deadlines earlier than 19 March 2027?</li></ul>
+<p><strong>Why it matters.</strong> The derogation is a choice the subsidiary or branch makes under national law, so the procedure and timing are national.</p>
+<p><strong>Our working assumption.</strong> Transposition follows the Directive's wording, and national details are unknown (A-L9).</p>
+<p><strong>What your answer changes.</strong> The timing and the steps a client must take.</p>
+<h2>Q-C6. What about an EU parallel fund?</h2>
+<p><strong>Question.</strong> Where the manager also runs an EU parallel fund (for example a Luxembourg vehicle) that holds or co-holds portfolio companies:</p>
+<ul><li>Is that vehicle an "undertaking" within the Accounting Directive's scope under its national law?</li><li>Does it control any portfolio company, given that co-investing parallel funds may share control (Art 22(3))?</li><li>If it is a parent, does Art 29a apply? Is the financial-holding option in Art 29a(7a) available to it?</li><li>Note that the Art 29a test uses total consolidated turnover (over EUR 450m) and more than 1,000 employees, not EU turnover.</li></ul>
+<p><strong>Why it matters.</strong> An EU parent reports on its own account under Art 29a, not under Art 40a, with different thresholds.</p>
+<p><strong>Our working assumption.</strong> Art 29a applies if the vehicle is in scope and controls, and Art 29a(7a) is the relevant option (A-L11).</p>
+<p><strong>What your answer changes.</strong> Whether a manager with an EU fund has a direct EU reporting route.</p>
+<hr>
+<h2>How to answer</h2>
+<p>A short answer per question is enough, with the provision or guidance relied on. We will:</p>
+<ul><li>record each answer in the register (<code>counsel-questions-csrd-pe-v1.csv</code>): answer, date, source, answered by;</li><li>update the applicability rules (A-04 to A-04e) and our assumptions register;</li><li>mark the related assumptions confirmed or overturned.</li></ul></div>
+<p class="note" style="margin-top:32px">Portfolio edition: Kith Climate cohort case, fictional client.</p></div></body></html>

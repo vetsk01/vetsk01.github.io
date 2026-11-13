@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard guide</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/dashboard/README-v2.md</span></div>
+<div class="doc"><h1>D4: dashboard for Sarah and query pack (v2)</h1>
+<p>Portfolio edition: Kith Climate cohort case, fictional client. In the case, this page is internal: the page and the pack name portfolio companies. Neither goes to LPs. Option B: a static page plus a pack Sarah loads into her own Claude. The v1 files in this folder (and the <code>query-pack/</code> folder) are kept as frozen; use the v2 files.</p>
+<h2>Files</h2>
+<div class="tw"><table><thead><tr><th>File</th><th>What it is</th></tr></thead><tbody><tr><td><code>northwood-climate-dashboard-v2.html</code></td><td>One self-contained page (about 44 KB, no external files): overview (now with Scope 3, financed emissions and the exposure by fund), companies, coverage and gaps, applicability, the 16 data requests, how to update, limits, framework verification dates. Opens in any browser; works on a phone</td></tr><tr><td><code>dashboard-data-v2.json</code></td><td>Every number and text on the page. The page embeds this same JSON; nothing on the page is typed</td></tr><tr><td><code>query-pack-v2/</code></td><td>JSON files, <code>index.json</code> (what each holds) and <code>CLAUDE.md</code> (the rules for Sarah's Claude: answer only from the files, cite the row, never turn unknown into no, never say requests were sent, say "estimated" for the grade C Scope 3 figure, use names only for internal answers)</td></tr><tr><td><code>check_dashboard.py</code></td><td>Eight checks that re-derive the page from the case files and compare</td></tr></tbody></table></div>
+<h2>How to rebuild (no Kith)</h2>
+<ol><li>Refresh the case and D2/D3 as in <code>my-work/week-6/fund-level/rerun-note-v2.md</code>.</li><li><code>python3 -I my-work/week-6/pipeline/build-d4-v1.py &lt;repo-root&gt;</code> writes the JSON, the page and the pack. The page layout is <code>my-work/week-6/pipeline/dashboard-template-v2.html</code>; the pack rules are <code>my-work/week-6/pipeline/query-pack-instructions-v2.md</code>.</li><li><code>python3 -I my-work/week-6/fund-level/dashboard/check_dashboard.py &lt;repo-root&gt;</code> must print DASHBOARD PASS. <code>python3 -I my-work/week-6/fund-level/tests/test_dashboard.py &lt;repo-root&gt;</code> proves each check can fail.</li><li>To use the pack: open the <code>query-pack-v2</code> folder in Claude, as the project folder or as an attached folder, and ask questions.</li></ol>
+<p>The pack includes the decision log and dispositions, so rebuild it after any new decision, or the clean re-run check will report a difference.</p></div>
+</div></body></html>

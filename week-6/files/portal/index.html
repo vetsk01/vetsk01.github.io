@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwood Week 6 Portal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: a filing-cabinet hub. One band per deliverable (D1 to D6, then the leave-behind), each a row of document tiles that open the rendered file. */
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--chip:#EFEBE4;
+--draft:#8A5A12;--internal:#3D5A80;--board:#6B3A55;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--chip:#22304b;--draft:#E0B565;--internal:#9FB6D8;--board:#D7A6C2;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--chip:#22304b;--draft:#E0B565;--internal:#9FB6D8;--board:#D7A6C2;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans)}
+.wrap{max-width:1120px;margin:0 auto;padding-block:28px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{border-bottom:2px solid var(--accent);padding-bottom:18px;margin-bottom:8px;display:grid;gap:8px}
+.eyebrow{font:600 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+h1{font:600 clamp(28px,4vw,40px)/1.15 var(--serif);margin:0;text-wrap:balance}
+.lede{max-width:70ch;color:var(--muted);margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted);margin-top:6px}
+nav.jump{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 6px}
+nav.jump a{font:600 13px/1 var(--sans);text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--card);padding:8px 10px;border-radius:3px}
+nav.jump a:hover,nav.jump a:focus-visible{border-color:var(--accent);outline:none}
+section{padding-top:30px;scroll-margin-top:12px}
+.band{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding-top:18px}
+.band h2{font:600 22px/1.2 var(--serif);margin:0 0 6px;text-wrap:balance}
+.band .code{font:600 13px/1 var(--mono);color:var(--accent-ink);display:block;margin-bottom:8px}
+.band p.why{margin:0;color:var(--muted);font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;min-width:0}
+a.tile{display:grid;gap:6px;align-content:start;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 14px 12px;min-width:0}
+a.tile:hover,a.tile:focus-visible{border-color:var(--accent);outline:2px solid transparent;box-shadow:0 0 0 1px var(--accent)}
+.tile strong{font:600 16px/1.3 var(--serif)}
+.tile span.d{font-size:14px;color:var(--muted)}
+.tile .m{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.chip{font:600 11px/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;padding:4px 6px;border-radius:2px;background:var(--chip)}
+.c-draft{color:var(--draft)}.c-internal{color:var(--internal)}.c-board{color:var(--board)}.c-lp{color:var(--accent-ink)}
+.co{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;min-width:0}
+.co a{display:block;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-radius:4px;color:var(--ink);text-decoration:none;font-size:14px}
+.co a:hover,.co a:focus-visible{border-color:var(--accent);outline:none}
+.co small{display:block;color:var(--muted);font-size:12px}
+.foot{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:var(--muted)}
+.foot code{font:12px var(--mono)}
+@media (max-width:720px){.band{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:no-preference){a.tile,.co a{transition:border-color .15s,box-shadow .15s}}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style>
+
+<div class="wrap">
+<header>
+<span class="eyebrow">Kith Consulting for Northwood Capital · Week 6 · Disclosure-as-a-Service</span>
+<h1>Week 6 deliverables</h1>
+<p class="lede">Every Week 6 deliverable, opened from one place. Each tile shows the final v2 file, and each page names its master file in the engagement folder. Four gates were signed; the G4 freeze hashes 85 files, including 2 of the 10 board pages; the other eight pages come from the same builder and passed checks B01 to B09. Nothing here has been sent to an LP, a lawyer or a company.</p>
+<p class="lede"><strong>Portfolio edition: Kith Climate cohort case, fictional client.</strong> Northwood Capital, its COO Sarah Mitchell and the portfolio companies are fictional (the Kith Climate cohort case). &ldquo;Sarah's Claude&rdquo; means the Claude session the COO would use with the query pack.</p><p class="lede"><strong>Audience tags.</strong> LP-facing: anonymised, written for limited partners. Internal: names companies, never sent to LPs. Board: for one company's board only. Not sent: nothing has gone out; Northwood decides. These audience tiers are part of the Week 6 design and are kept in this edition.</p><p class="lede">Master files and scripts are in the engagement repository, not published here.</p><div class="legend"><span><span class="chip c-draft">Not sent</span> Northwood decides</span><span><span class="chip c-internal">Internal</span> names companies, never to LPs</span><span><span class="chip c-board">Board</span> one company's board only</span><span><span class="chip c-lp">LP-facing</span> anonymised</span></div>
+</header>
+
+<nav class="jump" aria-label="Deliverables">
+<a href="#d1">D1 Library</a><a href="#d2">D2 Register</a><a href="#d3">D3 LP report</a><a href="#d4">D4 Dashboard</a><a href="#d5">D5 Board pages</a><a href="#d6">D6 Process log</a><a href="#leave-behind">Leave-behind</a>
+</nav>
+
+<section id="d3"><div class="band"><div><span class="code">D3</span><h2>LP climate report</h2><p class="why">The anonymised report for limited partners, in TCFD order, with framework content indices, Scope 3 (estimated), financed emissions and the exposure by fund. Final; Investor Relations reviews it before it goes out.</p></div>
+<div class="tiles">
+<a class="tile" href="lp/report.html"><strong>LP climate report</strong><span class="d">Governance, Strategy, Risk management, Metrics and targets, with the aggregate data rows.</span><span class="m"><span class="chip c-lp">LP-facing</span><span class="chip c-draft">Not sent</span></span></a>
+<a class="tile" href="lp/content-indices.html"><strong>Framework content indices</strong><span class="d">IFRS S2, ESRS E1, SFDR PAI and ILPA EDCI: each requirement, met or not, and where. 16 of 48 met (as delivered; 9 on portfolio review).</span><span class="m"><span class="chip c-lp">LP-facing</span></span></a>
+<a class="tile" href="lp/qa-result.html"><strong>QA result</strong><span class="d">The 22 quality checks run on the final report: 18 pass, 4 not applicable in Year 1.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="lp/readme.html"><strong>How the report is made</strong><span class="d">Figures drawn from the data table, fund labels, what is still open, and how to rebuild it.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+</div></div></section>
+
+<section id="d4"><div class="band"><div><span class="code">D4</span><h2>Dashboard and query pack</h2><p class="why">Sarah's own view of the portfolio, and a data pack her Claude can answer questions from, citing the row behind each answer.</p></div>
+<div class="tiles">
+<a class="tile" href="dashboard/dashboard.html"><strong>Climate disclosure dashboard</strong><span class="d">Overview with Scope 3, financed emissions and the exposure by fund, companies, coverage and gaps, applicability, the 16 data requests, how to update.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="dashboard/query-pack-rules.html"><strong>Query pack rules</strong><span class="d">The instructions Sarah's Claude follows: answer only from the files, cite the row, never turn unknown into no.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="dashboard/readme.html"><strong>Dashboard guide</strong><span class="d">What each file is, the eight dashboard checks, and how to rebuild.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+</div></div></section>
+
+<section id="d5"><div class="band"><div><span class="code">D5</span><h2>Board climate pages</h2><p class="why">One page per company for its own board: three dollar figures, emissions beside cost, risk as a share of EBITDA, the action plan and what Northwood asks of management.</p></div>
+<div style="display:grid;gap:12px;min-width:0">
+<div class="co">
+<a href="board/clearview-environmental-services.html">Clearview Environmental Services<small>Fund II · Environmental Services</small></a>
+<a href="board/harvest-ridge-foods.html">Harvest Ridge Foods<small>Fund II · Food &amp; Agriculture</small></a>
+<a href="board/keystone-behavioral-health.html">Keystone Behavioral Health<small>Fund II · Healthcare Services</small></a>
+<a href="board/meridian-business-solutions.html">Meridian Business Solutions<small>Fund I · Business Services</small></a>
+<a href="board/novacare-health-partners.html">NovaCare Health Partners<small>Fund I · Healthcare Services</small></a>
+<a href="board/patriot-staffing-solutions.html">Patriot Staffing Solutions<small>Fund II · Business Services</small></a>
+<a href="board/pinnacle-testing.html">Pinnacle Testing &amp; Inspection<small>Fund II · Industrial Technology</small></a>
+<a href="board/ridgeline-property-services.html">Ridgeline Property Services<small>Fund II · Real Estate Services</small></a>
+<a href="board/sterling-precision-manufacturing.html">Sterling Precision Manufacturing<small>Fund I · Industrial Technology</small></a>
+<a href="board/trident-it-solutions.html">Trident IT Solutions<small>Fund I · Technology Services</small></a>
+</div>
+<div class="tiles"><a class="tile" href="board/readme.html"><strong>Board pages guide</strong><span class="d">The board-level (Tier 3) rules, the nine page checks, peers, and what is open for each page.</span><span class="m"><span class="chip c-board">Board</span></span></a></div>
+</div></div></section>
+
+<section id="d2"><div class="band"><div><span class="code">D2</span><h2>Register, applicability and gaps</h2><p class="why">Disclose once, map to many: 32 concepts, the evidence for each company, which frameworks apply, and the requests that close the gaps.</p></div>
+<div class="tiles">
+<a class="tile" href="register/readme.html"><strong>Register guide</strong><span class="d">The files, how to read the 352-cell evidence map and the 104 applicability answers, how to re-run.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="register/data-requests.html"><strong>16 data requests</strong><span class="d">Who is asked, what for, and why it matters to EBITDA, deal risk or exit. None sent; Northwood decides which to send.</span><span class="m"><span class="chip c-internal">Internal</span><span class="chip c-draft">Not sent</span></span></a>
+<a class="tile" href="register/coverage-matrix.html"><strong>Coverage matrix</strong><span class="d">Each concept against the IFRS S2, ESRS E1, SFDR PAI and EDCI requirements that need it.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+</div></div></section>
+
+<section id="d1"><div class="band"><div><span class="code">D1</span><h2>Reference library</h2><p class="why">The reusable asset: the playbook, framework files with verification dates, house methodology and the applicability rules. It runs for Northwood next year and for any other client.</p></div>
+<div class="tiles">
+<a class="tile" href="library/playbook.html"><strong>Engagement playbook</strong><span class="d">Eight stages, what the client gives at each, automation versus human, QA protocol, versioning.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="library/framework-freshness.html"><strong>Framework freshness</strong><span class="d">11 frameworks and 2 method standards, by tier, how each was verified, and the date to check it again.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="library/standards-notes.html"><strong>Framework notes</strong><span class="d">IFRS S2, ESRS E1, SFDR PAI, EDCI, then Tier 2 and Tier 3: status, pitfalls, defensible wording.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="library/methodology-notes.html"><strong>Methodology notes</strong><span class="d">Materiality scoring, the A/B/C data-quality rubric, narrative voice, anonymisation, and the Scope 3 and PCAF method.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="library/applicability-method.html"><strong>Applicability method</strong><span class="d">How the scripted screen decides yes, no, unknown or monitor, and why a missing fact is never a no.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="library/counsel-questions.html"><strong>Questions for counsel</strong><span class="d">Six CSRD-scope questions for a US private-equity structure. Not sent; a Northwood action with its counsel.</span><span class="m"><span class="chip c-internal">Internal</span><span class="chip c-draft">Not sent</span></span></a>
+</div></div></section>
+
+<section id="d6"><div class="band"><div><span class="code">D6</span><h2>Process log</h2><p class="why">How the week ran, what the Week 1 proposal promised against what was delivered, and the pricing reflection.</p></div>
+<div class="tiles">
+<a class="tile" href="d6/process-log.html"><strong>Process log</strong><span class="d">Phases, counts from the record, what worked, what did not, what to carry forward.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="d6/week1-reconciliation.html"><strong>Week 1 reconciliation</strong><span class="d">Each Week 1 promise, what was delivered, and the reason for any different route.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="d6/pricing-reflection.html"><strong>Pricing reflection</strong><span class="d">Fixed versus per-company work, and the chosen option: an annual refresh retainer.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+</div></div></section>
+
+<section id="leave-behind"><div class="band"><div><span class="code">Next year</span><h2>Leave-behind</h2><p class="why">What Northwood needs to update the disclosure with no Kith involvement: the steps, who runs them, and the open items with their owners.</p></div>
+<div class="tiles">
+<a class="tile" href="leave-behind/rerun-note.html"><strong>Re-run note</strong><span class="d">Nine commands that rebuild every Week 6 output from next year's files, and what Sarah reviews at the end.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+<a class="tile" href="leave-behind/handoff-notes.html"><strong>Hand-off notes</strong><span class="d">The actions handed to Northwood with owners, the judgments to keep, and the traps.</span><span class="m"><span class="chip c-internal">Internal</span></span></a>
+</div></div></section>
+
+<p class="foot">Master files and scripts are in the engagement repository, not published here. Machine-readable files (the evidence map, applicability detail, query-pack JSON, engine, checks and tests) are not rendered here: they live in the engagement folder under <code>my-work/week-6/fund-level/</code>. Report date: 8 November 2026. Data period: calendar 2025. Portfolio edition: Kith Climate cohort case, fictional client.</p>
+</div>
+<script>
+(function(){function go(){var h=location.hash.slice(1);if(!h)return;var el=document.getElementById(h);if(el)el.scrollIntoView();}window.addEventListener('hashchange',go);go();})();
+</script>

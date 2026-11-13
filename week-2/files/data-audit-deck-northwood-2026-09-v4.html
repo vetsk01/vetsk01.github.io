@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Northwood Climate Data Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#f6f2ea; --ink:#241f1b; --muted:#6f6459; --green:#46697a; --line:#e2d9c8; --wash:#efe7d8;
+  --mint:#e4d3b8; --deep:#241a2c; --deep2:#32253c; --accent:#b5622e; --accent-d:#8c4a1f; --accent-l:#d98a52;
+  --amber:#c99a3e; --amber-d:#93701f; --ready:#5c8f74; --ready-d:#336b4f;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --rail:58px; --maxw:1220px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul{list-style:none;padding:0}
+strong,b{font-weight:600}
+button{font:inherit;color:inherit}
+a{color:inherit}
+::selection{background:var(--mint);color:var(--deep)}
+.tab{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono)}
+
+/* chrome */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;height:calc(56px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 28px 0 calc(var(--rail) + 10px);display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);background:rgba(246,242,234,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:background .5s,color .5s,border-color .5s}
+body.on-dark .topbar{background:rgba(36,26,44,.84);border-bottom-color:rgba(228,211,184,.16);color:rgba(241,235,222,.66)}
+.brand{display:flex;align-items:center;gap:12px;text-transform:none;letter-spacing:0;color:var(--ink);transition:color .5s}
+body.on-dark .brand{color:#f7f2e8}
+.brand svg{height:21px;width:auto;display:block}
+.brand .sep{opacity:.35;font-size:15px;font-weight:300}
+.brand .who{font-size:12.5px;letter-spacing:.01em;opacity:.72;white-space:nowrap}
+.topbar .right{display:flex;gap:18px;align-items:center}
+.topbar .idx{color:var(--accent-d)}
+body.on-dark .topbar .idx{color:var(--accent-l)}
+.aud{padding:3px 9px;border:1px solid currentColor;border-radius:20px;letter-spacing:.12em;opacity:.8}
+#bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:61;width:0;transition:width .16s linear}
+.rail{position:fixed;top:0;bottom:0;left:0;width:var(--rail);z-index:59;border-right:1px solid var(--line);background:rgba(246,242,234,.86);backdrop-filter:blur(14px);transition:background .5s,border-color .5s;overflow:hidden;perspective:520px}
+body.on-dark .rail{background:rgba(36,26,44,.84);border-right-color:rgba(228,211,184,.16)}
+.rail .win{position:absolute;left:8px;right:8px;top:50%;height:34px;margin-top:-17px;border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);opacity:.55;pointer-events:none}
+.rail .fade{position:absolute;left:0;right:0;height:38%;pointer-events:none;z-index:2}
+.rail .fade.t{top:0;background:linear-gradient(var(--paper),rgba(246,242,234,0))}
+.rail .fade.b{bottom:0;background:linear-gradient(rgba(246,242,234,0),var(--paper))}
+body.on-dark .rail .fade.t{background:linear-gradient(var(--deep),rgba(36,26,44,0))}
+body.on-dark .rail .fade.b{background:linear-gradient(rgba(36,26,44,0),var(--deep))}
+.drum{position:absolute;left:0;right:0;top:50%;transform-style:preserve-3d}
+.drum button{all:unset;cursor:pointer;position:absolute;left:0;right:0;height:34px;margin-top:-17px;display:flex;align-items:center;justify-content:center;font-size:12px;font-variant-numeric:tabular-nums;letter-spacing:.04em;color:var(--muted);transition:transform .55s cubic-bezier(.2,.75,.25,1),opacity .55s,color .3s;backface-visibility:hidden}
+body.on-dark .drum button{color:rgba(241,235,222,.72)}
+.drum button.on{color:var(--accent-d);font-weight:600;font-size:14px}
+body.on-dark .drum button.on{color:var(--accent-l)}
+.drum button:hover,.drum button:focus-visible{color:var(--accent)}
+.rlbl{position:fixed;z-index:62;left:calc(var(--rail) + 8px);transform:translateY(-50%);white-space:nowrap;font-size:11.5px;background:var(--ink);color:var(--paper);padding:5px 11px;border-radius:3px;opacity:0;pointer-events:none;transition:opacity .2s}
+.rlbl.on{opacity:1}
+.rail .wh{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7;z-index:3}
+body.on-dark .rail .wh{color:rgba(241,235,222,.55)}
+
+/* sections */
+section{position:relative;padding:112px 40px 80px calc(var(--rail) + 48px);min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto}
+.dark{background:var(--deep);color:#f3ede0}
+.dark .muted,.dark .lede{color:rgba(243,237,224,.76)}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:11px;margin-bottom:20px;font-weight:500}
+.eyebrow b{color:var(--accent-d)}
+.dark .eyebrow{color:var(--mint)}
+.dark .eyebrow b{color:var(--accent-l)}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--accent);flex:none}
+.dark .eyebrow::before{background:var(--accent-l)}
+.eyebrow .no{font-family:var(--mono);letter-spacing:.04em;opacity:.7}
+h1{font-family:var(--serif);font-size:clamp(40px,5.2vw,78px);line-height:1.02;letter-spacing:-.02em;font-weight:300;text-wrap:balance}
+h1 b{font-weight:400;font-style:italic;color:var(--accent-l)}
+h2{font-family:var(--serif);font-size:clamp(32px,4.1vw,50px);line-height:1.08;letter-spacing:-.015em;font-weight:400;text-wrap:balance}
+h2 em{font-style:italic;color:var(--accent-d)}
+.dark h2 em{color:var(--accent-l)}
+h3{font-size:18px;line-height:1.3;letter-spacing:-.014em;font-weight:600}
+.lede{font-size:18px;line-height:1.5;color:var(--muted);max-width:66ch;margin-top:14px}
+.muted{color:var(--muted)}
+.small{font-size:13.5px;line-height:1.5}
+.instr{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--muted);margin-top:12px;opacity:.9}
+.instr::before{content:"\2192  ";color:var(--accent)}
+.dark .instr{color:rgba(243,237,224,.6)}
+.hint{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.8}
+.dark .hint{color:rgba(243,237,224,.55)}
+.rv{animation:rise .8s cubic-bezier(.2,.7,.3,1) both;animation-play-state:paused}
+.in .rv,.rv.in{animation-play-state:running}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.26s}.d4{animation-delay:.38s}
+
+/* shared tooltip */
+#tip{position:fixed;z-index:80;max-width:360px;padding:13px 15px 14px;border-radius:6px;background:#1a1220;color:#f3ede0;border:1px solid rgba(228,211,184,.22);box-shadow:0 16px 40px -12px rgba(0,0,0,.55);font-size:13.5px;line-height:1.45;pointer-events:none;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .18s,transform .18s}
+#tip.on{opacity:1;transform:none}
+#tip .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mint);opacity:.85;margin-bottom:5px;display:flex;gap:8px;align-items:center}
+#tip .t{font-weight:600;font-size:15px;margin-bottom:4px;color:#fff}
+#tip .v{color:rgba(243,237,224,.8)}
+#tip .grid2{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin-top:6px}
+#tip .grid2 b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+#tip .pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;letter-spacing:.06em;color:#241a2c;font-weight:600}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:12px 30px;margin-top:40px}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,auto)}}
+.stat .n{font-size:clamp(28px,3vw,40px);font-weight:300;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.stat .n.acc{color:var(--accent-l)}
+.stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.66;margin-top:7px}
+
+/* ---------- 01 cover / orbit ---------- */
+#s1 .cover{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:10px 30px;align-items:center}
+#s1 .below{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 50px;align-items:start;padding-top:20px;border-top:1px solid rgba(228,211,184,.16)}
+#s1 .below .stats{margin-top:0}
+#s1 .below .meta{grid-column:1/-1;margin-top:0;padding-top:0;border-top:0}
+.kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent-l);margin-bottom:26px}
+.answer{font-size:17px;line-height:1.55;color:rgba(243,237,224,.8);max-width:58ch}
+.orbit{width:100%;max-width:600px;margin:0 auto;display:block;overflow:visible}
+.orbit .core{cursor:pointer}
+.orbit .core rect{fill:var(--deep2);stroke:var(--accent-l);stroke-width:1.2;transition:stroke .2s,fill .2s}
+.orbit .core:hover rect,.orbit .core:focus rect{stroke:#fff;fill:#3c2c48}
+.orbit .core:focus{outline:none}
+.orbit .coret1{fill:#fff;font-size:14.5px;font-weight:600}
+.orbit .coret2{fill:rgba(243,237,224,.68);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;text-anchor:end}
+.orbit .thresh{stroke:var(--accent-l);stroke-width:1.4;stroke-dasharray:3 5}
+.orbit .threshlbl{fill:var(--accent-l);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase}
+.orbit .rung{cursor:pointer}
+.orbit .rung .ln{stroke-width:2.5;stroke-linecap:round;opacity:0;transform-box:fill-box;transition:opacity .6s,stroke-width .2s}
+.in .orbit .rung .ln{opacity:1}
+.orbit .rung:hover .ln,.orbit .rung:focus .ln{stroke-width:4}
+.orbit .rung .b{stroke-width:1.6;transition:r .2s,stroke-width .2s}
+.orbit .rung:hover .b,.orbit .rung:focus .b{stroke:#fff;stroke-width:2.6;r:8}
+.orbit .rung:focus{outline:none}
+.orbit .rank{fill:rgba(243,237,224,.4);font-size:9.5px;font-family:var(--mono);text-anchor:end}
+.orbit .lbl{fill:#f7f2e8;font-size:11.5px;font-weight:500;text-anchor:end}
+.orbit .val{fill:rgba(243,237,224,.75);font-size:10.5px;font-variant-numeric:tabular-nums;font-family:var(--mono)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:11.5px;letter-spacing:.04em;margin-top:6px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.legend i.ring{background:none;border:1.5px solid currentColor}
+.dark .legend{color:rgba(243,237,224,.72)}
+.meta{display:flex;flex-wrap:wrap;gap:14px 34px;margin-top:34px;padding-top:18px;border-top:1px solid rgba(228,211,184,.16);font-size:13px}
+.meta .k{font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.55;margin-bottom:3px}
+
+/* ---------- act-now value map ---------- */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:34px;align-items:center;margin-top:28px}
+.mm{width:100%;display:block;overflow:visible}
+.mm .conn{fill:none;stroke:rgba(228,211,184,.35);stroke-width:1.4;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.3s cubic-bezier(.3,.7,.2,1)}
+.in .mm .conn{stroke-dashoffset:0}
+.mm .node{cursor:pointer;opacity:0;transform-box:fill-box;transform-origin:left center;transform:translateX(-24px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.3,1.3)}
+.in .mm .node{opacity:1;transform:none}
+.mm .node rect.b{fill:var(--deep2);stroke:var(--mint);stroke-width:1.4;transition:fill .25s,stroke .25s}
+.mm .node:hover rect.b,.mm .node:focus rect.b,.mm .node.on rect.b{fill:#4a3555;stroke:var(--accent-l)}
+.mm .node:focus{outline:none}
+.mm .accentbar{fill:var(--accent-l);opacity:0;transition:opacity .3s}
+.mm .node.on .accentbar{opacity:1}
+.mm .rank{fill:var(--accent-l);font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.mm .nl{fill:#f7f2e8;font-size:17px;font-weight:600;text-anchor:start}
+.mm .nv{fill:var(--accent-l);font-size:13px;font-weight:500;text-anchor:start;font-variant-numeric:tabular-nums}
+.mm .ns{fill:rgba(243,237,224,.6);font-size:9.5px;letter-spacing:.06em;text-anchor:start;text-transform:uppercase}
+.panel{border:1px solid rgba(228,211,184,.2);border-radius:8px;padding:24px 24px 22px;background:rgba(50,37,60,.55);min-height:320px}
+.panel .pk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);opacity:.8}
+.panel h3{font-size:22px;font-weight:500;letter-spacing:-.02em;margin:8px 0 10px;color:#fff}
+.panel .pv{font-size:24px;font-weight:300;color:var(--accent-l);letter-spacing:-.02em;line-height:1.2;font-variant-numeric:tabular-nums}
+.panel .pvs{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin:4px 0 14px}
+.panel p{font-size:14.5px;color:rgba(243,237,224,.8);line-height:1.55}
+.panel .act{margin-top:14px;font-size:13.5px;color:#f7f2e8;padding-top:12px;border-top:1px solid rgba(228,211,184,.16)}
+.panel .act b{color:var(--mint);font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:10.5px;display:block;margin-bottom:3px}
+
+/* ---------- score bars ---------- */
+.scorewrap{margin-top:30px}
+.sbar{display:grid;grid-template-columns:190px 1fr 92px;gap:16px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.sbar:first-child{border-top:0}
+.sbar .sn{font-size:14.5px;font-weight:500}
+.sbar .strack{position:relative;height:20px;background:var(--wash);border-radius:4px;overflow:hidden;cursor:pointer}
+.sbar .sfill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:4px;transition:width 1.1s cubic-bezier(.3,.7,.2,1)}
+.in .sbar .sfill{width:var(--w)}
+.sbar .sfill.y{background:var(--ready-d)}
+.sbar .sfill.n{background:var(--amber-d)}
+.sbar .sband{position:absolute;top:0;bottom:0;background:rgba(181,98,46,.08);border-right:1px dashed rgba(181,98,46,.45)}
+.sbar .sv{font-family:var(--mono);font-size:14px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.scorelegend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:12.5px;color:var(--muted)}
+.scorelegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* ---------- dimensions / method ---------- */
+.dimgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;margin-top:30px;align-items:start}
+.dbar{display:grid;grid-template-columns:1fr 40px;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.dbar:first-child{border-top:0}
+.dbar .dl{font-size:13.5px}
+.dbar .dl b{font-family:var(--mono);color:var(--accent-d);margin-right:6px}
+.dbar .dtrack{grid-column:1/-1;height:8px;background:var(--wash);border-radius:4px;overflow:hidden;margin-top:2px}
+.dbar .dfill{height:100%;width:0;background:var(--green);border-radius:4px;transition:width 1s ease}
+.in .dbar .dfill{width:var(--w)}
+.dbar .dv{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.bandcard{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-bottom:10px}
+.bandcard .bk{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bandcard h4{font-size:16px;font-weight:600;margin:4px 0 4px}
+.bandcard p{font-size:13.5px;color:var(--muted)}
+.bandcard.now{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+
+/* ---------- findings tabs ---------- */
+.findwrap{display:grid;grid-template-columns:220px 1fr;gap:0;margin-top:28px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.findtabs{display:flex;flex-direction:column;background:var(--wash);border-right:1px solid var(--line)}
+.ftab{all:unset;cursor:pointer;padding:16px 18px;border-bottom:1px solid var(--line);font-size:14px}
+.ftab:last-child{border-bottom:0}
+.ftab .fn{font-weight:600;display:block}
+.ftab .fs{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:2px;display:block}
+.ftab.on{background:#fff;box-shadow:inset 3px 0 0 var(--accent)}
+.ftab.on .fn{color:var(--accent-d)}
+.findpanel{padding:26px 30px}
+.findpanel h3{font-size:20px;margin-bottom:4px}
+.findpanel .fsub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.findpanel ul{display:grid;gap:9px;margin-bottom:16px}
+.findpanel li{font-size:14.5px;line-height:1.5;padding-left:16px;position:relative;color:var(--ink)}
+.findpanel li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.findpanel .conf{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:6px}
+.fixbox{background:var(--wash);border-radius:8px;padding:14px 16px;font-size:14px;margin-top:8px}
+.fixbox b{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.otherstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+@media (max-width:900px){.otherstrip{grid-template-columns:1fr 1fr}}
+.ostrip{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.ostrip .on2{font-size:13.5px;font-weight:600}
+.ostrip .ov{font-family:var(--mono);font-size:11.5px;color:var(--accent-d);margin:2px 0 4px}
+.ostrip .ot{font-size:12.5px;color:var(--muted);line-height:1.4}
+.dark .findwrap{border-color:rgba(228,211,184,.18)}
+.dark .findtabs{background:rgba(255,255,255,.04);border-right-color:rgba(228,211,184,.16)}
+.dark .ftab{border-bottom-color:rgba(228,211,184,.14)}
+.dark .ftab.on{background:rgba(255,255,255,.08)}
+.dark .ftab .fn{color:#f7f2e8}
+.dark .ftab.on .fn{color:var(--accent-l)}
+.dark .ftab .fs{color:rgba(243,237,224,.55)}
+.dark .findpanel .fsub{color:rgba(243,237,224,.72)}
+.dark .findpanel li{color:#f3ede0}
+.dark .findpanel .conf{color:rgba(243,237,224,.55)}
+.dark .fixbox{background:rgba(50,37,60,.6);border:1px solid rgba(228,211,184,.2);color:rgba(243,237,224,.88)}
+.dark .fixbox b{color:var(--mint)}
+.dark .ostrip{border-color:rgba(228,211,184,.2)}
+.dark .ostrip .ov{color:var(--accent-l)}
+.dark .ostrip .ot{color:rgba(243,237,224,.68)}
+
+/* ---------- decisions / confirm ---------- */
+.decisions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}
+@media (max-width:980px){.decisions{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.decisions{grid-template-columns:1fr}}
+.dec{border:1px solid rgba(228,211,184,.2);border-radius:8px;padding:20px 22px;background:rgba(50,37,60,.5)}
+.dec.first{border-color:var(--accent-l);box-shadow:inset 3px 0 0 var(--accent-l)}
+.dec .dk{font-family:var(--mono);font-size:11px;color:var(--mint);letter-spacing:.06em}
+.dec h3{margin:6px 0 6px;color:#fff}
+.dec p{font-size:14px;color:rgba(243,237,224,.78);line-height:1.5}
+.dec .range{display:flex;align-items:baseline;gap:10px;margin-top:12px;font-size:20px;font-weight:300;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#fff}
+.dec .range span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(243,237,224,.6)}
+.guard{font-size:14.5px;line-height:1.55;padding:16px 18px;border-radius:8px;background:rgba(50,37,60,.5);border:1px solid rgba(228,211,184,.2);color:rgba(243,237,224,.85);margin-top:14px}
+.guard b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:6px}
+
+/* ---------- request timeline ---------- */
+.asklane{position:relative;margin-top:34px;padding:0 6px}
+.lanehead{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.track{position:relative;height:400px;margin-top:14px;padding-left:160px}
+.track .axis{position:absolute;left:138px;top:2px;bottom:2px;width:2px;background:var(--line)}
+.track .fill{position:absolute;left:138px;top:2px;width:2px;height:0;background:var(--accent);transition:height 1.6s cubic-bezier(.3,.7,.2,1)}
+.in .track .fill{height:100%}
+.track .tk{position:absolute;left:0;top:0;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;text-align:right;width:122px}
+.track .tk::before{content:'';position:absolute;left:128px;top:50%;width:8px;height:1px;background:var(--muted);opacity:.6;transform:translateY(-50%)}
+.ask{all:unset;cursor:pointer;position:absolute;left:162px;display:flex;align-items:center;gap:12px}
+.ask .dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:500;color:#fff;background:var(--green);box-shadow:0 0 0 4px var(--paper);transition:transform .2s,background .2s;flex:none}
+.ask.hot .dot{background:var(--accent)}
+.ask:hover .dot,.ask:focus-visible .dot{transform:scale(1.18);background:var(--accent-d)}
+.ask .who{font-size:10.5px;color:var(--muted);white-space:nowrap}
+.tierlegend{display:flex;gap:20px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:var(--muted)}
+.tierlegend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.riskgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}
+@media (max-width:900px){.riskgrid{grid-template-columns:1fr}}
+.riskcard{border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.riskcard h4{font-size:14.5px;margin-bottom:6px}
+.riskcard p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+/* ---------- pipeline flow ---------- */
+.flow{width:100%;max-width:640px;margin:18px auto 0;display:block;overflow:visible}
+.flow .ringline{fill:none;stroke:var(--line);stroke-dasharray:2 6;opacity:.6}
+.flow .fl{fill:none;stroke:var(--line);stroke-width:1.6}
+.flow .pkt{fill:var(--accent)}
+.flow .fn{cursor:pointer}
+.flow .fn rect{fill:#fff;stroke:var(--line);stroke-width:1.2;transition:all .25s}
+.flow .fn.core rect{fill:var(--deep2);stroke:var(--accent-l);stroke-width:1.6}
+.flow .fn:hover rect,.flow .fn:focus rect{stroke:var(--accent);stroke-width:2}
+.flow .fn:focus{outline:none}
+.flow .ft{font-size:13.5px;font-weight:600;fill:var(--ink)}
+.flow .fv{font-size:11.5px;fill:var(--muted)}
+.flow .fn.core .ft{fill:#fff}.flow .fn.core .fv{fill:var(--mint)}
+.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:30px}
+@media (max-width:900px){.rules{grid-template-columns:1fr 1fr}}
+.rule .n{font-size:28px;font-weight:300;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--green)}
+.rule p{font-size:13.5px;color:var(--muted);margin-top:4px}
+.leavebehind{margin-top:26px;font-size:14.5px;line-height:1.6;padding:18px 20px;border-left:2px solid var(--accent);background:var(--wash);border-radius:0 8px 8px 0;color:var(--ink)}
+.leavebehind b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.dark .leavebehind{background:rgba(50,37,60,.6);border-left-color:var(--accent-l);color:rgba(243,237,224,.88)}
+.dark .leavebehind b{color:var(--mint)}
+.dark .rule p{color:rgba(243,237,224,.72)}
+
+/* ---------- coverage stat ---------- */
+.covwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center;margin-top:28px}
+@media (max-width:900px){.covwrap{grid-template-columns:1fr}}
+.covfig{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.covfig .cn{font-size:clamp(60px,9vw,120px);font-weight:300;letter-spacing:-.04em;color:var(--accent-d);line-height:.9}
+.covfig .cn2{font-size:clamp(30px,4vw,52px);font-weight:300;color:var(--muted)}
+.dark .covfig .cn{color:var(--accent-l)}
+.dark .covfig .cn2{color:rgba(243,237,224,.5)}
+.fee{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--ink)}
+.fee b{color:var(--ink);font-weight:600}
+.fee .chip{display:inline-flex;align-items:center;gap:8px}
+.fee .chip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green)}
+.fee .chip.o::before{background:var(--accent-d)}
+.dark .fee{border-top-color:rgba(228,211,184,.16);color:rgba(243,237,224,.82)}
+.dark .fee b{color:#fff}
+.dark .fee .chip::before{background:var(--mint)}
+.dark .fee .chip.o::before{background:var(--accent-l)}
+
+/* ---------- closer ---------- */
+.next{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:46px;margin-top:28px;align-items:start}
+@media (max-width:980px){.next{grid-template-columns:1fr}}
+.q{padding:20px 22px;border-radius:8px;border:1px solid var(--line);background:#fff;margin-bottom:14px}
+.q .qk{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.q p{font-size:16px;margin-top:6px;line-height:1.5;color:var(--ink)}
+.dark .q{background:rgba(50,37,60,.6);border-color:rgba(228,211,184,.2)}
+.dark .q .qk{color:var(--mint)}
+.dark .q p{color:#f7f2e8}
+.docfoot{padding:22px 40px 26px calc(var(--rail) + 48px);background:var(--deep);color:rgba(243,237,224,.55);font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid rgba(228,211,184,.12)}
+
+/* ---------- appendix: how we built it ---------- */
+.partband{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-d);margin-bottom:22px}
+.partband::before{content:'';width:34px;height:2px;background:currentColor}
+.dark .partband{color:var(--accent-l)}
+.apx .lede{font-size:16.5px}
+.stairgrid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:34px;align-items:start;margin-top:22px}
+.stair{width:100%;display:block;overflow:visible}
+.stair .stp{cursor:pointer}
+.stair .stp rect.tread{fill:var(--wash);stroke:var(--line);transition:fill .25s,stroke .25s}
+.stair .stp.rev rect.tread{fill:#f3e3d4;stroke:#e3c6ab}
+.stair .stp:hover rect.tread,.stair .stp:focus rect.tread,.stair .stp.on rect.tread{fill:#fff;stroke:var(--accent);stroke-width:1.6}
+.stair .stp:focus{outline:none}
+.stair .sn{font-family:var(--mono);font-size:12px;fill:var(--accent-d)}
+.stair .sl{font-size:12.5px;font-weight:600;fill:var(--ink)}
+.stair .wbar{fill:var(--green);opacity:.85}
+.stair .wlab{font-family:var(--mono);font-size:10.5px;fill:var(--muted);text-anchor:middle}
+.stair .vtag{font-family:var(--mono);font-size:11px;font-weight:500;fill:#fff;text-anchor:middle}
+.stair .axisl{stroke:var(--line)}
+.stair .cap{font-size:10px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted)}
+.stpanel{border:1px solid var(--line);border-radius:8px;background:#fff;padding:22px 22px 20px;min-height:280px}
+.stpanel .pk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-d)}
+.stpanel h3{font-size:21px;font-weight:500;letter-spacing:-.02em;margin:6px 0 10px}
+.stpanel p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.stpanel .row{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px}
+.stpanel .row b{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:500;margin-bottom:2px}
+.stpanel code{font-family:var(--mono);font-size:12px;color:var(--ink);word-break:break-word}
+.heads{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px}
+.hd{border-top:2px solid var(--line);padding-top:10px;font-size:13.5px;color:var(--muted);line-height:1.45}
+.hd .hv{font-family:var(--mono);font-size:11px;color:var(--accent-d);letter-spacing:.06em;margin-bottom:4px}
+.hd q{quotes:"\201C" "\201D";color:var(--ink)}
+.hd.now{border-top-color:var(--accent)}
+.lanes{width:100%;display:block;overflow:visible;margin-top:18px}
+.lanes .lane{fill:rgba(228,211,184,.05)}
+.lanes .lane.alt{fill:rgba(228,211,184,.1)}
+.lanes .lt{font-size:12.5px;font-weight:600;fill:#f7f2e8}
+.lanes .ls{font-size:10.5px;fill:rgba(243,237,224,.55)}
+.lanes .col{font-family:var(--mono);font-size:11px;fill:rgba(243,237,224,.6);text-anchor:middle}
+.lanes .grid{stroke:rgba(228,211,184,.1)}
+.lanes .hand{fill:none;stroke:rgba(228,211,184,.35);stroke-width:1.3}
+.lanes .hand.back{stroke:var(--accent-l);stroke-dasharray:4 4;opacity:.8}
+.lanes .tk{cursor:pointer;transition:transform .2s}
+.lanes .tk:focus{outline:none}
+.lanes .tk circle{stroke:#241a2c;stroke-width:2}
+.lanes .tk:hover circle,.lanes .tk:focus circle{stroke:#fff}
+.lanes .tk.ghost circle{fill:none;stroke:var(--accent-l);stroke-dasharray:3 3}
+.dag{width:100%;display:block;overflow:visible;margin-top:18px}
+.dag .colh{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;fill:var(--muted);text-anchor:middle}
+.dag .lk{fill:none;stroke:var(--line);stroke-width:1.6;transition:stroke .2s,opacity .2s}
+.dag .lk.hi{stroke:var(--accent);stroke-width:2.2}
+.dag.focus .lk:not(.hi){opacity:.18}
+.dag .nd{cursor:pointer;transition:opacity .2s}
+.dag.focus .nd:not(.hi){opacity:.3}
+.dag .nd rect{fill:#fff;stroke:var(--line);stroke-width:1.2}
+.dag .nd.k2 rect{fill:var(--deep);stroke:var(--deep)}
+.dag .nd.k2 text{fill:#f7f2e8}
+.dag .nd.k3 rect{fill:#f3e3d4;stroke:#e3c6ab}
+.dag .nd.k4 rect{fill:var(--wash);stroke-dasharray:4 3;stroke:var(--muted)}
+.dag .nd.hi rect{stroke:var(--accent);stroke-width:2}
+.dag .nd:focus{outline:none}
+.dag .nt{font-size:12.5px;font-weight:600;fill:var(--ink)}
+@media (max-width:980px){.stairgrid{grid-template-columns:1fr}.heads{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.heads{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.mm .conn{stroke-dashoffset:0}.mm .node{opacity:1;transform:none}.sbar .sfill,.dbar .dfill{width:var(--w,100%)!important}.track .fill{height:100%!important}.orbit .rung .ln{opacity:1!important}}
+@media (max-width:980px){
+  #s1 .cover,#s1 .below,.mapgrid,.dimgrid,.covwrap,.next{grid-template-columns:1fr}
+  .findwrap{grid-template-columns:1fr}
+  .findtabs{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line)}
+  .ftab{border-bottom:0;border-right:1px solid var(--line);flex:1 1 45%}
+}
+@media (max-width:760px){
+  :root{--rail:0px}
+  .rail{display:none}
+  section{padding:96px 16px 64px 16px;min-height:auto}
+  .topbar{padding-left:16px;padding-right:16px}
+  .topbar .sec,.aud,.brand .who,.brand .sep{display:none}
+  .decisions{grid-template-columns:1fr}
+  .docfoot{padding-left:16px;padding-right:16px}
+  .sbar{grid-template-columns:1fr;gap:4px}
+  .track{margin-bottom:56px}
+  .track .ask.t3{left:162px!important;margin-top:46px}
+  .sbar .sv{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="kwg" x1="308.412" y1="24.0442" x2="290.32" y2="152.779" gradientUnits="userSpaceOnUse">
+<stop stop-color="#5B9A8B" stop-opacity="0.1"/>
+<stop offset="0.25" stop-color="#5B9A8B"/>
+<stop offset="0.75" stop-color="#5B9A8B"/>
+<stop offset="1" stop-color="#5B9A8B" stop-opacity="0.1"/>
+</linearGradient><symbol id="kwm" viewBox="0 0 1013 187"><path d="M36.5 110.736L36.4091 94.1453H38.7727L66.5909 64.5999H82.8636L51.1364 98.2363H49L36.5 110.736ZM24 134.418V41.3272H37.5909V134.418H24ZM68.0909 134.418L43.0909 101.236L52.4545 91.7363L84.7727 134.418H68.0909Z" fill="currentColor"/><path d="M92.69 134.418V64.5999H106.281V134.418H92.69ZM99.5536 53.8272C97.19 53.8272 95.1597 53.0393 93.4627 51.4635C91.7961 49.8575 90.9627 47.9484 90.9627 45.7363C90.9627 43.4938 91.7961 41.5847 93.4627 40.009C95.1597 38.4029 97.19 37.5999 99.5536 37.5999C101.917 37.5999 103.932 38.4029 105.599 40.009C107.296 41.5847 108.145 43.4938 108.145 45.7363C108.145 47.9484 107.296 49.8575 105.599 51.4635C103.932 53.0393 101.917 53.8272 99.5536 53.8272Z" fill="currentColor"/><path d="M154.596 64.5999V75.509H116.46V64.5999H154.596ZM126.687 47.8726H140.278V113.918C140.278 116.554 140.672 118.539 141.46 119.873C142.247 121.176 143.263 122.07 144.505 122.554C145.778 123.009 147.157 123.236 148.641 123.236C149.732 123.236 150.687 123.16 151.505 123.009C152.323 122.857 152.96 122.736 153.414 122.645L155.869 133.873C155.081 134.176 153.96 134.479 152.505 134.782C151.05 135.115 149.232 135.297 147.05 135.327C143.475 135.388 140.141 134.751 137.05 133.418C133.96 132.085 131.46 130.024 129.55 127.236C127.641 124.448 126.687 120.948 126.687 116.736V47.8726Z" fill="currentColor"/><path d="M182.161 92.9635V134.418H168.57V41.3272H181.979V75.9635H182.843C184.479 72.206 186.979 69.2211 190.343 67.009C193.706 64.7969 198.1 63.6908 203.525 63.6908C208.312 63.6908 212.494 64.6757 216.07 66.6453C219.676 68.615 222.464 71.5544 224.434 75.4635C226.434 79.3423 227.434 84.1908 227.434 90.009V134.418H213.843V91.6453C213.843 86.5241 212.525 82.5544 209.888 79.7363C207.252 76.8878 203.585 75.4635 198.888 75.4635C195.676 75.4635 192.797 76.1453 190.252 77.509C187.737 78.8726 185.752 80.8726 184.297 83.509C182.873 86.115 182.161 89.2666 182.161 92.9635Z" fill="currentColor"/><path d="M397.818 135.873C391.576 135.873 386.136 134.312 381.5 131.191C376.894 128.07 373.318 123.797 370.773 118.373C368.227 112.948 366.954 106.767 366.954 99.8272C366.954 92.8272 368.242 86.5999 370.818 81.1453C373.424 75.6908 377.03 71.4181 381.636 68.3272C386.242 65.206 391.591 63.6453 397.682 63.6453C402.348 63.6453 406.576 64.5544 410.364 66.3726C414.151 68.1605 417.273 70.6908 419.727 73.9635C422.212 77.206 423.773 80.9938 424.409 85.3272H416.227C415.379 81.3878 413.333 78.0241 410.091 75.2363C406.879 72.4181 402.788 71.009 397.818 71.009C393.364 71.009 389.424 72.2211 386 74.6453C382.576 77.0393 379.894 80.3878 377.954 84.6908C376.045 88.9635 375.091 93.9181 375.091 99.5544C375.091 105.221 376.03 110.236 377.909 114.6C379.788 118.933 382.424 122.327 385.818 124.782C389.242 127.236 393.242 128.464 397.818 128.464C400.909 128.464 403.727 127.888 406.273 126.736C408.848 125.554 411 123.888 412.727 121.736C414.485 119.585 415.667 117.024 416.273 114.054H424.454C423.848 118.267 422.348 122.024 419.954 125.327C417.591 128.6 414.515 131.176 410.727 133.054C406.97 134.933 402.667 135.873 397.818 135.873Z" fill="currentColor" fill-opacity="0.4"/><path d="M471.492 135.873C465.461 135.873 460.128 134.342 455.492 131.282C450.886 128.221 447.28 123.994 444.674 118.6C442.068 113.176 440.764 106.918 440.764 99.8272C440.764 92.6757 442.068 86.3878 444.674 80.9635C447.28 75.509 450.886 71.2666 455.492 68.2363C460.128 65.1756 465.461 63.6453 471.492 63.6453C477.522 63.6453 482.84 65.1756 487.446 68.2363C492.052 71.2969 495.658 75.5393 498.264 80.9635C500.901 86.3878 502.219 92.6757 502.219 99.8272C502.219 106.918 500.916 113.176 498.31 118.6C495.704 123.994 492.083 128.221 487.446 131.282C482.84 134.342 477.522 135.873 471.492 135.873ZM471.492 128.464C476.34 128.464 480.446 127.16 483.81 124.554C487.174 121.948 489.719 118.479 491.446 114.145C493.204 109.812 494.083 105.039 494.083 99.8272C494.083 94.615 493.204 89.8272 491.446 85.4635C489.719 81.0999 487.174 77.5999 483.81 74.9635C480.446 72.3272 476.34 71.009 471.492 71.009C466.674 71.009 462.568 72.3272 459.174 74.9635C455.81 77.5999 453.249 81.0999 451.492 85.4635C449.764 89.8272 448.901 94.615 448.901 99.8272C448.901 105.039 449.764 109.812 451.492 114.145C453.249 118.479 455.81 121.948 459.174 124.554C462.537 127.16 466.643 128.464 471.492 128.464Z" fill="currentColor" fill-opacity="0.4"/><path d="M530.631 90.7817V134.418H522.54V64.5999H530.404V75.5544H531.131C532.768 71.9787 535.313 69.115 538.768 66.9635C542.253 64.7817 546.556 63.6908 551.677 63.6908C556.374 63.6908 560.495 64.6757 564.04 66.6453C567.616 68.5847 570.389 71.4484 572.359 75.2363C574.359 79.0241 575.359 83.6756 575.359 89.1908V134.418H567.268V89.6908C567.268 83.9635 565.662 79.4332 562.449 76.0999C559.268 72.7666 554.995 71.0999 549.631 71.0999C545.965 71.0999 542.707 71.8878 539.859 73.4635C537.01 75.0393 534.752 77.312 533.086 80.2817C531.449 83.2211 530.631 86.7211 530.631 90.7817Z" fill="currentColor" fill-opacity="0.4"/><path d="M646.134 79.9181L638.725 82.009C637.998 79.9181 636.968 78.0241 635.634 76.3272C634.301 74.6302 632.559 73.2817 630.407 72.2817C628.286 71.2817 625.65 70.7817 622.498 70.7817C617.771 70.7817 613.892 71.9029 610.862 74.1453C607.831 76.3878 606.316 79.2817 606.316 82.8272C606.316 85.8272 607.347 88.2666 609.407 90.1453C611.498 91.9938 614.71 93.4635 619.044 94.5544L629.589 97.1453C635.438 98.5696 639.816 100.827 642.725 103.918C645.665 107.009 647.134 110.888 647.134 115.554C647.134 119.494 646.044 122.994 643.862 126.054C641.68 129.115 638.634 131.524 634.725 133.282C630.847 135.009 626.347 135.873 621.225 135.873C614.407 135.873 608.786 134.342 604.362 131.282C599.938 128.191 597.104 123.736 595.862 117.918L603.634 116.009C604.634 120.16 606.589 123.297 609.498 125.418C612.438 127.539 616.301 128.6 621.089 128.6C626.453 128.6 630.741 127.403 633.953 125.009C637.165 122.585 638.771 119.554 638.771 115.918C638.771 113.1 637.831 110.736 635.953 108.827C634.074 106.888 631.225 105.464 627.407 104.554L615.998 101.827C609.938 100.373 605.453 98.0696 602.544 94.9181C599.634 91.7666 598.18 87.8575 598.18 83.1908C598.18 79.3423 599.225 75.9635 601.316 73.0544C603.407 70.115 606.286 67.812 609.953 66.1453C613.619 64.4787 617.801 63.6453 622.498 63.6453C628.892 63.6453 633.998 65.0999 637.816 68.009C641.665 70.8878 644.438 74.8575 646.134 79.9181Z" fill="currentColor" fill-opacity="0.4"/><path d="M711.774 107.736V64.5999H719.865V134.418H711.774V122.827H711.138C709.501 126.403 706.91 129.388 703.365 131.782C699.819 134.145 695.486 135.327 690.365 135.327C685.91 135.327 681.956 134.357 678.501 132.418C675.047 130.448 672.335 127.57 670.365 123.782C668.395 119.994 667.41 115.342 667.41 109.827V64.5999H675.501V109.327C675.501 114.782 677.107 119.176 680.319 122.509C683.532 125.812 687.653 127.464 692.683 127.464C695.835 127.464 698.865 126.706 701.774 125.191C704.683 123.676 707.077 121.464 708.956 118.554C710.835 115.615 711.774 112.009 711.774 107.736Z" fill="currentColor" fill-opacity="0.4"/><path d="M751.936 41.3272V134.418H743.845V41.3272H751.936Z" fill="currentColor" fill-opacity="0.4"/><path d="M803.405 64.5999V71.6453H770.087V64.5999H803.405ZM780.496 47.8726H788.633V116.191C788.633 119.1 789.133 121.388 790.133 123.054C791.133 124.691 792.436 125.857 794.042 126.554C795.648 127.221 797.36 127.554 799.178 127.554C800.239 127.554 801.148 127.494 801.905 127.373C802.663 127.221 803.33 127.07 803.905 126.918L805.633 134.236C804.845 134.539 803.875 134.812 802.724 135.054C801.572 135.327 800.148 135.464 798.451 135.464C795.481 135.464 792.617 134.812 789.86 133.509C787.133 132.206 784.89 130.267 783.133 127.691C781.375 125.115 780.496 121.918 780.496 118.1V47.8726Z" fill="currentColor" fill-opacity="0.4"/><path d="M824.431 134.418V64.5999H832.568V134.418H824.431ZM828.568 52.5999C826.901 52.5999 825.477 52.0393 824.295 50.9181C823.113 49.7666 822.522 48.3878 822.522 46.7817C822.522 45.1756 823.113 43.812 824.295 42.6908C825.477 41.5393 826.901 40.9635 828.568 40.9635C830.234 40.9635 831.659 41.5393 832.84 42.6908C834.022 43.812 834.613 45.1756 834.613 46.7817C834.613 48.3878 834.022 49.7666 832.84 50.9181C831.659 52.0393 830.234 52.5999 828.568 52.5999Z" fill="currentColor" fill-opacity="0.4"/><path d="M864.616 90.7817V134.418H856.525V64.5999H864.389V75.5544H865.116C866.753 71.9787 869.298 69.115 872.753 66.9635C876.238 64.7817 880.541 63.6908 885.662 63.6908C890.359 63.6908 894.48 64.6757 898.025 66.6453C901.601 68.5847 904.374 71.4484 906.344 75.2363C908.344 79.0241 909.344 83.6756 909.344 89.1908V134.418H901.253V89.6908C901.253 83.9635 899.647 79.4332 896.435 76.0999C893.253 72.7666 888.98 71.0999 883.616 71.0999C879.95 71.0999 876.692 71.8878 873.844 73.4635C870.995 75.0393 868.738 77.312 867.071 80.2817C865.435 83.2211 864.616 86.7211 864.616 90.7817Z" fill="currentColor" fill-opacity="0.4"/><path d="M959.847 162.054C955.089 162.054 950.922 161.433 947.347 160.191C943.771 158.979 940.756 157.312 938.301 155.191C935.847 153.07 933.938 150.691 932.574 148.054L939.21 143.691C940.21 145.448 941.544 147.176 943.21 148.873C944.907 150.57 947.104 151.979 949.801 153.1C952.529 154.221 955.877 154.782 959.847 154.782C966.029 154.782 971.013 153.236 974.801 150.145C978.619 147.054 980.529 142.251 980.529 135.736V120.009H979.801C978.862 122.13 977.513 124.251 975.756 126.373C973.998 128.464 971.695 130.206 968.847 131.6C966.029 132.994 962.529 133.691 958.347 133.691C952.771 133.691 947.816 132.312 943.483 129.554C939.18 126.797 935.786 122.857 933.301 117.736C930.847 112.585 929.619 106.448 929.619 99.3272C929.619 92.2666 930.816 86.0544 933.21 80.6908C935.635 75.3272 939.013 71.1453 943.347 68.1453C947.68 65.1453 952.726 63.6453 958.483 63.6453C962.756 63.6453 966.301 64.4029 969.119 65.9181C971.938 67.4029 974.195 69.2514 975.892 71.4635C977.619 73.6757 978.968 75.8272 979.938 77.9181H980.756V64.5999H988.665V136.236C988.665 142.145 987.407 147.009 984.892 150.827C982.377 154.645 978.953 157.464 974.619 159.282C970.286 161.13 965.362 162.054 959.847 162.054ZM959.301 126.282C963.786 126.282 967.619 125.206 970.801 123.054C973.983 120.873 976.422 117.751 978.119 113.691C979.816 109.63 980.665 104.797 980.665 99.1908C980.665 93.7363 979.832 88.9029 978.165 84.6908C976.498 80.4484 974.074 77.115 970.892 74.6908C967.741 72.2363 963.877 71.009 959.301 71.009C954.635 71.009 950.695 72.2666 947.483 74.7817C944.271 77.2969 941.847 80.6908 940.21 84.9635C938.574 89.2059 937.756 93.9484 937.756 99.1908C937.756 104.524 938.589 109.236 940.256 113.327C941.922 117.388 944.362 120.57 947.574 122.873C950.786 125.145 954.695 126.282 959.301 126.282Z" fill="currentColor" fill-opacity="0.4"/><path d="M303.33 27.8743C303.676 25.4132 305.951 23.6985 308.412 24.0444C310.873 24.3902 312.588 26.6657 312.242 29.1268L295.402 148.949C295.056 151.41 292.781 153.125 290.32 152.779C287.859 152.433 286.144 150.158 286.49 147.697L303.33 27.8743Z" fill="url(#kwg)"/></symbol></defs></svg>
+
+<div id="bar"></div>
+<header class="topbar">
+  <div class="brand"><svg viewBox="0 0 1013 187" role="img" aria-label="Kith Consulting"><use href="#kwm"/></svg><span class="sep">|</span><span class="who">Climate data review</span></div>
+  <div class="right"><span class="aud" id="aud">Sarah Mitchell &middot; COO</span><span class="sec" id="secname">Headline</span><span class="idx tab" id="secidx">01 / 12</span></div>
+</header>
+<nav class="rail" id="rail" aria-label="Pages"><div class="fade t"></div><div class="win"></div><div class="drum" id="drum"></div><div class="fade b"></div><div class="wh">pages</div></nav>
+<div class="rlbl" id="rlbl"></div>
+<div id="tip" role="tooltip"></div>
+
+<!-- ===================== 01 THE ANSWER ===================== -->
+<section id="s1" class="dark" data-label="Headline" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap cover">
+    <div>
+      <div class="kicker rv">Climate data review | Week 2 of 6 | September 25, 2026</div>
+      <h1 class="rv d1">Your protocol exists on paper. <b>It hasn't run for 2026.</b></h1>
+    </div>
+    <div class="rv d2">
+      <svg class="orbit" id="orbit" viewBox="0 0 600 640" role="img" aria-label="All ten portfolio companies ranked by readiness score, coloured by whether one fix reaches Partially ready"></svg>
+      <div class="legend">
+        <span><i style="background:var(--ready-d)"></i>One fix reaches Partially ready (6)</span>
+        <span><i style="background:var(--amber-d)"></i>No single fix (4)</span>
+        <span><i class="ring" style="color:#fff"></i>Rung length &middot; readiness score</span>
+      </div>
+      <p class="instr">All ten sit in the same band. Point at a rung for that company's score and exposure; the Northwood marker opens the portfolio totals.</p>
+    </div>
+    <div class="below">
+      <p class="answer rv d3">For LP disclosure, FY 2025 is achievable once known errors are fixed &mdash; the underlying energy data exists for all ten portcos, and management estimates are acceptable under the protocol. For buyer diligence, no portco would pass today: all ten score in the lowest readiness band, 26 to 38 out of 100. Meridian is tied with Sterling for closest, has the most traceable data in the portfolio, and is the most urgent &mdash; it enters confirmatory diligence in Q4 2026 on a live $363.9M to $400.9M process (as at 31 January 2026). The risk there is diligence friction, not a quantified discount.</p>
+      <div class="stats rv d3">
+        <div class="stat"><div class="n acc tab" data-count="10">10</div><div class="l">of 10 portcos, not diligence-ready</div></div>
+        <div class="stat"><div class="n tab">26&ndash;38</div><div class="l">readiness score range, out of 100</div></div>
+        <div class="stat"><div class="n tab" data-count="138">138</div><div class="l">facility rows checked</div></div>
+        <div class="stat"><div class="n tab" data-count="2">2</div><div class="l">of 10 mention climate in board materials</div></div>
+      </div>
+      <div class="meta rv d4">
+        <div><div class="k">Audience</div>Sarah Mitchell, COO, Northwood Capital</div>
+        <div><div class="k">Author</div>Kith Consulting</div>
+        <div><div class="k">Date</div>September 25, 2026</div>
+        <div><div class="k">Coverage</div>All 10 active portcos, extended from 4 at no added cost</div>
+        <div><div class="k">Edition</div>Portfolio edition: Kith Climate cohort case, fictional client</div>
+        <div><div class="k">Dates</div>Timetable as planned in September 2026; figures as at the data room&rsquo;s own dates, shown in brackets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 ACT NOW ===================== -->
+<section id="s2" data-label="Act now" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">02</span><b>Act now</b></div>
+    <h2 class="rv d1">Ranked by <em>value at stake</em>, not by data urgency.</h2>
+    <p class="lede rv d2">Four issues carry high value, a clock within about a year, and a fix within reach. Point at a step for its owner, clock and effort.</p>
+    <div class="mapgrid">
+      <svg class="mm" id="mm" viewBox="0 0 760 560" role="img" aria-label="Four act-now issues, cascaded by value at stake"></svg>
+      <div class="panel" id="mpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 LP-READINESS SCORES ===================== -->
+<section id="s3" class="dark" data-label="The scores" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">03</span><b>LP-readiness scores</b></div>
+    <h2 class="rv d1">All ten, <em>same band</em>, different distance to move.</h2>
+    <p class="lede rv d2">Every portco is Not diligence-ready (0&ndash;39). Six are one named fix from Partially ready (40+); four are not. Click a bar for the financial exposure the data supports.</p>
+    <div class="scorewrap rv d3" id="scorewrap"></div>
+    <div class="scorelegend"><span><i style="background:var(--ready-d)"></i>One fix reaches Partially ready</span><span><i style="background:var(--amber-d)"></i>No single fix identified</span><span>Dashed line &middot; 40, the Partially ready threshold</span></div>
+  </div>
+</section>
+
+<!-- ===================== 04 HOW THE SCORE WORKS ===================== -->
+<section id="s4" data-label="The method" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">04</span><b>How the score works</b></div>
+    <h2 class="rv d1">Eight weighted dimensions. <em>Three readiness bands.</em></h2>
+    <p class="lede rv d2">Each portco is scored 0&ndash;4 on eight dimensions, then combined into a composite out of 100. This is the methodology behind every number in this deck &mdash; reusable next quarter without Kith.</p>
+    <div class="dimgrid">
+      <div class="rv d3" id="dimwrap"></div>
+      <div class="rv d4">
+        <div class="bandcard now"><div class="bk">0&ndash;39</div><h4>Not diligence-ready</h4><p>Foundational gaps; the baseline cannot yet be relied on in diligence. All ten portcos sit here today.</p></div>
+        <div class="bandcard"><div class="bk">40&ndash;74</div><h4>Partially ready</h4><p>A usable baseline exists, with specific, namable gaps.</p></div>
+        <div class="bandcard"><div class="bk">75&ndash;100</div><h4>Diligence-ready</h4><p>Supports LP disclosure or buyer diligence with minor polish.</p></div>
+        <p class="small muted" style="margin-top:14px">The ceiling today is about 63: dimensions 3&ndash;6 carry 40% of the weight, and no portco scores above 1 on any of them. Sterling and Meridian sit 2.5 points from Partially ready on unrounded composites &mdash; treat the band as a close call and the dimension profile as the more reliable read. The weights were fixed on September 22, 2026, after the first automated checks had run, so with the data in view. They are held unchanged until request responses arrive, so they can't be tuned to results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 FINDINGS BY COMPANY ===================== -->
+<section id="s5" class="dark" data-label="Company findings" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">05</span><b>Findings by portfolio company</b></div>
+    <h2 class="rv d1">The four highest-exposure companies, <em>in their own data</em> (six more summarised below).</h2>
+    <p class="lede rv d2">Ordered by financial exposure at stake. Each finding carries its confidence: Confirmed, Reported or Inferred.</p>
+    <div class="findwrap rv d3">
+      <div class="findtabs" id="findtabs"></div>
+      <div class="findpanel" id="findpanel"></div>
+    </div>
+    <p class="hint rv d4" style="margin-top:18px">The remaining six portcos, summarized</p>
+    <div class="otherstrip rv d4" id="otherstrip"></div>
+  </div>
+</section>
+
+<!-- ===================== 06 ITEMS TO CONFIRM ===================== -->
+<section id="s6" data-label="For you to confirm" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">06</span><b>Items for Northwood to confirm</b></div>
+    <h2 class="rv d1">Three items can follow <em>after Monday</em>.</h2>
+    <p class="lede rv d2">The memo lists eight items for Northwood to confirm. The three that unlock the Week 3 baseline are on the decision page (09). These three change grades or later-week work, not Week 3 figures; the rest are in the memo.</p>
+    <div class="decisions rv d3" id="confirmcards"></div>
+  </div>
+</section>
+
+<!-- ===================== 07 DATA REQUESTS / TIMELINE ===================== -->
+<section id="s7" data-label="The data chase" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">07</span><b>Data requests and timeline</b></div>
+    <h2 class="rv d1">Three tiers, <em>set by what blocks Week 3</em>, not by importance.</h2>
+    <p class="lede rv d2">Eleven requests go out through Northwood &mdash; one per portco, plus the fund-level ask &mdash; the moment this memo is reviewed and issued, planned for Monday, September 28. The 79-ask register sits behind every tile.</p>
+    <div class="asklane rv d3">
+      <div class="lanehead"><h3>Tier 1 &middot; blocks the Week 3 baseline &middot; due Monday, October 5</h3><span class="instr" style="margin:0">Business days from Monday, September 28. Point at a tier to see its test.</span></div>
+      <div class="track" id="track"><div class="axis"></div><div class="fill"></div></div>
+      <div class="tierlegend" id="tierlegend"></div>
+    </div>
+    <div class="riskgrid rv d4">
+      <div class="riskcard"><h4>Harvest Ridge</h4><p>Its corrected submission needs plant-level re-entry from a finance team in the middle of integration.</p></div>
+      <div class="riskcard"><h4>Patriot</h4><p>The Evansville and Rockford figures depend on landlords replying &mdash; outside management's control. Its template also lists 12 sites that aren't in its organisation chart, so the branch list is a Tier 1 ask.</p></div>
+      <div class="riskcard"><h4>Ridgeline</h4><p>Three Tier 1 asks, including an office (Las Vegas) that isn't in the template at all.</p></div>
+    </div>
+    <div class="guard" style="margin-top:8px;background:var(--wash);border-color:var(--line);color:var(--ink)"><b>If responses are late</b>The Week 3 baseline still covers all ten portcos on a stated provisional rule: where the template is known wrong and the questionnaire gives a figure, that figure is used and flagged (NovaCare's two migrated clinics, Patriot's two zeroed branches, Meridian's four zero-gas sites). Where two submissions conflict and neither is known right, a range is shown, as for Harvest Ridge. Everything else uses the submitted template, marked provisional &mdash; with a methodology note stating what was assumed and what would close the gap.</div>
+  </div>
+</section>
+
+<!-- ===================== 08 THE SYSTEM UNDERNEATH ===================== -->
+<section id="s8" class="dark" data-label="Pipeline" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">08</span><b>How this was built</b></div>
+    <h2 class="rv d1">Scripted end to end, <em>and Northwood can run it again.</em></h2>
+    <p class="lede rv d2">Figures move from raw files to the memo through scripts, not manual re-entry. The scripts use only the Python standard library, and the whole pipeline is checked before issue. Point at a stage to see its output.</p>
+    <svg class="flow rv d2" id="flow" viewBox="0 0 700 700" role="img" aria-label="Seven pipeline stages arranged as a process ring: config to facts scripts to logs to scores, branching to prioritisation, requests and gate"></svg>
+    <div class="rules rv d3">
+      <div class="rule"><div class="n tab">91 / 0</div><p><code class="mono">verify-pipeline-v1.py</code>, at memo v4: every script re-run, memo figures checked against fresh outputs, 91 checks passed, 0 failed, before issue. The later v2 gate&rsquo;s last recorded run (27 September, memo v5) passed 133 of 136; its 3 fails were this deck&rsquo;s citations to an older memo.</p></div>
+      <div class="rule"><div class="n tab">151 / 0</div><p>Second extraction of all 10 questionnaires: 151 shared figures compared, 0 mismatches.</p></div>
+      <div class="rule"><div class="n tab">10</div><p>Steps to re-run next quarter (Appendix B), from new submissions and a config-file year change through to the same gate.</p></div>
+      <div class="rule"><div class="n tab">Std lib</div><p>Every script runs on the Python standard library only &mdash; no dependency Northwood's own team would need to install.</p></div>
+    </div>
+    <div class="leavebehind rv d4"><b>Leave-behind</b>Emission factors with source and retrieval date sit in <code class="mono">_reference/emission-factors/</code>; the method is set out in <code class="mono">_reference/audit-methodology-v2.md</code>. Judgment inputs live in data files, not code, so a change doesn't require touching a script. The one manual step left is questionnaire transcription, checked by the second extraction above; moving the playbook to a Northwood-owned location is part of the Week 6 handover.</div>
+  </div>
+</section>
+
+<!-- ===================== 10 MONDAY'S DECISIONS ===================== -->
+<section id="s10" class="dark" data-label="Monday's decisions" data-aud="Sarah Mitchell &middot; COO">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">09</span><b>What Northwood needs to decide by Monday, September 28</b></div>
+    <h2 class="rv d1">Three answers <em>unlock the Week 3 baseline</em>.</h2>
+    <div class="next rv d2">
+      <div>
+                <div class="q"><div class="qk">NW-2</div><p>Confirm Ridgeline's FY 2025 reporting boundary. Kith recommends own offices and fleet, with client-managed buildings recognised but reported separately, pending a review of the management contracts. Changes Ridgeline's footprint by orders of magnitude.</p></div>
+        <div class="q"><div class="qk">NW-10</div><p>Confirm with Mark Sullivan where Meridian's sale process stands now. Its February 2026 management-package workbook points to a March 12, 2026 advisor selection, a date that has passed, and disagrees with the Q4 2025 board deck; the workbook's origin is unclear. The live question: when does the ESG section need to be clean?</p></div>
+      </div>
+      <div>
+        <div class="q" style="border-color:var(--accent-l)"><div class="qk">The sequencing call</div><p>Whether the six additional portco requests &mdash; Keystone, NovaCare, Patriot, Pinnacle, Ridgeline and Trident &mdash; go out Monday with the priority four, follow later, or wait for the January 2027 collection cycle.</p></div>
+        <p class="small muted" style="margin-top:6px">Resolved, no answer needed: the Harvest Ridge and Patriot questionnaires are both signed &ldquo;Thomas Nguyen, CFO&rdquo;, and they are two different people, so both requests are addressed correctly.</p>
+        <p class="small muted" style="margin-top:6px">This timetable depends on the memo being reviewed and all eleven requests issued on Monday, September 28. Tier 1 responses are then due Monday, October 5; Tiers 2 and 3 by Monday, October 12.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11 APPENDIX: STAGES ===================== -->
+<section id="s11" class="apx" data-label="Appendix: the build, in stages" data-aud="Appendix &middot; cohort review">
+  <div class="wrap">
+    <div class="partband rv">Appendix &middot; How this was built (process appendix) &middot; D- and A- ids are entries in the disposition log (every finding) and the assumption log (every judgment call)</div>
+    <div class="eyebrow rv d1"><span class="no">10</span><b>Eight stages, four memo versions to the cohort review</b></div>
+    <h2 class="rv d1">Each review made the memo <em>answer your question more directly</em>.</h2>
+    <p class="lede rv d2">Step height is the stage; bars are the memo's length at each version. Two independent reviews (shaded steps) drove most of the change. Click a step for what happened and the file that shows it. Sourced from Kith's working files and archived drafts, not from the memo. Memo v5 (27 September) and v6 (1 October) followed a closeout check of the source files; this deck was brought in line with v6 for the portfolio.</p>
+    <div class="stairgrid">
+      <svg class="stair rv d2" id="stair" viewBox="0 0 720 430" role="img" aria-label="Eight build stages as a staircase, with memo word counts at versions 1 to 4"></svg>
+      <div class="stpanel rv d3" id="stpanel" aria-live="polite"></div>
+    </div>
+    <div class="heads rv d4" id="heads"></div>
+  </div>
+</section>
+
+<!-- ===================== 12 APPENDIX: WHO DID WHAT ===================== -->
+<section id="s12" class="dark apx" data-label="Appendix: who did what" data-aud="Appendix &middot; cohort review">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">11</span><b>Instructions, agents and files</b></div>
+    <h2 class="rv d1">One author, <em>read-only challengers</em>, and every decision logged.</h2>
+    <p class="lede rv d2">Each lane is a participant; each column is a stage. Solid lines hand work forward; dashed lines are challenges sent back. Point at a marker to see what that participant did at that stage.</p>
+    <svg class="lanes rv d2" id="lanes" viewBox="0 0 1100 440" role="img" aria-label="Swimlane of instructions, authoring pass, scripts and logs, review agents and consultant decisions across the eight stages"></svg>
+    <div class="legend rv d3" style="margin-top:14px">
+      <span><i style="background:var(--mint)"></i>Instructions read</span>
+      <span><i style="background:#8fb0c2"></i>Authoring pass (Claude Code)</span>
+      <span><i style="background:var(--amber)"></i>Scripts and logs</span>
+      <span><i style="background:var(--accent-l)"></i>Read-only review agents</span>
+      <span><i style="background:#f7f2e8"></i>Kith lead's decisions</span>
+      <span><i class="ring" style="color:var(--accent-l)"></i>Still to run</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 13 APPENDIX: HOW THE DELIVERABLES LINK ===================== -->
+<section id="s13" class="apx" data-label="Appendix: how it all links" data-aud="Appendix &middot; cohort review">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="no">12</span><b>How the deliverables link</b></div>
+    <h2 class="rv d1">What you receive, <em>what you keep</em>, and what it feeds next.</h2>
+    <p class="lede rv d2">Evidence on the left, later weeks on the right. The leave-behind column is what lets Northwood re-run this without Kith. Point at any item to trace what it is built from and what it feeds.</p>
+    <svg class="dag rv d2" id="dag" viewBox="0 0 1100 470" role="img" aria-label="Flow from Northwood's data room through Kith's working layer to this week's deliverables, the leave-behind, and Weeks 3 to 6"></svg>
+  </div>
+</section>
+<footer class="docfoot">Kith Consulting for Northwood Capital &middot; Portfolio edition: Kith Climate cohort case, fictional client &middot; Deck v4, from memo v6 &middot; presented September 25, 2026; updated for the portfolio November 2026</footer>
+
+<script>
+(function(){
+"use strict";
+var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmt(n){return n.toLocaleString("en-US");}
+var NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent){var e=document.createElementNS(NS,tag);for(var k in attrs){e.setAttribute(k,attrs[k]);}if(parent)parent.appendChild(e);return e;}
+
+/* ---------- tooltip ---------- */
+var tip = document.getElementById("tip");
+function showTip(html, x, y){
+  tip.innerHTML = html; tip.classList.add("on");
+  var w = tip.offsetWidth, h = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
+  var left = x + 16, top = y + 16;
+  if (left + w > vw - 12) left = x - w - 16;
+  if (top + h > vh - 12) top = y - h - 16;
+  tip.style.left = Math.max(12,left) + "px"; tip.style.top = Math.max(12,top) + "px";
+}
+function hideTip(){ tip.classList.remove("on"); }
+function bindTip(node, html){
+  node.addEventListener("mousemove", function(e){ showTip(typeof html==="function"?html():html, e.clientX, e.clientY); });
+  node.addEventListener("mouseleave", hideTip);
+  node.addEventListener("focus", function(){ var r=node.getBoundingClientRect(); showTip(typeof html==="function"?html():html, r.right, r.top); });
+  node.addEventListener("blur", hideTip);
+  node.addEventListener("click", function(e){ var r=node.getBoundingClientRect(); showTip(typeof html==="function"?html():html, r.right, r.top); e.stopPropagation(); });
+}
+document.addEventListener("click", hideTip);
+window.addEventListener("scroll", hideTip, {passive:true});
+
+/* ---------- navigation ---------- */
+var sections = [].slice.call(document.querySelectorAll("section"));
+var rail = document.getElementById("rail"), drum = document.getElementById("drum"), rlbl = document.getElementById("rlbl");
+var btns = [];
+sections.forEach(function(s, i){
+  var b = document.createElement("button");
+  b.setAttribute("aria-label", "Go to page " + (i+1) + ": " + s.dataset.label);
+  b.innerHTML = String(i+1).padStart(2,"0");
+  b.addEventListener("click", function(){ go(i); });
+  b.addEventListener("mouseenter", function(){ var r=b.getBoundingClientRect(); rlbl.textContent=s.dataset.label; rlbl.style.top=(r.top+r.height/2)+"px"; rlbl.classList.add("on"); });
+  b.addEventListener("mouseleave", function(){ rlbl.classList.remove("on"); });
+  drum.appendChild(b); btns.push(b);
+});
+function spin(i){
+  btns.forEach(function(b,j){
+    var d=j-i, a=d*24;
+    var ad=Math.abs(d), y=Math.sign(d)*(ad*34 - ad*ad*2.2);
+    b.style.transform="translateY("+y.toFixed(1)+"px) rotateX("+(-a)+"deg) scale("+(1-ad*0.07).toFixed(2)+")";
+    b.style.opacity = Math.abs(d)>3 ? 0 : (1 - Math.abs(d)*0.24);
+    b.tabIndex = Math.abs(d)>3 ? -1 : 0;
+  });
+}
+var wheelLock=0;
+rail.addEventListener("wheel", function(e){ e.preventDefault(); var now=Date.now(); if(now-wheelLock<450) return; wheelLock=now; go(current + (e.deltaY>0?1:-1)); }, {passive:false});
+var current = 0;
+function go(i){ i=Math.max(0,Math.min(sections.length-1,i)); sections[i].scrollIntoView({behavior: reduce?"auto":"smooth"}); }
+function setActive(i){
+  current = i;
+  btns.forEach(function(b,j){ b.classList.toggle("on", j===i); }); spin(i);
+  document.getElementById("secname").textContent = sections[i].dataset.label;
+  document.getElementById("secidx").textContent = String(i+1).padStart(2,"0") + " / " + String(sections.length).padStart(2,"0");
+  document.getElementById("aud").textContent = sections[i].dataset.aud;
+  document.body.classList.toggle("on-dark", sections[i].classList.contains("dark"));
+}
+var ticking=false;
+function onScroll(){
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(function(){
+    var mid = window.scrollY + window.innerHeight*0.4, idx=0;
+    for (var i=0;i<sections.length;i++){ if (sections[i].offsetTop <= mid) idx=i; }
+    if (idx!==current || !btns[idx].classList.contains("on")) setActive(idx);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById("bar").style.width = (max>0 ? window.scrollY/max*100 : 0) + "%";
+    ticking=false;
+  });
+}
+window.addEventListener("scroll", onScroll, {passive:true});
+window.addEventListener("resize", onScroll);
+document.addEventListener("keydown", function(e){
+  var k=e.key;
+  if (k==="ArrowDown"||k==="ArrowRight"||k==="PageDown"||k===" "){ e.preventDefault(); go(current+1); }
+  else if (k==="ArrowUp"||k==="ArrowLeft"||k==="PageUp"){ e.preventDefault(); go(current-1); }
+  else if (k==="Home"){ e.preventDefault(); go(0); }
+  else if (k==="End"){ e.preventDefault(); go(sections.length-1); }
+  else if (k==="Escape"){ hideTip(); }
+});
+setActive(0); onScroll();
+
+/* ---------- reveal ---------- */
+var io = new IntersectionObserver(function(en){
+  en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+},{threshold:0.16});
+sections.forEach(function(s){ io.observe(s); });
+sections[0].classList.add("in");
+
+/* ---------- count up ---------- */
+function countUp(elm, target, dur, suffix){
+  if (reduce){ elm.textContent = fmt(target)+(suffix||""); return; }
+  var t0=null;
+  function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-p,3); elm.textContent=fmt(Math.round(target*e))+(suffix||""); if(p<1) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
+document.querySelectorAll("[data-count]").forEach(function(n,i){
+  var raw = n.textContent;
+  if (/[–-]/.test(raw)) return; // leave "26–38" style range labels static, untouched
+  var m = raw.match(/^([\d,]+)(.*)$/);
+  setTimeout(function(){ countUp(n, +n.dataset.count, 1200, m?m[2]:""); }, 300 + i*110);
+});
+
+/* ================= DATA ================= */
+var PORTCOS = [
+ {n:"Sterling Precision Manufacturing", s:"Sterling", score:38, fix:"y", exp:"$25.0M–$42.0M in defense RFPs; Boeing Defense carbon data mandatory from 2027."},
+ {n:"Meridian Business Solutions", s:"Meridian", score:38, fix:"y", exp:"Confirmatory diligence in Q4 2026 on $363.9M–$400.9M EV (as at 31 January 2026). The risk is diligence friction, not a quantified discount."},
+ {n:"Clearview Environmental Services", s:"Clearview", score:36, fix:"y", exp:"$2.0M–$3.0M estimated lost on 5 ESG-scored RFPs."},
+ {n:"NovaCare Health Partners", s:"NovaCare", score:36, fix:"y", exp:"Accuracy of Northwood's LP carbon footprint; limited customer pull."},
+ {n:"Trident IT Solutions", s:"Trident", score:36, fix:"y", exp:"ESG vendor reviews by clients worth about 42.0% of revenue."},
+ {n:"Pinnacle Testing & Inspection", s:"Pinnacle", score:34, fix:"n", exp:"Refinery clients worth about $18.0M (as at 12 December 2025) sending ESG questionnaires; P&C premium $1.7M, rising 12.0%/yr."},
+ {n:"Ridgeline Property Services", s:"Ridgeline", score:30, fix:"n", exp:"REIT client worth about $4.5M requiring emissions reporting by 2027; $1.5M–$8.0M/yr service line."},
+ {n:"Keystone Behavioral Health", s:"Keystone", score:30, fix:"n", exp:"Accuracy of Northwood's LP carbon footprint; limited customer pull."},
+ {n:"Patriot Staffing Solutions", s:"Patriot", score:29, fix:"n", exp:"$0.5M weather-closure revenue deferral in FY2025; heat-related workers' comp claims."},
+ {n:"Harvest Ridge Foods", s:"Harvest Ridge", score:26, fix:"y", exp:"About $34.0M revenue (as at February 2026) from 3 of top 10 customers requiring Scope 3 supplier data at 2027 renewal."}
+];
+var RCOL = {y:"#336b4f", n:"#93701f"};
+
+/* ================= 01 RANKED LADDER ================= */
+(function(){
+  var svg = document.getElementById("orbit");
+  var left=160, right=560, top=100, rowH=54, scale=(right-left)/100;
+  var CORE_TIP='<div class="k">Portfolio view &middot; 10 active portcos</div><div class="t">Northwood Capital</div>'+
+    '<div class="grid2"><b>26–38</b><span>readiness score range, out of 100</span>'+
+    '<b>0</b><span>portcos above the Not diligence-ready band</span>'+
+    '<b>6 / 4</b><span>one fix reaches Partially ready / no single fix</span>'+
+    '<b>2 of 10</b><span>mention climate in board or value-creation materials</span></div>';
+  var core=el("g",{class:"core",tabindex:"0",role:"button","aria-label":"Northwood Capital portfolio view"},svg);
+  el("rect",{x:10,y:10,width:580,height:44,rx:8},core);
+  var t1=el("text",{x:26,y:37,class:"coret1"},core); t1.textContent="Northwood · 10 / 10 portcos";
+  var t2=el("text",{x:564,y:37,class:"coret2"},core); t2.textContent="Not diligence-ready";
+  bindTip(core, CORE_TIP);
+
+  var sorted = PORTCOS.slice().sort(function(a,b){ return b.score-a.score; });
+  var threshX = left + 40*scale, bottom = top + (sorted.length-1)*rowH + 30;
+  el("line",{x1:threshX.toFixed(1),y1:top-14,x2:threshX.toFixed(1),y2:bottom,class:"thresh"},svg);
+  var tl=el("text",{x:threshX.toFixed(1),y:top-20,class:"threshlbl"},svg); tl.textContent="40 · Partially ready";
+
+  sorted.forEach(function(c,i){
+    var y = top + i*rowH + 24;
+    var x2 = left + c.score*scale;
+    var g = el("g",{class:"rung",tabindex:"0",role:"button","aria-label":c.n+": score "+c.score},svg);
+    var rk=el("text",{x:left-118,y:(y+3).toFixed(1),class:"rank"},g); rk.textContent="#"+(i+1);
+    var lab=el("text",{x:left-14,y:(y+4).toFixed(1),class:"lbl"},g); lab.textContent=c.s;
+    el("line",{x1:left,y1:y.toFixed(1),x2:x2.toFixed(1),y2:y.toFixed(1),stroke:RCOL[c.fix],class:"ln"},g).style.transitionDelay=(i*0.06)+"s";
+    el("circle",{cx:x2.toFixed(1),cy:y.toFixed(1),r:6,fill:RCOL[c.fix],stroke:"rgba(255,255,255,.5)",class:"b"},g);
+    var sc=el("text",{x:(threshX+12).toFixed(1),y:(y+4).toFixed(1),class:"val"},g); sc.textContent=c.score;
+    bindTip(g,'<div class="k">Not diligence-ready &middot; score '+c.score+' / 100</div><div class="t">'+esc(c.n)+'</div><div class="v">'+(c.fix==="y"?"One named fix reaches Partially ready (40+).":"No single fix identified; several gaps remain.")+'<br><span style="opacity:.85">'+esc(c.exp)+'</span></div>');
+  });
+})();
+
+/* ================= 02 ACT NOW CASCADE ================= */
+(function(){
+  var svg=document.getElementById("mm"), panel=document.getElementById("mpanel");
+  var N=[
+   {id:"md",x:20,y:18,w:400,h:104,name:"Meridian",val:"$363.9M–$400.9M EV",sub:"friction risk, not a quantified discount",
+    pk:"Act now 1 · exit value and deal risk",pv:"$363.9M–$400.9M EV",pvs:"live LOI and confirmatory diligence, Q4 2026; EV shown for scale, not as exposure (as at 31 January 2026)",
+    p:"Two CFO-signed submissions disagree on gas and fleet figures, and the exit plan's vendor diligence scope has no ESG workstream. The risk is diligence friction in a live process, not a quantified discount.",
+    act:"Reconcile against utility invoices before the LOI. Owners: Patricia Wells (CFO), Mark Sullivan (deal lead). Effort: Low."},
+   {id:"hr",x:135,y:160,w:400,h:104,name:"Harvest Ridge",val:"about $34.0M revenue",sub:"revenue protection",
+    pk:"Act now 2 · revenue protection",pv:"about $34.0M revenue",pvs:"3 of top 10 customers require Scope 3 at 2027 renewal; expected to spread to 6–7 (as at February 2026)",
+    p:"The two FY 2025 submissions disagree on every total. A baseline built on the wrong one would have to be restated in front of the customers holding this revenue.",
+    act:"One clean resubmission that settles the period, totals and refrigerants. Owner: Harvest Ridge CFO (Thomas Nguyen, to be confirmed). Effort: Medium."},
+   {id:"st",x:250,y:302,w:400,h:104,name:"Sterling",val:"$25.0M–$42.0M",sub:"revenue growth",
+    pk:"Act now 3 · revenue growth",pv:"$25.0M–$42.0M",pvs:"defense RFPs; Boeing Defense mandatory from 2027",
+    p:"Totals reconcile exactly, but all six facility-level pairs conflict with the questionnaire. Defense primes assess supplier carbon data at facility level.",
+    act:"Reconcile the facility split against the three utilities' invoices. Owners: Janet Chen (CFO), Derek Williams (COO); David Okafor (Operating Partner). Effort: Medium."},
+   {id:"nw",x:340,y:444,w:400,h:104,name:"Fund-level LP letter",val:"Q4 2026 letter",sub:"LP reporting",
+    pk:"Act now 4 · LP reporting",pv:"Due mid-February 2027",pvs:"45 days after quarter end; Meridian is Fund I's flagship for Fund III fundraising",
+    p:"Northwood's protocol requires a climate section in the Q4 letter. The 2026 cycle hasn't run: the ESG score tables hold header rows only, and no board or LP material carries a climate section beyond 2 of 10 portcos.",
+    act:"Kith drafts in Week 6, from the Week 3 baseline forward. Owners: Sarah Mitchell, Jennifer Park (IR). Effort: Medium."}
+  ];
+  var byId={}; N.forEach(function(n){byId[n.id]=n;});
+  for (var i=0;i<N.length-1;i++){
+    var a=N[i], b=N[i+1];
+    var sx=a.x+56, sy=a.y+a.h, ex=b.x+56, ey=b.y;
+    var my=(sy+ey)/2;
+    var p=el("path",{d:"M"+sx+","+sy+" C"+sx+","+my+" "+ex+","+my+" "+ex+","+ey,class:"conn"},svg);
+    var len=p.getTotalLength ? Math.ceil(p.getTotalLength()) : 140; p.style.setProperty("--len",len);
+  }
+  var gs={};
+  N.forEach(function(n,i){
+    var g=el("g",{class:"node",tabindex:"0",role:"button","aria-label":n.name+": "+n.val},svg);
+    g.style.transitionDelay=(0.3+i*0.13)+"s";
+    el("rect",{x:n.x,y:n.y,width:n.w,height:n.h,rx:10,class:"b"},g);
+    el("rect",{x:n.x,y:n.y,width:5,height:n.h,rx:2,class:"accentbar"},g);
+    var rk=el("text",{x:n.x+22,y:n.y+26,class:"rank"},g); rk.textContent="ACT NOW "+(i+1);
+    var a=el("text",{x:n.x+22,y:n.y+52,class:"nl"},g); a.textContent=n.name;
+    var b=el("text",{x:n.x+22,y:n.y+74,class:"nv"},g); b.textContent=n.val;
+    var c=el("text",{x:n.x+22,y:n.y+92,class:"ns"},g); c.textContent=n.sub;
+    gs[n.id]=g;
+    function act(){ select(n.id); }
+    g.addEventListener("mouseenter",act); g.addEventListener("focus",act); g.addEventListener("click",act);
+  });
+  function select(id){
+    var n=byId[id];
+    Object.keys(gs).forEach(function(k){ gs[k].classList.toggle("on",k===id); });
+    panel.innerHTML='<div class="pk">'+esc(n.pk)+'</div><h3>'+esc(n.name)+'</h3><div class="pv">'+esc(n.pv)+'</div><div class="pvs">'+esc(n.pvs)+'</div><p>'+esc(n.p)+'</p><div class="act"><b>Fix that moves it</b>'+esc(n.act)+'</div>';
+  }
+  select("md");
+})();
+
+/* ================= 03 SCORE BARS ================= */
+(function(){
+  var wrap=document.getElementById("scorewrap");
+  var sorted = PORTCOS.slice().sort(function(a,b){return b.score-a.score;});
+  sorted.forEach(function(c){
+    var row=document.createElement("div"); row.className="sbar";
+    var pct = c.score; // out of 100
+    row.innerHTML = '<div class="sn">'+esc(c.s)+'</div>'+
+      '<div class="strack"><div class="sband" style="left:0;width:40%"></div><div class="sfill '+(c.fix==="y"?"y":"n")+'" style="--w:'+pct+'%"></div></div>'+
+      '<div class="sv">'+c.score+' / 100</div>';
+    bindTip(row.querySelector(".strack"), '<div class="k">Not diligence-ready</div><div class="t">'+esc(c.n)+'</div><div class="v"><b>'+c.score+' / 100</b> &middot; '+(c.fix==="y"?"one fix reaches Partially ready":"no single fix identified")+'<br><span style="opacity:.85">'+esc(c.exp)+'</span></div>');
+    wrap.appendChild(row);
+  });
+})();
+
+/* ================= 04 DIMENSION BARS ================= */
+(function(){
+  var wrap=document.getElementById("dimwrap");
+  var DIMS=[
+   [1,"Scope 1/2 activity data completeness",25,"Electricity, gas and fuel present for every facility","Verified, source quality unknown"],
+   [2,"Data source traceability",15,"Northwood's A/B/C source grade, plus whether the two submissions agree","Verified, source quality unknown"],
+   [3,"Emissions calculation",10,"The portco has converted its own data to CO2e","Self-reported"],
+   [4,"Targets",10,"Stated, dated reduction targets","Self-reported"],
+   [5,"Governance",10,"A management structure that climate ownership sits in","Self-reported"],
+   [6,"Framework alignment",10,"Reporting against CDP, GRI, SASB, TCFD or similar","Self-reported"],
+   [7,"Scope 3 visibility",15,"Supplier or customer emissions data","Self-reported"],
+   [8,"Physical risk documentation",5,"Facility risk scores plus documented incidents and cost","Estimated"]
+  ];
+  DIMS.forEach(function(d){
+    var row=document.createElement("div"); row.className="dbar";
+    row.innerHTML='<div class="dl"><b>'+d[0]+'</b>'+esc(d[1])+'</div><div class="dv">'+d[2]+'%</div><div class="dtrack"><div class="dfill" style="--w:'+(d[2]*4)+'%"></div></div>';
+    bindTip(row, '<div class="k">Dimension '+d[0]+' &middot; weight '+d[2]+'%</div><div class="t">'+esc(d[1])+'</div><div class="v">'+esc(d[3])+'<br><span style="opacity:.8">Confidence: '+esc(d[4])+'</span></div>');
+    wrap.appendChild(row);
+  });
+})();
+
+/* ================= 05 FINDINGS TABS ================= */
+(function(){
+  var COMP=[
+   {s:"Meridian",n:"Meridian Business Solutions",score:38,tag:"The most traceable data in the portfolio, entering confirmatory diligence.",
+    bullets:[
+      "The vendor data room was scheduled for Q2 2026, and the LOI and confirmatory diligence fall in Q4 2026; the vendor diligence scope and value-creation story contain no ESG content. <span class=\"conf\">Confirmed</span>",
+      "Electricity matches the questionnaire at all 16 facilities, but the template records 0 therms at Miami, Phoenix, Jacksonville and San Antonio, where the CFO-signed questionnaire reports 12,500 therms. <span class=\"conf\">Confirmed</span>",
+      "The template records 3,200 gallons of fleet gasoline; the questionnaire states Meridian has no fleet. <span class=\"conf\">Confirmed</span>",
+      "17.2% of electricity is Grade B without required methodology documentation, and one site labelled a utility bill is a 60.0% allocation. <span class=\"conf\">Confirmed</span>"
+    ],
+    fix:"Reconcile against utility invoices, from the vendor data room if it already holds them. Lifts traceability to 4, for a score of 41 (Partially ready).",
+    why:"Two CFO-signed submissions that disagree are a routine buyer-diligence finding. Resolving them before the LOI keeps the ESG section clean on Fund I's flagship realization.",
+    worst:"The buyer's advisors find the gas and fleet conflicts in the data room. The likely result is a list of buyer questions to answer under time pressure, a slower ESG workstream, and possibly a request for a specific representation on the environmental data. A price effect is unlikely for an office-based business with a small footprint. The cost is management time and credibility at the point in the process where both are scarcest. <span class=\"conf\">Inferred</span>"},
+   {s:"Harvest Ridge",n:"Harvest Ridge Foods",score:26,tag:"The weakest data, attached to the most time-bound revenue exposure.",
+    bullets:[
+      "The two FY 2025 submissions disagree on every total: electricity &minus;14.6%, gas &minus;18.7%, fleet diesel &minus;62.2%. <span class=\"conf\">Confirmed</span>",
+      "The template can't record Harvest Ridge's refrigerants: R-404A in cold storage (high global warming potential) and R-134a. <span class=\"conf\">Confirmed</span>",
+      "The board rates customer Scope 3 requirements &ldquo;Low-Medium&rdquo; and treats them as an administrative compliance item, against about $34.0M of revenue at risk. <span class=\"conf\">Confirmed</span>",
+      "The physical-risk file gives Bowling Green the lowest water-stress score, but the questionnaire documents three 2025 water-pressure events there that delayed about $0.3M of shipments. <span class=\"conf\">Confirmed</span>"
+    ],
+    fix:"One clean resubmission that settles the period, the conflicting totals and the refrigerants. Gives a score of 40 (Partially ready).",
+    why:"A Week 3 baseline built on the wrong submission would have to be restated in front of the customers holding about $34.0M of revenue."},
+   {s:"Sterling",n:"Sterling Precision Manufacturing",score:38,tag:"Totals reconcile exactly; the facility detail underneath does not.",
+    bullets:[
+      "All 6 facility-level electricity and gas pairs conflict with the questionnaire (&minus;24.0% to +68.0%), although each plant has its own utility. <span class=\"conf\">Inferred</span>",
+      "The Akron R-22 chiller replacement is scheduled per the template, but the questionnaire says it was deferred twice and the FY 2026 Budget names a different plant; deferral costs $15K–$25K/yr. <span class=\"conf\">Confirmed / Reported</span>",
+      "R-410A is recorded at only one of three sites. <span class=\"conf\">Confirmed</span>"
+    ],
+    fix:"Reconcile the facility split against the three utilities' invoices. Lifts traceability to 4, for a score of 45 (Partially ready).",
+    why:"Defense primes assess supplier carbon data at facility level, and Boeing Defense's requirement is mandatory from 2027."},
+   {s:"Ridgeline",n:"Ridgeline Property Services",score:30,tag:"A climate data problem that is also a revenue opportunity.",
+    bullets:[
+      "Its board has sized a sustainability services line at $1.5M–$8.0M/yr; one REIT client (about $4.5M revenue) will require emissions reporting by 2027. <span class=\"conf\">Reported</span>",
+      "Ridgeline holds meter-level energy data for about 85.0% of the 18M sq ft it manages (about 285M kWh) &mdash; whether that sits inside Ridgeline's own footprint is a Week 3 boundary decision that changes the answer by orders of magnitude. <span class=\"conf\">Reported</span>",
+      "Three of six template rows are malformed but recoverable; the Las Vegas office is missing entirely; the template holds only 39.0% of the fleet fuel the questionnaire reports. <span class=\"conf\">Confirmed</span>"
+    ],
+    fix:"No single fix; about 10 points away. First step: a corrected template covering all 7 offices and all 40 vehicles.",
+    why:"The services line is revenue creation, and it needs Ridgeline's own baseline first."}
+  ];
+  var tabs=document.getElementById("findtabs"), panel=document.getElementById("findpanel");
+  var bs=[];
+  COMP.forEach(function(c,i){
+    var b=document.createElement("button"); b.className="ftab";
+    b.innerHTML='<span class="fn">'+esc(c.s)+'</span><span class="fs">'+c.score+' / 100</span>';
+    b.addEventListener("click",function(){ show(i); });
+    tabs.appendChild(b); bs.push(b);
+  });
+  function show(i){
+    bs.forEach(function(b,j){ b.classList.toggle("on",j===i); });
+    var c=COMP[i];
+    panel.innerHTML='<h3>'+esc(c.n)+' <span class="mono" style="font-size:14px;color:var(--muted)">&middot; '+c.score+' / 100</span></h3>'+
+      '<div class="fsub">'+esc(c.tag)+'</div>'+
+      '<ul>'+c.bullets.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>'+
+      '<div class="fixbox"><b>Fix that moves it</b>'+c.fix+'</div>'+
+      '<div class="fixbox" style="margin-top:8px"><b>Why it matters</b>'+c.why+'</div>'+
+      (c.worst?'<div class="fixbox" style="margin-top:8px"><b>If it isn\u2019t fixed before confirmatory diligence</b>'+c.worst+'</div>':'');
+  }
+  show(0);
+
+  var OTHER=[
+   {n:"Pinnacle Testing & Inspection",score:34,t:"All four energy totals match exactly, but the facility roster and source basis don't: 10 facilities graded mostly as estimates against a questionnaire that lists 9 and cites utility bills."},
+   {n:"Clearview Environmental Services",score:36,t:"Internally consistent totals on an unconfirmed roster: the template lists 12 facilities including two sites the acquisition pipeline hasn't closed on. Fleet fuel covers 85 vehicles; the board deck lists 115 vehicles and 18 rigs."},
+   {n:"Trident IT Solutions",score:36,t:"The only portco to calculate its own emissions &mdash; and the number looks wrong: stated Scope 1 of 95 t is inconsistent with its own 50,000 therms of gas (about 265 t at the EPA factor)."},
+   {n:"Patriot Staffing Solutions",score:29,t:"Heat stress already moves the cost base: 8 incidents and $47K of workers' comp claims in 2025, inside a $1.5M loss-ratio overrun the board materials don't connect."},
+   {n:"NovaCare Health Partners",score:36,t:"Two clinic rows carry figures that look entered in the wrong field, putting the template's gas total 90.5% above the questionnaire's (about 156,000 therms in the portfolio total). The sites also need confirming."},
+   {n:"Keystone Behavioral Health",score:30,t:"53.5% of electricity is Grade C, including six clinics sharing one identical square-footage estimate; the submission was prepared without CFO review."}
+  ];
+  var strip=document.getElementById("otherstrip");
+  OTHER.forEach(function(o){
+    var d=document.createElement("div"); d.className="ostrip";
+    d.innerHTML='<div class="on2">'+esc(o.n)+'</div><div class="ov">'+o.score+' / 100</div><div class="ot">'+o.t+'</div>';
+    strip.appendChild(d);
+  });
+})();
+
+/* ================= 06 CONFIRM CARDS ================= */
+(function(){
+  var ITEMS=[
+   {k:"NW-3",t:"Fuel-card classification",p:"We treat fuel-card records as Grade A-equivalent because they record measured gallons, but the protocol names only utility bills as Grade A."},
+   {k:"NW-4",t:"Physical-risk score provenance",p:"Who provided the facility hazard scores, and when they were retrieved. Underpins insurance and continuity quantification in Week 5."},
+   {k:"NW-6",t:"Fund-level kickoff inputs",p:"Status of the LP reporting templates, the IC reporting cadence, and any prior ESG consulting output requested at kickoff."},
+  ];
+  var wrap=document.getElementById("confirmcards");
+  ITEMS.forEach(function(it){
+    var d=document.createElement("div"); d.className="dec"+(it.first?" first":"");
+    var range = it.range ? '<div class="range">'+it.range[0]+' <span>to</span> '+it.range[1]+'</div>' : "";
+    d.innerHTML='<div class="dk">'+it.k+' &middot; can follow</div><h3>'+esc(it.t)+'</h3><p>'+it.p+'</p>'+range;
+    wrap.appendChild(d);
+  });
+})();
+
+/* ================= 07 VERTICAL STEPPED TIMELINE ================= */
+(function(){
+  var track=document.getElementById("track");
+  var ticks=[["Mon Sep 28",4,"Requests issued"],["Mon Oct 5",42,"Tier 1 due"],["Mon Oct 12",92,"Tiers 2 & 3 due"]];
+  ticks.forEach(function(t){ var d=document.createElement("div"); d.className="tk"; d.style.top=t[1]+"%"; d.innerHTML=t[0]+"<br><span style='opacity:.7'>"+t[2]+"</span>"; track.appendChild(d); });
+  var TIERS=[
+   ["T1",42,"Tier 1","5 business days","Without it, a baseline figure would rest on a known conflict or gap of 5.0% or more of electricity, gas or fleet fuel, or an implausible figure, or it blocks issuing a request.",true],
+   ["T2",92,"Tier 2","10 business days","Resolving it changes figures by less than 5.0%, or changes source grade, traceability or scope classification.",false],
+   ["T3",92,"Tier 3","10 business days, partial accepted","No effect on Week 3 figures; informs materiality, risk and disclosure work in Weeks 4–6.",false]
+  ];
+  TIERS.forEach(function(a,i){
+    var b=document.createElement("button"); b.className="ask"+(a[5]?" hot":"")+(i===2?" t3":""); b.style.top=a[1]+"%"; b.style.left=(i===2?"312px":"162px");
+    b.setAttribute("aria-label",a[2]+" due "+a[3]);
+    b.innerHTML='<span class="dot">'+a[0]+'</span><span class="who">'+esc(a[2])+'</span>';
+    track.appendChild(b);
+    bindTip(b,'<div class="k">'+esc(a[2])+' &middot; due '+a[3]+'</div><div class="t">'+esc(a[2])+'</div><div class="v">'+esc(a[4])+'</div>');
+  });
+  var leg=document.getElementById("tierlegend");
+  leg.innerHTML='<span><i style="background:var(--accent)"></i>Tier 1 &middot; blocks Week 3</span><span><i style="background:var(--green)"></i>Tier 2 &middot; baseline proceeds provisionally</span><span><i style="background:var(--green)"></i>Tier 3 &middot; needed after Week 3</span><span>79 asks total, across 11 requests</span>';
+})();
+
+/* ================= 08 RADIAL PROCESS RING ================= */
+(function(){
+  var svg=document.getElementById("flow");
+  var cx=350, cy=340, R=248;
+  var STAGES=[
+   {id:"cfg",w:146,h:64,t:"Config",v:"pipeline-config-v1.json",d:"Year, file paths, contacts, dates and version suffix, in one file. Judgment inputs live in data files, not code."},
+   {id:"scr",w:200,h:64,t:"Facts scripts",v:"verify, reconcile, cross-check",d:"verify-climate-data-v2.py checks all 138 facility rows. reconcile-carbon-vs-questionnaire-v3.py compares template to questionnaire. crosscheck-questionnaire-extracts-v1.py checks the second extraction: 151 shared figures, 0 mismatches."},
+   {id:"log",w:150,h:64,t:"Logs",v:"D1–D45 · A1–A29",d:"Every finding logged with evidence (disposition log). Every judgment call logged with rationale (assumption log)."},
+   {id:"scr2",w:170,h:68,core:true,t:"Scores",v:"score-composite-v2.py",d:"Each dimension scored per the rubric, with a citation for every score, then combined into the composite and grade distribution."},
+   {id:"pri",w:170,h:60,t:"Prioritisation",v:"79-ask register",d:"finding-criticality-register-v3.csv, then prioritise-findings-v2.py: the value ranking behind Act now / Resource and plan / Quick win."},
+   {id:"req",w:170,h:60,t:"Requests",v:"11 requests generated",d:"build-data-requests-v2.py reads request-narratives-v1.md and generates every request. Company text is never hand-edited."},
+   {id:"gate",w:160,h:60,t:"Gate",v:"verify-pipeline-v1.py",d:"Re-runs every script and checks the memo's figures against fresh outputs. 91 passed, 0 failed at memo v4; the v2 gate's last recorded run (27 September) passed 133 of 136, its 3 fails being deck citations to an older memo. Any failure blocks issue."}
+  ];
+  var n=STAGES.length;
+  STAGES.forEach(function(b,i){
+    var a = -Math.PI/2 + i*(2*Math.PI/n);
+    b.cx = cx + R*Math.cos(a); b.cy = cy + R*Math.sin(a);
+    b.x = b.cx - b.w/2; b.y = b.cy - b.h/2;
+  });
+  var by={}; STAGES.forEach(function(b){by[b.id]=b;});
+  el("circle",{cx:cx,cy:cy,r:R,class:"ringline"},svg);
+  var paths=[];
+  function link(a,b){
+    var s=by[a], e=by[b];
+    var mx=(s.cx+e.cx)/2, my=(s.cy+e.cy)/2;
+    var dx=mx-cx, dy=my-cy, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var kx=cx+dx/len*R*1.12, ky=cy+dy/len*R*1.12;
+    var p=el("path",{d:"M"+s.cx.toFixed(1)+","+s.cy.toFixed(1)+" Q"+kx.toFixed(1)+","+ky.toFixed(1)+" "+e.cx.toFixed(1)+","+e.cy.toFixed(1),class:"fl",id:"fl"+paths.length},svg);
+    paths.push(p); return p;
+  }
+  link("cfg","scr"); link("scr","log"); link("log","scr2"); ["pri","req","gate"].forEach(function(o){ link("scr2",o); });
+  if(!reduce){ paths.forEach(function(p,i){ var c=el("circle",{r:3.2,class:"pkt",opacity:0},svg); var bg=(i*0.35)+"s"; el("set",{attributeName:"opacity",to:"1",begin:bg},c); var am=el("animateMotion",{dur:"2.8s",repeatCount:"indefinite",begin:bg},c); el("mpath",{href:"#"+p.id},am); }); }
+  STAGES.forEach(function(b){
+    var g=el("g",{class:"fn"+(b.core?" core":""),tabindex:"0",role:"button","aria-label":b.t+": "+b.v},svg);
+    el("rect",{x:b.x.toFixed(1),y:b.y.toFixed(1),width:b.w,height:b.h,rx:8},g);
+    var t=el("text",{x:(b.x+16).toFixed(1),y:(b.y+(b.h>62?32:25)).toFixed(1),class:"ft"},g); t.textContent=b.t;
+    var v=el("text",{x:(b.x+16).toFixed(1),y:(b.y+(b.h>62?53:44)).toFixed(1),class:"fv"},g); v.textContent=b.v;
+    bindTip(g,'<div class="k">'+esc(b.v)+'</div><div class="t">'+esc(b.t)+'</div><div class="v">'+esc(b.d)+'</div>');
+  });
+})();
+
+/* ================= 11 APPENDIX STAIRCASE ================= */
+(function(){
+  var svg=document.getElementById("stair"), panel=document.getElementById("stpanel");
+  var S=[
+   {s:"Brief",t:"Brief and scope",h:"The Week 1 pitch set four priority portcos and a data ask for each. CLAUDE.md set the filter every claim must pass (EBITDA, deal risk, exit value) and the leave-behind rule.",o:"Per-portco request scope (A1 to A4)",e:"Week 1 pitch; data-assumption-log-v1.md A1 to A4"},
+   {s:"Checks",t:"Automated checks",h:"A script checked all 138 facility rows: identifiers, duplicates, blanks, source labels, outliers and row structure.",o:"First flags, into the disposition log",e:"verify-climate-data.py, then -v2.py"},
+   {s:"Reopen",t:"Reconciliation and reopen",h:"The carbon template was reconciled against each questionnaire. A deliberate reopen of the first pass found issues it had closed too early.",o:"D4, D6, D10, D11, D13",e:"reconcile-carbon-vs-questionnaire-v1.py to -v3.py"},
+   {s:"Rubric",t:"Rubric and first memo",h:"An 8-dimension rubric, with weights fixed on September 22 after the first checks had run. Four portcos at full depth, six lighter.",o:"Memo v1, 4,231 words",e:"climate-data-readiness-rubric-v1.md; A5 to A12",w:4231,v:"v1"},
+   {s:"Challenge",t:"First independent challenge",h:"The process-review agent's verdict: not yet consulting-grade. The audit had inventoried the climate files, not the client. It missed Meridian's exit plan and Northwood's own ESG method, and routed requests through a VP of ESG role that isn't on Northwood's roster.",o:"Memo v2, 5,901 words: leads with the fund-level finding; LP and buyer readiness split; all ten at full depth",e:"process-review-week2-v1.md; A13 to A17",w:5901,v:"v2",rev:true},
+   {s:"Rank",t:"Requests and ranking",h:"Eleven requests generated from data files, 70 asks tiered by one rule, and a separate value ranking.",o:"Memo v3, 7,235 words: “Where Northwood's attention should go” leads",e:"finding-criticality-register-v2.csv; prioritise-findings-v2.py; build-data-requests-v2.py; A18 to A24",w:7235,v:"v3"},
+   {s:"Review",t:"Stage 7 review",h:"Six read-only reviews in parallel: assurance-audit on the memo and on the requests, client-voice (reading as Northwood's COO and as the portco CFOs), deck-quality and process-review. Consolidated into 17 must-fix items, 10 decisions, 9 improvements and 8 standing changes.",o:"Memo v4, 7,749 words; methodology v2; pipeline gate 91 passed, 0 failed",e:"stage-7-review-consolidation-v1.md; A25; verify-pipeline-v1.py",w:7749,v:"v4",rev:true},
+   {s:"Deck",t:"This deck",h:"The memo condensed for Monday's decisions, in the order set at the Stage 7 review. A Stage 7 check on the deck itself (assurance-audit, client-voice, process-review) led to nine fixes, G1 to G9.",o:"Deck v2",e:"data-audit-deck-northwood-2026-09-v2-draft.html; deck-stage-7-review-v1.md"}
+  ];
+  var x0=24, sw=84, base=392, rise=36, wmax=7749, bmax=112;
+  el("line",{x1:x0,y1:base,x2:x0+sw*8,y2:base,class:"axisl"},svg);
+  var cap=el("text",{x:x0,y:base+22,class:"cap"},svg); cap.textContent="Stage →";
+  var groups=[];
+  function show(i){
+    var d=S[i];
+    groups.forEach(function(g,j){ g.classList.toggle("on", j===i); });
+    panel.innerHTML='<div class="pk">Stage '+(i+1)+' of 8'+(d.rev?' &middot; independent review':'')+'</div><h3>'+esc(d.t)+'</h3><p>'+esc(d.h)+'</p>'+
+      '<div class="row"><b>Output</b>'+esc(d.o)+'</div><div class="row"><b>Evidence</b><code>'+esc(d.e)+'</code></div>';
+  }
+  S.forEach(function(d,i){
+    var top=base-(i+1)*rise, x=x0+i*sw;
+    var g=el("g",{class:"stp"+(d.rev?" rev":""),tabindex:"0",role:"button","aria-label":"Stage "+(i+1)+": "+d.t},svg);
+    el("rect",{x:x+1,y:top,width:sw-2,height:base-top,rx:3,class:"tread"},g);
+    var n=el("text",{x:x+10,y:top+18,class:"sn"},g); n.textContent=String(i+1).padStart(2,"0");
+    var l=el("text",{x:x+10,y:top+34,class:"sl"},g); l.textContent=d.s;
+    if (d.w){
+      var h=d.w/wmax*bmax, bx=x+sw/2-14;
+      el("rect",{x:bx,y:top-h,width:28,height:h,rx:2,class:"wbar"},g);
+      var tg=el("text",{x:bx+14,y:top-h+15,class:"vtag"},g); tg.textContent=d.v;
+      var wl=el("text",{x:bx+14,y:top-h-6,class:"wlab"},g); wl.textContent=fmt(d.w);
+    }
+    g.addEventListener("click",function(e){ show(i); e.stopPropagation(); });
+    g.addEventListener("focus",function(){ show(i); });
+    g.addEventListener("mouseenter",function(){ show(i); });
+    groups.push(g);
+  });
+  show(4);
+  var H=[
+   ["v1","None of the 10 would survive LP or buyer scrutiny today","First pass",false],
+   ["v2","The protocol exists on paper, but its 2026 cycle has not run. LP disclosure is achievable; buyer diligence is not.","Process review: answer the client's question; lead with the fund-level finding",false],
+   ["v3","Same headline, with a value ranking leading: Act now, Resource and plan, Quick wins","Rank by value at stake, not by data urgency (A24)",false],
+   ["v4","Same, with evidence and caveats tightened, EVs removed, coverage extended at no cost, and a provisional rule","Stage 7 decisions B1 to B10",true]
+  ];
+  document.getElementById("heads").innerHTML=H.map(function(h){
+    return '<div class="hd'+(h[3]?' now':'')+'"><div class="hv">Memo '+h[0]+'</div><q>'+esc(h[1])+'</q><div style="margin-top:6px;font-size:12.5px">'+esc(h[2])+'</div></div>';
+  }).join("");
+})();
+
+/* ================= 12 APPENDIX SWIMLANES ================= */
+(function(){
+  var svg=document.getElementById("lanes");
+  var L=[
+   {n:"Instructions",s:"CLAUDE.md, brief, method, rubric",c:"#e4d3b8"},
+   {n:"Authoring pass",s:"Claude Code",c:"#8fb0c2"},
+   {n:"Scripts and logs",s:"standard-library Python; D and A logs",c:"#c99a3e"},
+   {n:"Review agents",s:"read-only, run in parallel",c:"#d98a52"},
+   {n:"Kith lead",s:"Daniel Vetsko: decisions, approval",c:"#f7f2e8"}
+  ];
+  var COLS=["Brief","Checks","Reopen","Rubric","Challenge","Rank","Review","Deck"];
+  var lx=200, cx0=250, cstep=(1070-cx0)/7, ly0=46, lh=76;
+  function X(s){return cx0+s*cstep;} function Y(l){return ly0+l*lh+lh/2;}
+  L.forEach(function(l,i){
+    el("rect",{x:0,y:ly0+i*lh,width:1100,height:lh,class:"lane"+(i%2?" alt":"")},svg);
+    var t=el("text",{x:12,y:Y(i)-2,class:"lt"},svg); t.textContent=l.n;
+    var s=el("text",{x:12,y:Y(i)+15,class:"ls"},svg); s.textContent=l.s;
+  });
+  COLS.forEach(function(c,i){
+    el("line",{x1:X(i),y1:ly0,x2:X(i),y2:ly0+L.length*lh,class:"grid"},svg);
+    var t=el("text",{x:X(i),y:28,class:"col"},svg); t.textContent=(i+1)+" · "+c;
+  });
+  var M=[
+   [0,0,"CLAUDE.md framing and leave-behind rule; the kickoff brief; the Week 1 pitch's four priority portcos"],
+   [0,3,"Rubric v1 and methodology v1; dimension 2 scored against Northwood's own A/B/C data-quality hierarchy (A5)"],
+   [0,4,"Northwood's ESG Risk Assessment Methodology and Meridian's exit plan, read after the review flagged them"],
+   [0,6,"Methodology v2, written from the Stage 7 standing changes"],
+   [1,0,"Scoped the per-portco asks (A1 to A4)"],
+   [1,1,"Ran the automated checks and logged the first flags"],
+   [1,2,"Reopened the first pass: D4, D6, D10, D11, D13"],
+   [1,3,"Drafted memo v1"],
+   [1,4,"Memo v2: fund-level finding first; all ten portcos at full depth"],
+   [1,5,"Memo v3 and the eleven generated requests"],
+   [1,6,"Applied fixes through source files and generators; memo v4"],
+   [1,7,"Deck v1, re-themed, then v2 with this appendix"],
+   [2,1,"verify-climate-data-v2.py over 138 facility rows; disposition log opened"],
+   [2,2,"reconcile-carbon-vs-questionnaire, v1 to v3"],
+   [2,3,"Scores and composites; assumption log A5 to A12"],
+   [2,5,"70-ask criticality register, value ranking, request generator"],
+   [2,6,"verify-pipeline-v1.py: 91 passed, 0 failed"],
+   [2,7,"audit-db-v1.sqlite, rebuilt from the working files; its composites match the pipeline's"],
+   [3,4,"process-review: “not yet consulting-grade”"],
+   [3,6,"Six reviews: assurance-audit (memo; requests), client-voice (reading as Northwood's COO; as the portco CFOs), deck-quality, process-review"],
+   [3,7,"Stage 7 on this deck: assurance-audit, client-voice (reading as Northwood's COO), and process-review of the methodology doc"],
+   [4,4,"A13 to A17: route via Sarah, all ten at full depth, keep the readiness scale with a crosswalk"],
+   [4,5,"A18 to A24: request package, tiers, value ranking"],
+   [4,6,"B1 to B10 (A25), including EVs out of the memo and the provisional rule"],
+   [4,7,"G1 to G9 decided; approval to present follows the fixes",true]
+  ];
+  function hand(x1,y1,x2,y2,cls){ var mx=(x1+x2)/2; el("path",{d:"M"+x1+","+y1+" C"+mx+","+y1+" "+mx+","+y2+" "+x2+","+y2,class:"hand"+(cls?" "+cls:"")},svg); }
+  for (var s=0;s<7;s++) hand(X(s),Y(1),X(s+1),Y(1));
+  [[0,0],[0,3],[0,4],[0,6]].forEach(function(m){ hand(X(m[1]),Y(0),X(m[1]),Y(1)); });
+  [1,2,3,5,6,7].forEach(function(s){ hand(X(s),Y(1),X(s),Y(2)); });
+  hand(X(4),Y(3),X(3)+14,Y(1)+10,"back");
+  hand(X(6),Y(3),X(5)+14,Y(1)+10,"back");
+  [4,5,6].forEach(function(s){ hand(X(s),Y(4),X(s),Y(1)); });
+  M.forEach(function(m){
+    var g=el("g",{class:"tk"+(m[3]?" ghost":""),tabindex:"0",role:"button","aria-label":L[m[0]].n+", stage "+(m[1]+1)+": "+m[2]},svg);
+    el("circle",{cx:X(m[1]),cy:Y(m[0]),r:m[0]===3?10:8,fill:L[m[0]].c},g);
+    bindTip(g,'<div class="k">'+esc(L[m[0]].n)+' &middot; stage '+(m[1]+1)+(m[3]?' &middot; still to run':'')+'</div><div class="t">'+esc(COLS[m[1]])+'</div><div class="v">'+esc(m[2])+'</div>');
+  });
+  var bl=el("text",{x:X(4)-16,y:Y(3)+26,class:"ls",fill:"#d98a52","text-anchor":"end"},svg); bl.textContent="challenges sent back";
+})();
+
+/* ================= 13 APPENDIX DELIVERABLES FLOW ================= */
+(function(){
+  var svg=document.getElementById("dag");
+  var C=[["Evidence",4],["Kith working layer",1],["This week, to you",2],["Leave-behind",3],["Later weeks",4]];
+  var N=[
+   ["room",0,"Northwood data room","Carbon template, questionnaires, board and deal documents for all ten portcos"],
+   ["proto",0,"Northwood standards","Climate Data Collection Protocol and ESG Risk Assessment Methodology"],
+   ["pitch",0,"Week 1 pitch and brief","The scope promised: four priority portcos, one data ask each"],
+   ["scr",1,"Scripts and config","Standard-library Python driven by one config file"],
+   ["disp",1,"Disposition log","D1 to D40: every flag resolved, with evidence"],
+   ["asm",1,"Assumption log","A1 to A25: every judgment call, with its rationale"],
+   ["sc",1,"Scores and composites","8 dimensions per portco, each score cited"],
+   ["reg",1,"Criticality register","79 asks (v3), each tiered by one rule"],
+   ["val",1,"Value ranking","Act now, Resource and plan, Quick wins"],
+   ["memo",2,"Memo v4","The full argument, with appendices"],
+   ["fund",2,"Fund-level request","Ten asks of Northwood; owns the list of portco requests"],
+   ["port",2,"10 portco requests","Each carries only that company's own data"],
+   ["deck",2,"This deck","The memo, condensed for Monday's decisions"],
+   ["meth",3,"Methodology v2","The staged process, with its standing rules"],
+   ["rerun",3,"Re-run steps","Memo Appendix B: ten steps for next quarter"],
+   ["ef",3,"Emission-factor reference","EPA 2025 and eGRID2023, with retrieval date"],
+   ["db",3,"Audit database","One queryable store, rebuilt from the working files"],
+   ["w3",4,"Week 3 baseline","Request responses, plus the provisional rule"],
+   ["w5",4,"Week 5 risk register","Physical-risk provenance (D15); E1 and E2 write-back"],
+   ["w6",4,"Week 6 disclosure","The Q4 2026 LP climate section"]
+  ];
+  var E=[["room","scr"],["room","disp"],["proto","sc"],["proto","meth"],["pitch","asm"],["scr","disp"],["scr","sc"],["disp","sc"],["asm","sc"],["disp","reg"],["sc","memo"],["val","memo"],["reg","val"],["reg","fund"],["reg","port"],["fund","port"],["memo","deck"],["scr","rerun"],["meth","rerun"],["disp","db"],["asm","db"],["sc","db"],["reg","db"],["port","w3"],["fund","w3"],["memo","w3"],["ef","w3"],["sc","w5"],["memo","w6"],["rerun","w6"]];
+  var cw=178, nh=38, colx=[20,245,470,695,905];
+  var byCol={}; N.forEach(function(n){ (byCol[n[1]]=byCol[n[1]]||[]).push(n); });
+  var P={};
+  Object.keys(byCol).forEach(function(k){
+    var list=byCol[k], gap=(430-60)/list.length;
+    list.forEach(function(n,i){ P[n[0]]={x:colx[k],y:60+gap*i+(gap-nh)/2,n:n}; });
+  });
+  C.forEach(function(c,i){ var t=el("text",{x:colx[i]+cw/2,y:36,class:"colh"},svg); t.textContent=c[0]; });
+  var links=E.map(function(e){
+    var a=P[e[0]], b=P[e[1]];
+    var x1=a.x+cw, y1=a.y+nh/2, x2=b.x, y2=b.y+nh/2;
+    if (b.n[1]===a.n[1]){ x1=a.x; x2=b.x; var bx=a.x-18-Math.abs(y2-y1)*0.12; return {e:e,p:el("path",{d:"M"+x1+","+y1+" C"+bx+","+y1+" "+bx+","+y2+" "+x2+","+y2,class:"lk"},svg)}; }
+    var mx=(x1+x2)/2;
+    return {e:e,p:el("path",{d:"M"+x1+","+y1+" C"+mx+","+y1+" "+mx+","+y2+" "+x2+","+y2,class:"lk"},svg)};
+  });
+  var nodes={};
+  function focus(id){
+    svg.classList.add("focus");
+    var keep={}; keep[id]=1;
+    links.forEach(function(l){ var hit=l.e[0]===id||l.e[1]===id; l.p.classList.toggle("hi",hit); if(hit){keep[l.e[0]]=1;keep[l.e[1]]=1;} });
+    Object.keys(nodes).forEach(function(k){ nodes[k].classList.toggle("hi",!!keep[k]); });
+  }
+  function clear(){ svg.classList.remove("focus"); links.forEach(function(l){l.p.classList.remove("hi");}); Object.keys(nodes).forEach(function(k){nodes[k].classList.remove("hi");}); }
+  N.forEach(function(n){
+    var p=P[n[0]];
+    var g=el("g",{class:"nd k"+C[n[1]][1],tabindex:"0",role:"button","aria-label":n[2]+": "+n[3]},svg);
+    el("rect",{x:p.x,y:p.y,width:cw,height:nh,rx:6},g);
+    var t=el("text",{x:p.x+12,y:p.y+nh/2+4.5,class:"nt"},g); t.textContent=n[2];
+    var ins=E.filter(function(e){return e[1]===n[0];}).map(function(e){return P[e[0]].n[2];});
+    var outs=E.filter(function(e){return e[0]===n[0];}).map(function(e){return P[e[1]].n[2];});
+    bindTip(g,'<div class="k">'+esc(C[n[1]][0])+'</div><div class="t">'+esc(n[2])+'</div><div class="v">'+esc(n[3])+'</div>'+
+      (ins.length?'<div class="sub" style="margin-top:8px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Built from</div><div class="v">'+esc(ins.join(", "))+'</div>':'')+
+      (outs.length?'<div class="sub" style="margin-top:8px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Feeds</div><div class="v">'+esc(outs.join(", "))+'</div>':''));
+    g.addEventListener("mouseenter",function(){focus(n[0]);}); g.addEventListener("focus",function(){focus(n[0]);});
+    g.addEventListener("mouseleave",clear); g.addEventListener("blur",clear);
+    nodes[n[0]]=g;
+  });
+})();
+
+})();
+</script>
+
+</body>
+</html>

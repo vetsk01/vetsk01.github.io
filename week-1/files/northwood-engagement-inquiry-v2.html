@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Inquiry — Northwood Capital | Kith Consulting Client Records</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-base: #1a1d21;
+      --color-surface: #1e2227;
+      --color-card: #232629;
+      --color-border: rgba(232, 230, 227, 0.06);
+      --color-text-primary: #e8e6e3;
+      --color-text-secondary: rgba(232, 230, 227, 0.65);
+      --color-text-tertiary: rgba(232, 230, 227, 0.4);
+      --color-text-muted: rgba(232, 230, 227, 0.25);
+      --color-teal: #5B9A8B;
+      --color-teal-bright: #6FB3A2;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-base);
+      color: var(--color-text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Chrome — Kith Consulting's own record-keeping shell */
+    .record-topbar {
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .record-topbar-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .record-topbar img { height: 22px; opacity: 0.85; }
+
+    .record-topbar-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 56px 48px 80px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      background: rgba(91, 154, 139, 0.1);
+      border: 1px solid rgba(91, 154, 139, 0.25);
+      color: var(--color-teal-bright);
+      margin-bottom: 28px;
+    }
+
+    .status-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-teal-bright);
+      box-shadow: 0 0 6px var(--color-teal-bright);
+    }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .intake-note {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      max-width: 640px;
+      margin-bottom: 36px;
+    }
+
+    /* Metadata card — framed as intake record, not outgoing letterhead */
+    .meta-card {
+      background: linear-gradient(135deg, rgba(232, 230, 227, 0.03) 0%, rgba(232, 230, 227, 0.01) 100%);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 32px;
+    }
+
+    .meta-row-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 5px;
+    }
+
+    .meta-row-value {
+      font-size: 15px;
+      color: var(--color-text-primary);
+    }
+
+    .meta-row-value .dim {
+      color: var(--color-text-tertiary);
+      font-size: 13px;
+    }
+
+    /* Divider marking the start of the original inquiry */
+    .original-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .original-divider .line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    .original-divider .text {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    /* Body — original message content */
+    .memo-body h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: 44px;
+      margin-bottom: 14px;
+      color: var(--color-text-primary);
+    }
+
+    .memo-body h2:first-child { margin-top: 0; }
+
+    .memo-body h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-teal-bright);
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    .memo-body p {
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--color-text-secondary);
+      margin-bottom: 14px;
+      max-width: 700px;
+    }
+
+    .memo-body ul, .memo-body ol.plain {
+      list-style: none;
+      margin: 14px 0 18px;
+    }
+
+    .memo-body ul li, .memo-body ol.plain li {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      padding-left: 22px;
+      position: relative;
+      max-width: 680px;
+    }
+
+    .memo-body ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--color-teal);
+      border-radius: 2px;
+    }
+
+    .memo-body strong { color: var(--color-text-primary); font-weight: 600; }
+
+    .numbered-list {
+      counter-reset: item;
+      list-style: none;
+      margin: 20px 0 28px;
+    }
+
+    .numbered-list li {
+      counter-increment: item;
+      font-size: 15.5px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 22px;
+      padding-left: 44px;
+      position: relative;
+      max-width: 700px;
+    }
+
+    .numbered-list li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: -2px;
+      width: 28px;
+      height: 28px;
+      background: rgba(91, 154, 139, 0.12);
+      border: 1px solid rgba(91, 154, 139, 0.3);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-teal-bright);
+    }
+
+    .numbered-list li strong { color: var(--color-text-primary); }
+
+    .clincher {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin: 8px 0 24px;
+    }
+
+    .pull-quote {
+      background: var(--color-card);
+      border-left: 3px solid var(--color-teal);
+      padding: 20px 26px;
+      margin: 28px 0;
+      max-width: 680px;
+    }
+
+    .pull-quote p {
+      font-size: 16px;
+      color: var(--color-text-primary);
+      font-style: italic;
+      margin: 0;
+      max-width: 100%;
+    }
+
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .memo-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 18px 0 20px;
+    }
+
+    .memo-table th {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      text-align: left;
+      padding: 9px 14px;
+      border-bottom: 1px solid rgba(91, 154, 139, 0.2);
+    }
+
+    .memo-table td {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .memo-table td:first-child { color: var(--color-text-primary); font-weight: 500; }
+    .memo-table tr:last-child td { border-bottom: none; }
+
+    .logistics-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 16px 0 8px;
+      max-width: 700px;
+    }
+
+    .logistics-table td {
+      font-size: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+
+    .logistics-table tr:last-child td { border-bottom: none; }
+
+    .logistics-table td:first-child {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      width: 180px;
+      padding-right: 20px;
+      white-space: nowrap;
+    }
+
+    .logistics-table td:last-child { color: var(--color-text-secondary); overflow-wrap: anywhere; }
+    .logistics-table td:first-child { overflow-wrap: normal; }
+
+    /* Signature */
+    .signature {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .signature .name { font-size: 16px; font-weight: 600; color: var(--color-text-primary); }
+    .signature .title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      margin-top: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    /* End-of-original marker + internal footer */
+    .end-original {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin: 48px 0;
+    }
+
+    .internal-footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: 28px 48px;
+    }
+
+    .internal-footer-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="record-topbar">
+    <div class="record-topbar-inner">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAxMyIgaGVpZ2h0PSIxODciIHZpZXdCb3g9IjAgMCAxMDEzIDE4NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8xMzlfMjcpIj4KPHBhdGggZD0iTTM2LjUgMTEwLjczNkwzNi40MDkxIDk0LjE0NTNIMzguNzcyN0w2Ni41OTA5IDY0LjU5OTlIODIuODYzNkw1MS4xMzY0IDk4LjIzNjNINDlMMzYuNSAxMTAuNzM2Wk0yNCAxMzQuNDE4VjQxLjMyNzJIMzcuNTkwOVYxMzQuNDE4SDI0Wk02OC4wOTA5IDEzNC40MThMNDMuMDkwOSAxMDEuMjM2TDUyLjQ1NDUgOTEuNzM2M0w4NC43NzI3IDEzNC40MThINjguMDkwOVoiIGZpbGw9IiNFOEU2RTMiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPgo8cGF0aCBkPSJNOTIuNjkgMTM0LjQxOFY2NC41OTk5SDEwNi4yODFWMTM0LjQxOEg5Mi42OVpNOTkuNTUzNiA1My44MjcyQzk3LjE5IDUzLjgyNzIgOTUuMTU5NyA1My4wMzkzIDkzLjQ2MjcgNTEuNDYzNUM5MS43OTYxIDQ5Ljg1NzUgOTAuOTYyNyA0Ny45NDg0IDkwLjk2MjcgNDUuNzM2M0M5MC45NjI3IDQzLjQ5MzggOTEuNzk2MSA0MS41ODQ3IDkzLjQ2MjcgNDAuMDA5Qzk1LjE1OTcgMzguNDAyOSA5Ny4xOSAzNy41OTk5IDk5LjU1MzYgMzcuNTk5OUMxMDEuOTE3IDM3LjU5OTkgMTAzLjkzMiAzOC40MDI5IDEwNS41OTkgNDAuMDA5QzEwNy4yOTYgNDEuNTg0NyAxMDguMTQ1IDQzLjQ5MzggMTA4LjE0NSA0NS43MzYzQzEwOC4xNDUgNDcuOTQ4NCAxMDcuMjk2IDQ5Ljg1NzUgMTA1LjU5OSA1MS40NjM1QzEwMy45MzIgNTMuMDM5MyAxMDEuOTE3IDUzLjgyNzIgOTkuNTUzNiA1My44MjcyWiIgZmlsbD0iI0U4RTZFMyIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik0xNTQuNTk2IDY0LjU5OTlWNzUuNTA5SDExNi40NlY2NC41OTk5SDE1NC41OTZaTTEyNi42ODcgNDcuODcyNkgxNDAuMjc4VjExMy45MThDMTQwLjI3OCAxMTYuNTU0IDE0MC42NzIgMTE4LjUzOSAxNDEuNDYgMTE5Ljg3M0MxNDIuMjQ3IDEyMS4xNzYgMTQzLjI2MyAxMjIuMDcgMTQ0LjUwNSAxMjIuNTU0QzE0NS43NzggMTIzLjAwOSAxNDcuMTU3IDEyMy4yMzYgMTQ4LjY0MSAxMjMuMjM2QzE0OS43MzIgMTIzLjIzNiAxNTAuNjg3IDEyMy4xNiAxNTEuNTA1IDEyMy4wMDlDMTUyLjMyMyAxMjIuODU3IDE1Mi45NiAxMjIuNzM2IDE1My40MTQgMTIyLjY0NUwxNTUuODY5IDEzMy44NzNDMTU1LjA4MSAxMzQuMTc2IDE1My45NiAxMzQuNDc5IDE1Mi41MDUgMTM0Ljc4MkMxNTEuMDUgMTM1LjExNSAxNDkuMjMyIDEzNS4yOTcgMTQ3LjA1IDEzNS4zMjdDMTQzLjQ3NSAxMzUuMzg4IDE0MC4xNDEgMTM0Ljc1MSAxMzcuMDUgMTMzLjQxOEMxMzMuOTYgMTMyLjA4NSAxMzEuNDYgMTMwLjAyNCAxMjkuNTUgMTI3LjIzNkMxMjcuNjQxIDEyNC40NDggMTI2LjY4NyAxMjAuOTQ4IDEyNi42ODcgMTE2LjczNlY0Ny44NzI2WiIgZmlsbD0iI0U4RTZFMyIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik0xODIuMTYxIDkyLjk2MzVWMTM0LjQxOEgxNjguNTdWNDEuMzI3MkgxODEuOTc5Vjc1Ljk2MzVIMTgyLjg0M0MxODQuNDc5IDcyLjIwNiAxODYuOTc5IDY5LjIyMTEgMTkwLjM0MyA2Ny4wMDlDMTkzLjcwNiA2NC43OTY5IDE5OC4xIDYzLjY5MDggMjAzLjUyNSA2My42OTA4QzIwOC4zMTIgNjMuNjkwOCAyMTIuNDk0IDY0LjY3NTcgMjE2LjA3IDY2LjY0NTNDMjE5LjY3NiA2OC42MTUgMjIyLjQ2NCA3MS41NTQ0IDIyNC40MzQgNzUuNDYzNUMyMjYuNDM0IDc5LjM0MjMgMjI3LjQzNCA4NC4xOTA4IDIyNy40MzQgOTAuMDA5VjEzNC40MThIMjEzLjg0M1Y5MS42NDUzQzIxMy44NDMgODYuNTI0MSAyMTIuNTI1IDgyLjU1NDQgMjA5Ljg4OCA3OS43MzYzQzIwNy4yNTIgNzYuODg3OCAyMDMuNTg1IDc1LjQ2MzUgMTk4Ljg4OCA3NS40NjM1QzE5NS42NzYgNzUuNDYzNSAxOTIuNzk3IDc2LjE0NTMgMTkwLjI1MiA3Ny41MDlDMTg3LjczNyA3OC44NzI2IDE4NS43NTIgODAuODcyNiAxODQuMjk3IDgzLjUwOUMxODIuODczIDg2LjExNSAxODIuMTYxIDg5LjI2NjYgMTgyLjE2MSA5Mi45NjM1WiIgZmlsbD0iI0U4RTZFMyIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik0zOTcuODE4IDEzNS44NzNDMzkxLjU3NiAxMzUuODczIDM4Ni4xMzYgMTM0LjMxMiAzODEuNSAxMzEuMTkxQzM3Ni44OTQgMTI4LjA3IDM3My4zMTggMTIzLjc5NyAzNzAuNzczIDExOC4zNzNDMzY4LjIyNyAxMTIuOTQ4IDM2Ni45NTQgMTA2Ljc2NyAzNjYuOTU0IDk5LjgyNzJDMzY2Ljk1NCA5Mi44MjcyIDM2OC4yNDIgODYuNTk5OSAzNzAuODE4IDgxLjE0NTNDMzczLjQyNCA3NS42OTA4IDM3Ny4wMyA3MS40MTgxIDM4MS42MzYgNjguMzI3MkMzODYuMjQyIDY1LjIwNiAzOTEuNTkxIDYzLjY0NTMgMzk3LjY4MiA2My42NDUzQzQwMi4zNDggNjMuNjQ1MyA0MDYuNTc2IDY0LjU1NDQgNDEwLjM2NCA2Ni4zNzI2QzQxNC4xNTEgNjguMTYwNSA0MTcuMjczIDcwLjY5MDggNDE5LjcyNyA3My45NjM1QzQyMi4yMTIgNzcuMjA2IDQyMy43NzMgODAuOTkzOCA0MjQuNDA5IDg1LjMyNzJINDE2LjIyN0M0MTUuMzc5IDgxLjM4NzggNDEzLjMzMyA3OC4wMjQxIDQxMC4wOTEgNzUuMjM2M0M0MDYuODc5IDcyLjQxODEgNDAyLjc4OCA3MS4wMDkgMzk3LjgxOCA3MS4wMDlDMzkzLjM2NCA3MS4wMDkgMzg5LjQyNCA3Mi4yMjExIDM4NiA3NC42NDUzQzM4Mi41NzYgNzcuMDM5MyAzNzkuODk0IDgwLjM4NzggMzc3Ljk1NCA4NC42OTA4QzM3Ni4wNDUgODguOTYzNSAzNzUuMDkxIDkzLjkxODEgMzc1LjA5MSA5OS41NTQ0QzM3NS4wOTEgMTA1LjIyMSAzNzYuMDMgMTEwLjIzNiAzNzcuOTA5IDExNC42QzM3OS43ODggMTE4LjkzMyAzODIuNDI0IDEyMi4zMjcgMzg1LjgxOCAxMjQuNzgyQzM4OS4yNDIgMTI3LjIzNiAzOTMuMjQyIDEyOC40NjQgMzk3LjgxOCAxMjguNDY0QzQwMC45MDkgMTI4LjQ2NCA0MDMuNzI3IDEyNy44ODggNDA2LjI3MyAxMjYuNzM2QzQwOC44NDggMTI1LjU1NCA0MTEgMTIzLjg4OCA0MTIuNzI3IDEyMS43MzZDNDE0LjQ4NSAxMTkuNTg1IDQxNS42NjcgMTE3LjAyNCA0MTYuMjczIDExNC4wNTRINDI0LjQ1NEM0MjMuODQ4IDExOC4yNjcgNDIyLjM0OCAxMjIuMDI0IDQxOS45NTQgMTI1LjMyN0M0MTcuNTkxIDEyOC42IDQxNC41MTUgMTMxLjE3NiA0MTAuNzI3IDEzMy4wNTRDNDA2Ljk3IDEzNC45MzMgNDAyLjY2NyAxMzUuODczIDM5Ny44MTggMTM1Ljg3M1oiIGZpbGw9IiNFOEU2RTMiIGZpbGwtb3BhY2l0eT0iMC40IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiLz4KPHBhdGggZD0iTTQ3MS40OTIgMTM1Ljg3M0M0NjUuNDYxIDEzNS44NzMgNDYwLjEyOCAxMzQuMzQyIDQ1NS40OTIgMTMxLjI4MkM0NTAuODg2IDEyOC4yMjEgNDQ3LjI4IDEyMy45OTQgNDQ0LjY3NCAxMTguNkM0NDIuMDY4IDExMy4xNzYgNDQwLjc2NCAxMDYuOTE4IDQ0MC43NjQgOTkuODI3MkM0NDAuNzY0IDkyLjY3NTcgNDQyLjA2OCA4Ni4zODc4IDQ0NC42NzQgODAuOTYzNUM0NDcuMjggNzUuNTA5IDQ1MC44ODYgNzEuMjY2NiA0NTUuNDkyIDY4LjIzNjNDNDYwLjEyOCA2NS4xNzU2IDQ2NS40NjEgNjMuNjQ1MyA0NzEuNDkyIDYzLjY0NTNDNDc3LjUyMiA2My42NDUzIDQ4Mi44NCA2NS4xNzU2IDQ4Ny40NDYgNjguMjM2M0M0OTIuMDUyIDcxLjI5NjkgNDk1LjY1OCA3NS41MzkzIDQ5OC4yNjQgODAuOTYzNUM1MDAuOTAxIDg2LjM4NzggNTAyLjIxOSA5Mi42NzU3IDUwMi4yMTkgOTkuODI3MkM1MDIuMjE5IDEwNi45MTggNTAwLjkxNiAxMTMuMTc2IDQ5OC4zMSAxMTguNkM0OTUuNzA0IDEyMy45OTQgNDkyLjA4MyAxMjguMjIxIDQ4Ny40NDYgMTMxLjI4MkM0ODIuODQgMTM0LjM0MiA0NzcuNTIyIDEzNS44NzMgNDcxLjQ5MiAxMzUuODczWk00NzEuNDkyIDEyOC40NjRDNDc2LjM0IDEyOC40NjQgNDgwLjQ0NiAxMjcuMTYgNDgzLjgxIDEyNC41NTRDNDg3LjE3NCAxMjEuOTQ4IDQ4OS43MTkgMTE4LjQ3OSA0OTEuNDQ2IDExNC4xNDVDNDkzLjIwNCAxMDkuODEyIDQ5NC4wODMgMTA1LjAzOSA0OTQuMDgzIDk5LjgyNzJDNDk0LjA4MyA5NC42MTUgNDkzLjIwNCA4OS44MjcyIDQ5MS40NDYgODUuNDYzNUM0ODkuNzE5IDgxLjA5OTkgNDg3LjE3NCA3Ny41OTk5IDQ4My44MSA3NC45NjM1QzQ4MC40NDYgNzIuMzI3MiA0NzYuMzQgNzEuMDA5IDQ3MS40OTIgNzEuMDA5QzQ2Ni42NzQgNzEuMDA5IDQ2Mi41NjggNzIuMzI3MiA0NTkuMTc0IDc0Ljk2MzVDNDU1LjgxIDc3LjU5OTkgNDUzLjI0OSA4MS4wOTk5IDQ1MS40OTIgODUuNDYzNUM0NDkuNzY0IDg5LjgyNzIgNDQ4LjkwMSA5NC42MTUgNDQ4LjkwMSA5OS44MjcyQzQ0OC45MDEgMTA1LjAzOSA0NDkuNzY0IDEwOS44MTIgNDUxLjQ5MiAxMTQuMTQ1QzQ1My4yNDkgMTE4LjQ3OSA0NTUuODEgMTIxLjk0OCA0NTkuMTc0IDEyNC41NTRDNDYyLjUzNyAxMjcuMTYgNDY2LjY0MyAxMjguNDY0IDQ3MS40OTIgMTI4LjQ2NFoiIGZpbGw9IiNFOEU2RTMiIGZpbGwtb3BhY2l0eT0iMC40IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiLz4KPHBhdGggZD0iTTUzMC42MzEgOTAuNzgxN1YxMzQuNDE4SDUyMi41NFY2NC41OTk5SDUzMC40MDRWNzUuNTU0NEg1MzEuMTMxQzUzMi43NjggNzEuOTc4NyA1MzUuMzEzIDY5LjExNSA1MzguNzY4IDY2Ljk2MzVDNTQyLjI1MyA2NC43ODE3IDU0Ni41NTYgNjMuNjkwOCA1NTEuNjc3IDYzLjY5MDhDNTU2LjM3NCA2My42OTA4IDU2MC40OTUgNjQuNjc1NyA1NjQuMDQgNjYuNjQ1M0M1NjcuNjE2IDY4LjU4NDcgNTcwLjM4OSA3MS40NDg0IDU3Mi4zNTkgNzUuMjM2M0M1NzQuMzU5IDc5LjAyNDEgNTc1LjM1OSA4My42NzU2IDU3NS4zNTkgODkuMTkwOFYxMzQuNDE4SDU2Ny4yNjhWODkuNjkwOEM1NjcuMjY4IDgzLjk2MzUgNTY1LjY2MiA3OS40MzMyIDU2Mi40NDkgNzYuMDk5OUM1NTkuMjY4IDcyLjc2NjYgNTU0Ljk5NSA3MS4wOTk5IDU0OS42MzEgNzEuMDk5OUM1NDUuOTY1IDcxLjA5OTkgNTQyLjcwNyA3MS44ODc4IDUzOS44NTkgNzMuNDYzNUM1MzcuMDEgNzUuMDM5MyA1MzQuNzUyIDc3LjMxMiA1MzMuMDg2IDgwLjI4MTdDNTMxLjQ0OSA4My4yMjExIDUzMC42MzEgODYuNzIxMSA1MzAuNjMxIDkwLjc4MTdaIiBmaWxsPSIjRThFNkUzIiBmaWxsLW9wYWNpdHk9IjAuNCIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik02NDYuMTM0IDc5LjkxODFMNjM4LjcyNSA4Mi4wMDlDNjM3Ljk5OCA3OS45MTgxIDYzNi45NjggNzguMDI0MSA2MzUuNjM0IDc2LjMyNzJDNjM0LjMwMSA3NC42MzAyIDYzMi41NTkgNzMuMjgxNyA2MzAuNDA3IDcyLjI4MTdDNjI4LjI4NiA3MS4yODE3IDYyNS42NSA3MC43ODE3IDYyMi40OTggNzAuNzgxN0M2MTcuNzcxIDcwLjc4MTcgNjEzLjg5MiA3MS45MDI5IDYxMC44NjIgNzQuMTQ1M0M2MDcuODMxIDc2LjM4NzggNjA2LjMxNiA3OS4yODE3IDYwNi4zMTYgODIuODI3MkM2MDYuMzE2IDg1LjgyNzIgNjA3LjM0NyA4OC4yNjY2IDYwOS40MDcgOTAuMTQ1M0M2MTEuNDk4IDkxLjk5MzggNjE0LjcxIDkzLjQ2MzUgNjE5LjA0NCA5NC41NTQ0TDYyOS41ODkgOTcuMTQ1M0M2MzUuNDM4IDk4LjU2OTYgNjM5LjgxNiAxMDAuODI3IDY0Mi43MjUgMTAzLjkxOEM2NDUuNjY1IDEwNy4wMDkgNjQ3LjEzNCAxMTAuODg4IDY0Ny4xMzQgMTE1LjU1NEM2NDcuMTM0IDExOS40OTQgNjQ2LjA0NCAxMjIuOTk0IDY0My44NjIgMTI2LjA1NEM2NDEuNjggMTI5LjExNSA2MzguNjM0IDEzMS41MjQgNjM0LjcyNSAxMzMuMjgyQzYzMC44NDcgMTM1LjAwOSA2MjYuMzQ3IDEzNS44NzMgNjIxLjIyNSAxMzUuODczQzYxNC40MDcgMTM1Ljg3MyA2MDguNzg2IDEzNC4zNDIgNjA0LjM2MiAxMzEuMjgyQzU5OS45MzggMTI4LjE5MSA1OTcuMTA0IDEyMy43MzYgNTk1Ljg2MiAxMTcuOTE4TDYwMy42MzQgMTE2LjAwOUM2MDQuNjM0IDEyMC4xNiA2MDYuNTg5IDEyMy4yOTcgNjA5LjQ5OCAxMjUuNDE4QzYxMi40MzggMTI3LjUzOSA2MTYuMzAxIDEyOC42IDYyMS4wODkgMTI4LjZDNjI2LjQ1MyAxMjguNiA2MzAuNzQxIDEyNy40MDMgNjMzLjk1MyAxMjUuMDA5QzYzNy4xNjUgMTIyLjU4NSA2MzguNzcxIDExOS41NTQgNjM4Ljc3MSAxMTUuOTE4QzYzOC43NzEgMTEzLjEgNjM3LjgzMSAxMTAuNzM2IDYzNS45NTMgMTA4LjgyN0M2MzQuMDc0IDEwNi44ODggNjMxLjIyNSAxMDUuNDY0IDYyNy40MDcgMTA0LjU1NEw2MTUuOTk4IDEwMS44MjdDNjA5LjkzOCAxMDAuMzczIDYwNS40NTMgOTguMDY5NiA2MDIuNTQ0IDk0LjkxODFDNTk5LjYzNCA5MS43NjY2IDU5OC4xOCA4Ny44NTc1IDU5OC4xOCA4My4xOTA4QzU5OC4xOCA3OS4zNDIzIDU5OS4yMjUgNzUuOTYzNSA2MDEuMzE2IDczLjA1NDRDNjAzLjQwNyA3MC4xMTUgNjA2LjI4NiA2Ny44MTIgNjA5Ljk1MyA2Ni4xNDUzQzYxMy42MTkgNjQuNDc4NyA2MTcuODAxIDYzLjY0NTMgNjIyLjQ5OCA2My42NDUzQzYyOC44OTIgNjMuNjQ1MyA2MzMuOTk4IDY1LjA5OTkgNjM3LjgxNiA2OC4wMDlDNjQxLjY2NSA3MC44ODc4IDY0NC40MzggNzQuODU3NSA2NDYuMTM0IDc5LjkxODFaIiBmaWxsPSIjRThFNkUzIiBmaWxsLW9wYWNpdHk9IjAuNCIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik03MTEuNzc0IDEwNy43MzZWNjQuNTk5OUg3MTkuODY1VjEzNC40MThINzExLjc3NFYxMjIuODI3SDcxMS4xMzhDNzA5LjUwMSAxMjYuNDAzIDcwNi45MSAxMjkuMzg4IDcwMy4zNjUgMTMxLjc4MkM2OTkuODE5IDEzNC4xNDUgNjk1LjQ4NiAxMzUuMzI3IDY5MC4zNjUgMTM1LjMyN0M2ODUuOTEgMTM1LjMyNyA2ODEuOTU2IDEzNC4zNTcgNjc4LjUwMSAxMzIuNDE4QzY3NS4wNDcgMTMwLjQ0OCA2NzIuMzM1IDEyNy41NyA2NzAuMzY1IDEyMy43ODJDNjY4LjM5NSAxMTkuOTk0IDY2Ny40MSAxMTUuMzQyIDY2Ny40MSAxMDkuODI3VjY0LjU5OTlINjc1LjUwMVYxMDkuMzI3QzY3NS41MDEgMTE0Ljc4MiA2NzcuMTA3IDExOS4xNzYgNjgwLjMxOSAxMjIuNTA5QzY4My41MzIgMTI1LjgxMiA2ODcuNjUzIDEyNy40NjQgNjkyLjY4MyAxMjcuNDY0QzY5NS44MzUgMTI3LjQ2NCA2OTguODY1IDEyNi43MDYgNzAxLjc3NCAxMjUuMTkxQzcwNC42ODMgMTIzLjY3NiA3MDcuMDc3IDEyMS40NjQgNzA4Ljk1NiAxMTguNTU0QzcxMC44MzUgMTE1LjYxNSA3MTEuNzc0IDExMi4wMDkgNzExLjc3NCAxMDcuNzM2WiIgZmlsbD0iI0U4RTZFMyIgZmlsbC1vcGFjaXR5PSIwLjQiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPgo8cGF0aCBkPSJNNzUxLjkzNiA0MS4zMjcyVjEzNC40MThINzQzLjg0NVY0MS4zMjcySDc1MS45MzZaIiBmaWxsPSIjRThFNkUzIiBmaWxsLW9wYWNpdHk9IjAuNCIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik04MDMuNDA1IDY0LjU5OTlWNzEuNjQ1M0g3NzAuMDg3VjY0LjU5OTlIODAzLjQwNVpNNzgwLjQ5NiA0Ny44NzI2SDc4OC42MzNWMTE2LjE5MUM3ODguNjMzIDExOS4xIDc4OS4xMzMgMTIxLjM4OCA3OTAuMTMzIDEyMy4wNTRDNzkxLjEzMyAxMjQuNjkxIDc5Mi40MzYgMTI1Ljg1NyA3OTQuMDQyIDEyNi41NTRDNzk1LjY0OCAxMjcuMjIxIDc5Ny4zNiAxMjcuNTU0IDc5OS4xNzggMTI3LjU1NEM4MDAuMjM5IDEyNy41NTQgODAxLjE0OCAxMjcuNDk0IDgwMS45MDUgMTI3LjM3M0M4MDIuNjYzIDEyNy4yMjEgODAzLjMzIDEyNy4wNyA4MDMuOTA1IDEyNi45MThMODA1LjYzMyAxMzQuMjM2QzgwNC44NDUgMTM0LjUzOSA4MDMuODc1IDEzNC44MTIgODAyLjcyNCAxMzUuMDU0QzgwMS41NzIgMTM1LjMyNyA4MDAuMTQ4IDEzNS40NjQgNzk4LjQ1MSAxMzUuNDY0Qzc5NS40ODEgMTM1LjQ2NCA3OTIuNjE3IDEzNC44MTIgNzg5Ljg2IDEzMy41MDlDNzg3LjEzMyAxMzIuMjA2IDc4NC44OSAxMzAuMjY3IDc4My4xMzMgMTI3LjY5MUM3ODEuMzc1IDEyNS4xMTUgNzgwLjQ5NiAxMjEuOTE4IDc4MC40OTYgMTE4LjFWNDcuODcyNloiIGZpbGw9IiNFOEU2RTMiIGZpbGwtb3BhY2l0eT0iMC40IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiLz4KPHBhdGggZD0iTTgyNC40MzEgMTM0LjQxOFY2NC41OTk5SDgzMi41NjhWMTM0LjQxOEg4MjQuNDMxWk04MjguNTY4IDUyLjU5OTlDODI2LjkwMSA1Mi41OTk5IDgyNS40NzcgNTIuMDM5MyA4MjQuMjk1IDUwLjkxODFDODIzLjExMyA0OS43NjY2IDgyMi41MjIgNDguMzg3OCA4MjIuNTIyIDQ2Ljc4MTdDODIyLjUyMiA0NS4xNzU2IDgyMy4xMTMgNDMuODEyIDgyNC4yOTUgNDIuNjkwOEM4MjUuNDc3IDQxLjUzOTMgODI2LjkwMSA0MC45NjM1IDgyOC41NjggNDAuOTYzNUM4MzAuMjM0IDQwLjk2MzUgODMxLjY1OSA0MS41MzkzIDgzMi44NCA0Mi42OTA4QzgzNC4wMjIgNDMuODEyIDgzNC42MTMgNDUuMTc1NiA4MzQuNjEzIDQ2Ljc4MTdDODM0LjYxMyA0OC4zODc4IDgzNC4wMjIgNDkuNzY2NiA4MzIuODQgNTAuOTE4MUM4MzEuNjU5IDUyLjAzOTMgODMwLjIzNCA1Mi41OTk5IDgyOC41NjggNTIuNTk5OVoiIGZpbGw9IiNFOEU2RTMiIGZpbGwtb3BhY2l0eT0iMC40IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiLz4KPHBhdGggZD0iTTg2NC42MTYgOTAuNzgxN1YxMzQuNDE4SDg1Ni41MjVWNjQuNTk5OUg4NjQuMzg5Vjc1LjU1NDRIODY1LjExNkM4NjYuNzUzIDcxLjk3ODcgODY5LjI5OCA2OS4xMTUgODcyLjc1MyA2Ni45NjM1Qzg3Ni4yMzggNjQuNzgxNyA4ODAuNTQxIDYzLjY5MDggODg1LjY2MiA2My42OTA4Qzg5MC4zNTkgNjMuNjkwOCA4OTQuNDggNjQuNjc1NyA4OTguMDI1IDY2LjY0NTNDOTAxLjYwMSA2OC41ODQ3IDkwNC4zNzQgNzEuNDQ4NCA5MDYuMzQ0IDc1LjIzNjNDOTA4LjM0NCA3OS4wMjQxIDkwOS4zNDQgODMuNjc1NiA5MDkuMzQ0IDg5LjE5MDhWMTM0LjQxOEg5MDEuMjUzVjg5LjY5MDhDOTAxLjI1MyA4My45NjM1IDg5OS42NDcgNzkuNDMzMiA4OTYuNDM1IDc2LjA5OTlDODkzLjI1MyA3Mi43NjY2IDg4OC45OCA3MS4wOTk5IDg4My42MTYgNzEuMDk5OUM4NzkuOTUgNzEuMDk5OSA4NzYuNjkyIDcxLjg4NzggODczLjg0NCA3My40NjM1Qzg3MC45OTUgNzUuMDM5MyA4NjguNzM4IDc3LjMxMiA4NjcuMDcxIDgwLjI4MTdDODY1LjQzNSA4My4yMjExIDg2NC42MTYgODYuNzIxMSA4NjQuNjE2IDkwLjc4MTdaIiBmaWxsPSIjRThFNkUzIiBmaWxsLW9wYWNpdHk9IjAuNCIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik05NTkuODQ3IDE2Mi4wNTRDOTU1LjA4OSAxNjIuMDU0IDk1MC45MjIgMTYxLjQzMyA5NDcuMzQ3IDE2MC4xOTFDOTQzLjc3MSAxNTguOTc5IDk0MC43NTYgMTU3LjMxMiA5MzguMzAxIDE1NS4xOTFDOTM1Ljg0NyAxNTMuMDcgOTMzLjkzOCAxNTAuNjkxIDkzMi41NzQgMTQ4LjA1NEw5MzkuMjEgMTQzLjY5MUM5NDAuMjEgMTQ1LjQ0OCA5NDEuNTQ0IDE0Ny4xNzYgOTQzLjIxIDE0OC44NzNDOTQ0LjkwNyAxNTAuNTcgOTQ3LjEwNCAxNTEuOTc5IDk0OS44MDEgMTUzLjFDOTUyLjUyOSAxNTQuMjIxIDk1NS44NzcgMTU0Ljc4MiA5NTkuODQ3IDE1NC43ODJDOTY2LjAyOSAxNTQuNzgyIDk3MS4wMTMgMTUzLjIzNiA5NzQuODAxIDE1MC4xNDVDOTc4LjYxOSAxNDcuMDU0IDk4MC41MjkgMTQyLjI1MSA5ODAuNTI5IDEzNS43MzZWMTIwLjAwOUg5NzkuODAxQzk3OC44NjIgMTIyLjEzIDk3Ny41MTMgMTI0LjI1MSA5NzUuNzU2IDEyNi4zNzNDOTczLjk5OCAxMjguNDY0IDk3MS42OTUgMTMwLjIwNiA5NjguODQ3IDEzMS42Qzk2Ni4wMjkgMTMyLjk5NCA5NjIuNTI5IDEzMy42OTEgOTU4LjM0NyAxMzMuNjkxQzk1Mi43NzEgMTMzLjY5MSA5NDcuODE2IDEzMi4zMTIgOTQzLjQ4MyAxMjkuNTU0QzkzOS4xOCAxMjYuNzk3IDkzNS43ODYgMTIyLjg1NyA5MzMuMzAxIDExNy43MzZDOTMwLjg0NyAxMTIuNTg1IDkyOS42MTkgMTA2LjQ0OCA5MjkuNjE5IDk5LjMyNzJDOTI5LjYxOSA5Mi4yNjY2IDkzMC44MTYgODYuMDU0NCA5MzMuMjEgODAuNjkwOEM5MzUuNjM1IDc1LjMyNzIgOTM5LjAxMyA3MS4xNDUzIDk0My4zNDcgNjguMTQ1M0M5NDcuNjggNjUuMTQ1MyA5NTIuNzI2IDYzLjY0NTMgOTU4LjQ4MyA2My42NDUzQzk2Mi43NTYgNjMuNjQ1MyA5NjYuMzAxIDY0LjQwMjkgOTY5LjExOSA2NS45MTgxQzk3MS45MzggNjcuNDAyOSA5NzQuMTk1IDY5LjI1MTQgOTc1Ljg5MiA3MS40NjM1Qzk3Ny42MTkgNzMuNjc1NyA5NzguOTY4IDc1LjgyNzIgOTc5LjkzOCA3Ny45MTgxSDk4MC43NTZWNjQuNTk5OUg5ODguNjY1VjEzNi4yMzZDOTg4LjY2NSAxNDIuMTQ1IDk4Ny40MDcgMTQ3LjAwOSA5ODQuODkyIDE1MC44MjdDOTgyLjM3NyAxNTQuNjQ1IDk3OC45NTMgMTU3LjQ2NCA5NzQuNjE5IDE1OS4yODJDOTcwLjI4NiAxNjEuMTMgOTY1LjM2MiAxNjIuMDU0IDk1OS44NDcgMTYyLjA1NFpNOTU5LjMwMSAxMjYuMjgyQzk2My43ODYgMTI2LjI4MiA5NjcuNjE5IDEyNS4yMDYgOTcwLjgwMSAxMjMuMDU0Qzk3My45ODMgMTIwLjg3MyA5NzYuNDIyIDExNy43NTEgOTc4LjExOSAxMTMuNjkxQzk3OS44MTYgMTA5LjYzIDk4MC42NjUgMTA0Ljc5NyA5ODAuNjY1IDk5LjE5MDhDOTgwLjY2NSA5My43MzYzIDk3OS44MzIgODguOTAyOSA5NzguMTY1IDg0LjY5MDhDOTc2LjQ5OCA4MC40NDg0IDk3NC4wNzQgNzcuMTE1IDk3MC44OTIgNzQuNjkwOEM5NjcuNzQxIDcyLjIzNjMgOTYzLjg3NyA3MS4wMDkgOTU5LjMwMSA3MS4wMDlDOTU0LjYzNSA3MS4wMDkgOTUwLjY5NSA3Mi4yNjY2IDk0Ny40ODMgNzQuNzgxN0M5NDQuMjcxIDc3LjI5NjkgOTQxLjg0NyA4MC42OTA4IDk0MC4yMSA4NC45NjM1QzkzOC41NzQgODkuMjA1OSA5MzcuNzU2IDkzLjk0ODQgOTM3Ljc1NiA5OS4xOTA4QzkzNy43NTYgMTA0LjUyNCA5MzguNTg5IDEwOS4yMzYgOTQwLjI1NiAxMTMuMzI3Qzk0MS45MjIgMTE3LjM4OCA5NDQuMzYyIDEyMC41NyA5NDcuNTc0IDEyMi44NzNDOTUwLjc4NiAxMjUuMTQ1IDk1NC42OTUgMTI2LjI4MiA5NTkuMzAxIDEyNi4yODJaIiBmaWxsPSIjRThFNkUzIiBmaWxsLW9wYWNpdHk9IjAuNCIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjxwYXRoIGQ9Ik0zMDMuMzMgMjcuODc0M0MzMDMuNjc2IDI1LjQxMzIgMzA1Ljk1MSAyMy42OTg1IDMwOC40MTIgMjQuMDQ0NEMzMTAuODczIDI0LjM5MDIgMzEyLjU4OCAyNi42NjU3IDMxMi4yNDIgMjkuMTI2OEwyOTUuNDAyIDE0OC45NDlDMjk1LjA1NiAxNTEuNDEgMjkyLjc4MSAxNTMuMTI1IDI5MC4zMiAxNTIuNzc5QzI4Ny44NTkgMTUyLjQzMyAyODYuMTQ0IDE1MC4xNTggMjg2LjQ5IDE0Ny42OTdMMzAzLjMzIDI3Ljg3NDNaIiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfMTM5XzI3KSIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIi8+CjwvZz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZF8xMzlfMjciIHg9IjAiIHk9IjAiIHdpZHRoPSIxMDEyLjY2IiBoZWlnaHQ9IjE4Ni4wNTQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQ29sb3JNYXRyaXggaW49IlNvdXJjZUFscGhhIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiIHJlc3VsdD0iaGFyZEFscGhhIi8+CjxmZU9mZnNldC8+CjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjEyIi8+CjxmZUNvbXBvc2l0ZSBpbjI9ImhhcmRBbHBoYSIgb3BlcmF0b3I9Im91dCIvPgo8ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjM1Njg2MyAwIDAgMCAwIDAuNjAzOTIyIDAgMCAwIDAgMC41NDUwOTggMCAwIDAgMC41IDAiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJlZmZlY3QxX2Ryb3BTaGFkb3dfMTM5XzI3Ii8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iZWZmZWN0MV9kcm9wU2hhZG93XzEzOV8yNyIgcmVzdWx0PSJzaGFwZSIvPgo8L2ZpbHRlcj4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzEzOV8yNyIgeDE9IjMwOC40MTIiIHkxPSIyNC4wNDQ0IiB4Mj0iMjkwLjMyIiB5Mj0iMTUyLjc3OSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjNUI5QThCIiBzdG9wLW9wYWNpdHk9IjAuMSIvPgo8c3RvcCBvZmZzZXQ9IjAuMjUiIHN0b3AtY29sb3I9IiM1QjlBOEIiLz4KPHN0b3Agb2Zmc2V0PSIwLjc1IiBzdG9wLWNvbG9yPSIjNUI5QThCIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVCOUE4QiIgc3RvcC1vcGFjaXR5PSIwLjEiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K" alt="Kith Consulting">
+      <span class="record-topbar-tag">Client Records · Engagement Intake</span>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <span class="status-pill">Received — Logged for Engagement Team</span>
+
+    <div class="label">Client Intake</div>
+    <h1>Northwood Capital — Engagement Inquiry</h1>
+    <p class="intake-note">The scope-of-work request below was received from Sarah Mitchell, COO of Northwood Capital, and is reproduced here as sent for the assigned engagement team. This is Kith Consulting's internal record of the client's ask — not a Kith-authored document.</p>
+
+    <div class="meta-card">
+      <div>
+        <div class="meta-row-label">Received From</div>
+        <div class="meta-row-value">Sarah Mitchell <span class="dim">— COO, Northwood Capital</span></div>
+      </div>
+      <div>
+        <div class="meta-row-label">Addressed To</div>
+        <div class="meta-row-value">Kith Consulting</div>
+      </div>
+      <div>
+        <div class="meta-row-label">Date Received</div>
+        <div class="meta-row-value">March 2, 2026</div>
+      </div>
+      <div>
+        <div class="meta-row-label">Subject</div>
+        <div class="meta-row-value">ESG &amp; Climate Consulting — Scope of Work Request</div>
+      </div>
+    </div>
+
+    <div class="original-divider">
+      <span class="line"></span>
+      <span class="text">Original message follows</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="memo-body">
+      <p>Sarah —</p>
+      <p>We're reaching out to explore a consulting engagement with Kith Consulting for ESG and climate work across our fund and portfolio companies.</p>
+
+      <h2>About Us</h2>
+      <p>Northwood Capital is a Chicago-based mid-market PE firm. $1.75B AUM across two funds. Ten active portfolio companies spanning Business Services, Healthcare Services, Industrial Technology, Environmental Services, Food &amp; Agriculture, and Real Estate Services. Two realized exits in Fund I. Fund II is actively deploying with ~$346M in remaining capacity.</p>
+      <p>We do not have a dedicated ESG professional at the fund level. I handle ESG oversight as part of my broader operational responsibilities. At the portfolio company level, each portco has a designated ESG contact — typically the CFO or an operations lead — but no one dedicated to the function.</p>
+
+      <h2>What We've Done So Far</h2>
+      <p>We've historically relied on our management consulting relationships — primarily McKinsey — for ESG-related work as part of broader portco operational improvement engagements. The output has been fine but has two recurring problems:</p>
+      <ol class="numbered-list">
+        <li><strong>Generic.</strong> The work reads like climate consulting adapted for PE, not PE consulting that incorporates climate. The deliverables don't connect to our value creation plans, our operating review cadence, or the metrics our IC and LPs actually track.</li>
+        <li><strong>No residual value.</strong> We get a deliverable, it goes in a folder, and when we need an update six months later we're starting from scratch. There's no compounding. No system. Just one-off reports.</li>
+      </ol>
+      <p class="clincher">We want something different this time.</p>
+
+      <h2>What We're Looking For</h2>
+      <p>We have three objectives for this engagement:</p>
+
+      <h3>1. Deliverables with Immediate Operational Impact</h3>
+      <p>We need work product our teams can use — not strategy documents that require a second phase of implementation. Specifically:</p>
+      <ul>
+        <li><strong>Fund-level:</strong> A clear picture of where we stand on ESG across the portfolio. What's measured, what isn't, where the gaps are, and what it means for LP reporting and exit positioning.</li>
+        <li><strong>Portfolio company-level:</strong> Company-specific deliverables that connect ESG/climate work to financial outcomes. Emissions baselines, reduction initiatives with cost-benefit analysis, and reporting frameworks the portco teams can maintain.</li>
+      </ul>
+      <p>We care about ESG insofar as it impacts value creation, risk, and exit readiness. We are not looking for a sustainability mission statement.</p>
+
+      <h3>2. A System That Compounds</h3>
+      <p>We've seen your Claude Code-native model. This is the part that interests us most. We want to come out of this engagement with:</p>
+      <ul>
+        <li>Documented methodologies and reference data our team can reuse</li>
+        <li>Templates and playbooks our portco ESG contacts can execute without calling a consultant</li>
+        <li>A knowledge architecture that gets smarter with each quarterly update, not one that decays the moment the engagement ends</li>
+      </ul>
+
+      <h3>3. A Test Case for AI-Native Consulting</h3>
+      <p>We are an AI-forward firm. We've been evaluating how AI — and Claude Code specifically — can be integrated into our operations. This engagement is partly a test: can a CC-native consulting firm deliver the same (or better) quality as a traditional firm, faster, with better knowledge retention? We want to see it in action.</p>
+
+      <h2>Scope</h2>
+      <p>We'd like to start with a focused engagement — <strong>six weeks</strong> — covering both the fund level and a representative set of portfolio companies. We are not looking for a 12-month retainer or a phased multi-year roadmap. Six weeks, defined deliverables, measurable outcomes.</p>
+      <p>Our portfolio spans several sectors:</p>
+      <div class="table-scroll"><table class="memo-table">
+        <thead>
+          <tr><th>Company</th><th>Sector</th><th>Fund</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Meridian Business Solutions</td><td>Business Services</td><td>I</td><td>Exit prep</td></tr>
+          <tr><td>NovaCare Health Partners</td><td>Healthcare Services</td><td>I</td><td>On plan</td></tr>
+          <tr><td>Sterling Precision Manufacturing</td><td>Industrial Technology</td><td>I</td><td>Strong</td></tr>
+          <tr><td>Trident IT Solutions</td><td>Technology Services</td><td>I</td><td>Above plan</td></tr>
+          <tr><td>Clearview Environmental Services</td><td>Environmental Services</td><td>II</td><td>On plan</td></tr>
+          <tr><td>Patriot Staffing Solutions</td><td>Business Services</td><td>II</td><td>Below plan</td></tr>
+          <tr><td>Keystone Behavioral Health</td><td>Healthcare Services</td><td>II</td><td>Early / 100-day</td></tr>
+          <tr><td>Pinnacle Testing &amp; Inspection</td><td>Industrial Technology</td><td>II</td><td>Early integration</td></tr>
+          <tr><td>Harvest Ridge Foods</td><td>Food &amp; Agriculture</td><td>II</td><td>Early / 100-day</td></tr>
+          <tr><td>Ridgeline Property Services</td><td>Real Estate Services</td><td>II</td><td>Early / 100-day</td></tr>
+        </tbody>
+      </table></div>
+      <p>We'd like your recommendation on which companies to prioritize given the six-week window. Not all ten need full treatment — we want depth over breadth.</p>
+
+      <h2>What We Need From You</h2>
+      <p>We're asking Kith Consulting to come back with a presentation covering:</p>
+      <ol class="numbered-list">
+        <li><strong>Proposed deliverables</strong> — What specifically will you produce in six weeks, at both fund and portco level?</li>
+        <li><strong>Benefits and outcomes</strong> — What will Northwood have at the end that we don't have today? How does it connect to value creation and LP reporting?</li>
+        <li><strong>Data requirements</strong> — What do you need from us and from the portco teams to execute? Be specific — we'd rather know upfront than discover gaps in week three.</li>
+        <li><strong>Team and approach</strong> — How does your CC-native model work in practice? How will your team interact with ours?</li>
+        <li><strong>Anything else</strong> — If there's something we should be thinking about that we haven't raised, tell us.</li>
+      </ol>
+
+      <h2>Logistics</h2>
+      <table class="logistics-table">
+        <tr><td>Primary Contact</td><td>Sarah Mitchell, COO (sarah.mitchell@northwoodcapital.com)</td></tr>
+        <tr><td>Portco Coordination</td><td>I'll introduce you to the designated ESG contacts at each priority company</td></tr>
+        <tr><td>Timeline</td><td>We'd like to see your proposal within two weeks. If it works, we'd target engagement kickoff in late March.</td></tr>
+        <tr><td>Budget</td><td>We have budget allocated for this. We're not price-shopping — we're evaluating fit and capability. Include your fee structure in the proposal.</td></tr>
+      </table>
+
+      <div class="pull-quote">
+        <p>We've spoken with your team and we like the model. Now show us what six weeks looks like.</p>
+      </div>
+
+      <div class="signature">
+        <div class="name">Sarah Mitchell</div>
+        <div class="title">Chief Operating Officer<br>Northwood Capital · Chicago, IL</div>
+      </div>
+    </div>
+
+    <div class="end-original">— End of original inquiry —</div>
+
+  </div>
+
+  <div class="internal-footer">
+    <div class="internal-footer-inner">
+      <span>Kith Consulting — Client Records</span>
+      <span>Logged for engagement team review</span>
+    </div>
+  </div>
+
+</body>
+</html>

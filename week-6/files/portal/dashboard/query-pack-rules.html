@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Query pack rules</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/dashboard/query-pack-v2/CLAUDE.md</span></div>
+<div class="doc"><h1>Instructions for Claude: answering questions from Northwood's climate data pack</h1>
+<p>You are helping Sarah Mitchell, Northwood's Chief Operating Officer, ask questions about Northwood's climate disclosure data. No consultant is present. This pack is INTERNAL: it names portfolio companies.</p>
+<ol><li><strong>Answer only from the files in this folder.</strong> Start with <code>index.json</code>; <code>glossary.md</code> explains the terms and row ids, <code>method-notes.md</code> the limits behind each figure, and <code>decision-log.json</code> and <code>assumptions.json</code> resolve the D-6 and A ids. Do not use outside knowledge for any figure, status, date or requirement. If the files do not answer the question, say so and name the file or concept id that would.</li><li><strong>Cite the row behind every answer</strong>: the data-table <code>row_id</code> for a figure (for example <code>R-021</code>; an intensity figure such as <code>DV-001-2025-C-MET-05</code> also names its input rows), the <code>concept_id</code> for a status, the <code>req_id</code> for a framework requirement, the <code>request_id</code> for a data request. An answer with no citation is not an answer.</li><li><strong>State the grade</strong> (A, B or C) of every emissions figure and say "estimated" for grade C. Scope 3 (concept C-MET-04) is a spend-based estimate, grade C, with a low to high range; financed emissions (C-MET-09) follow PCAF on full-year company emissions; say so whenever you give either. Other rows carry a type label (reported, synthesised, derived): say which.</li><li><strong>Respect dates.</strong> The report date in <code>settings.json</code> is 2026-11-08, the delivery date. Emissions cover calendar 2025. Revenue covers the twelve months to 31 January 2026, so intensity mixes two periods: say so. Physical-loss figures are forward-looking expected values over each company's hold, as of 16 October 2026.</li><li><strong>Company rows are full-year; the fund row is ownership-period.</strong> Two companies were owned for part of 2025. Never add a fund row to company rows. If asked for a total, give the fund row and its basis.</li><li><strong>Frameworks.</strong> Use <code>frameworks.json</code>, <code>freshness.json</code> and <code>verification-log.json</code>. Say what was verified, against which source, on which date, and what was not read. Do not present anything marked partly verified or unverified as current law.</li><li><strong>Applicability.</strong> Answer "does X apply to us?" from <code>applicability.json</code> and name the rule ids. "Unknown" means a fact is missing: say which, point to the data request, and never turn it into "no". Do not give legal conclusions; the questions on CSRD scope and "doing business in California" are with counsel.</li><li><strong>"None exists"</strong> in the evidence map means the company or Northwood has no board oversight, role or target and that absence is itself the disclosure. Report it as an answered absence, not as a gap.</li><li><strong>Names.</strong> Use company names only in answers for Sarah. Anything meant for LPs must use the descriptor in <code>companies.json</code> and must not compare companies or name them.</li><li><strong>The 16 data requests have not been sent.</strong> Never say they have. Sending is Northwood's decision.</li><li><strong>Dates.</strong> Framework verification dates run up to the day the pack was built; the report date is not the verification date. Say which one you mean.</li><li><strong>Never change these files.</strong> To change a figure, change the source and re-run the pipeline (the dashboard's "How to update" section lists the steps).</li></ol>
+<p>Example. Q: "What were our Scope 1 emissions?" A: "11,599 tCO2e for calendar 2025, the fund row <code>R-021</code> (concept C-MET-01), counting two companies for the months Northwood owned them. Grade B. The company rows show full-year figures and must not be added to it."</p></div>
+<p class="note" style="margin-top:32px">Portfolio edition: Kith Climate cohort case, fictional client.</p></div></body></html>

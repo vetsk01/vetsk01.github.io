@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Applicability screen method</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+:root{--bg:#F6F4F0;--card:#FFFFFF;--ink:#1A2744;--muted:#55606F;--line:#E2DED7;--accent:#A67C52;--accent-ink:#7A5631;--code:#EFEBE4;
+--serif:'Source Serif 4',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a2b;--card:#18233a;--ink:#EEF0F3;--muted:#AEB6C2;--line:#2E3B55;--accent:#C9A87C;--accent-ink:#D9BC93;--code:#22304b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+.wrap{max-width:980px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:24px}
+.top a{color:var(--accent-ink);font-weight:600;text-decoration:none}
+.top a:hover,.top a:focus-visible{text-decoration:underline}
+.src{font:13px/1.4 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;text-wrap:balance}
+h1{font-size:32px;margin:8px 0 16px}h2{font-size:24px;margin:36px 0 10px}h3{font-size:19px;margin:26px 0 8px}h4{font-size:16px;margin:20px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--accent-ink)}
+code{font:0.88em var(--mono);background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+blockquote{margin:16px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card)}
+blockquote p{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--code)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+ul.sub{margin-top:0}
+.doc + .doc{border-top:1px solid var(--line);margin-top:36px;padding-top:4px}
+.note{font-size:14px;color:var(--muted)}
+
+/* portfolio edition: mobile wrapping and edition note */
+p,li,dd{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.tw{max-width:100%;overflow-x:auto}.note{font-size:14px;color:var(--muted,#55606F)}
+</style></head>
+<body><div class="wrap"><div class="top"><a href="../index.html">&#8592; Week 6 portal</a><span class="src">Master file in the engagement folder:<br>my-work/week-6/fund-level/library/applicability/applicability-screen-v1.md</span></div>
+<div class="doc"><h1>Applicability screen (v1, scripted)</h1><p class="note"><strong>Record ids.</strong> D-6-n is a Week 6 decision, J-n a journal entry, F-0n a review finding, DR6-n a data request, A-n an assumption; all are in the engagement record.</p>
+<p><strong>Rules:</strong> <code>applicability-rules-v2.csv</code> has 25 rules, one per framework, entity type (fund, GP, company or any) and route. Each rule has a machine-readable <code>condition</code>, the route (mandatory by law, requested by LPs, requested by customers, requested by a buyer in diligence, or none), the deciding threshold, a source URL, a retrieval date, a verification label and a re-check-by date. The v1 rules, written as prose, are in <code>_archive/</code>.</p>
+<p><strong>Input:</strong> <code>entity-facts-v1.json</code> in the case folder. It holds the facts for each entity. The allowed fact names and types are listed in <code>engine/run_applicability.py</code> (FACTS): revenue, EU group employees, AUM, California business, EU, UK and ISSB-jurisdiction listing, FCA authorisation, PRI signatory, EDCI participation, exit in view, and the lists of LP requests, customer requests and what the GP collects.</p>
+<p><strong>Fact definitions that carry legal tests:</strong></p>
+<ul><li><code>does_business_in_california</code>: the statutes do not define it. California's tax code test (RTC 23101) is met if any one holds: organised or commercially domiciled in California; California sales above the lesser of $500,000 or 25% of total sales; California property or payroll above the lesser of $50,000 or 25% of the total (the Franchise Tax Board adjusts these amounts each year). CARB's adoption of this test was not read. It is a low bar, so revenue is usually the real gate.</li><li><code>formed_in_us</code>: SB 253 and SB 261 cover only entities formed under US law (a state, DC or federal).</li><li><code>eu_turnover_eur_m</code> and <code>eu_turnover_eur_m_prior_year</code>: the non-EU group test needs both years above EUR 450m.</li></ul>
+<ul><li>Fund-level CSRD route (A-04d, A-04e): see <code>legal-reading-csrd-pe-groups-v1.md</code>. <code>fhu_derogation_confirmed</code> is true only on counsel's written confirmation, never on the team's judgment.</li></ul>
+<p><strong>Run:</strong> <code>python3 outputs/engine/run_applicability.py --case &lt;case folder&gt;</code> (also part of <code>run-all.sh</code>). Output goes to the case's <code>out/</code>:</p>
+<ul><li><code>applicability-detail-v1.csv</code>: each entity against each rule. The outcome is yes, no, unknown or monitor, with the facts used.</li><li><code>applicability-result-v1.csv</code>: each entity against each framework. It shows whether the framework applies, the routes (mandatory first), any undecided rules and the missing facts.</li><li><code>applicability-screen-v1.md</code>: the table for the scope note, followed by the open items.</li></ul>
+<p><strong>How it decides</strong></p>
+<ul><li>A condition is a set of clauses that must all hold (<code>fact == true</code>, <code>fact &gt; number</code>, <code>list contains TAG</code>, or <code>always</code>).</li><li>A rule is "no" if any clause it can test fails, even when another fact is missing. For example, revenue of $90m rules out SB 253 whether or not the company does business in California.</li><li>It is "unknown" if no clause fails but a fact it needs is missing. A missing fact never produces "no".</li><li>An undecided rule is listed in the open items even when the framework already applies by another route. A possible legal obligation still matters when an LP or customer already asks for the same thing.</li><li>A rule whose re-check date falls on or before the report date (a setting) is flagged as due for re-check.</li><li>The script stops (exit 2) on a rule or fact it cannot parse. It never guesses.</li></ul>
+<p><strong>Lens:</strong> mandatory routes are not negotiable. LP, customer and buyer routes are scoped with the owner on whether serving the request reduces deal risk or supports exit value.</p>
+<p><strong>Independent check:</strong> <code>checks/chk_applicability.py</code> (<code>applicability-sound</code>). It recomputes the California and FCA outcomes from the facts using thresholds declared in the check. It also confirms that every entity met every rule for its type exactly once, and that every undecided rule is surfaced.</p>
+<p>Thresholds marked unverified must be checked against the source before they decide anything for a client.</p></div>
+<p class="note" style="margin-top:32px">Portfolio edition: Kith Climate cohort case, fictional client.</p></div></body></html>

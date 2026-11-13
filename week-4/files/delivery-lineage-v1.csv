@@ -1,0 +1,398 @@
+kind,company,item,field,value,source
+company,sterling-precision-manufacturing,exit year,remaining_hold_n_years,1.0,connected-dataset-v4.csv; exit = report date + hold
+company,sterling-precision-manufacturing,"expected loss, everything lost",expected_loss_mid_usd,5918530,d4-summary-v5.csv
+company,sterling-precision-manufacturing,"expected loss, half lost",expected_loss_half_case_mid_usd,3196655,d4-summary-v5.csv
+company,harvest-ridge-foods,exit year,remaining_hold_n_years,3.23,connected-dataset-v4.csv; exit = report date + hold
+company,harvest-ridge-foods,"expected loss, everything lost",expected_loss_mid_usd,2426683,d4-summary-v5.csv
+company,harvest-ridge-foods,"expected loss, half lost",expected_loss_half_case_mid_usd,1339922,d4-summary-v5.csv
+company,meridian-business-solutions,exit year,remaining_hold_n_years,1.0,connected-dataset-v4.csv; exit = report date + hold
+company,meridian-business-solutions,"expected loss, everything lost",expected_loss_mid_usd,565240,d4-summary-v5.csv
+company,meridian-business-solutions,"expected loss, half lost",expected_loss_half_case_mid_usd,460498,d4-summary-v5.csv
+company,clearview-environmental,exit year,remaining_hold_n_years,1.23,connected-dataset-v4.csv; exit = report date + hold
+company,clearview-environmental,"expected loss, everything lost",expected_loss_mid_usd,646767,d4-summary-v5.csv
+company,clearview-environmental,"expected loss, half lost",expected_loss_half_case_mid_usd,555991,d4-summary-v5.csv
+company,keystone-behavioral-health,exit year,remaining_hold_n_years,2.73,connected-dataset-v4.csv; exit = report date + hold
+company,keystone-behavioral-health,"expected loss, everything lost",expected_loss_mid_usd,426026,d4-summary-v5.csv
+company,keystone-behavioral-health,"expected loss, half lost",expected_loss_half_case_mid_usd,426026,d4-summary-v5.csv
+company,novacare-health-partners,exit year,remaining_hold_n_years,1.00,connected-dataset-v4.csv; exit = report date + hold
+company,novacare-health-partners,"expected loss, everything lost",expected_loss_mid_usd,515903,d4-summary-v5.csv
+company,novacare-health-partners,"expected loss, half lost",expected_loss_half_case_mid_usd,515903,d4-summary-v5.csv
+company,patriot-staffing-solutions,exit year,remaining_hold_n_years,2.48,connected-dataset-v4.csv; exit = report date + hold
+company,patriot-staffing-solutions,"expected loss, everything lost",expected_loss_mid_usd,239260,d4-summary-v5.csv
+company,patriot-staffing-solutions,"expected loss, half lost",expected_loss_half_case_mid_usd,239260,d4-summary-v5.csv
+company,pinnacle-testing,exit year,remaining_hold_n_years,2.73,connected-dataset-v4.csv; exit = report date + hold
+company,pinnacle-testing,"expected loss, everything lost",expected_loss_mid_usd,1754117,d4-summary-v5.csv
+company,pinnacle-testing,"expected loss, half lost",expected_loss_half_case_mid_usd,1379457,d4-summary-v5.csv
+company,ridgeline-property-services,exit year,remaining_hold_n_years,3.23,connected-dataset-v4.csv; exit = report date + hold
+company,ridgeline-property-services,"expected loss, everything lost",expected_loss_mid_usd,617369,d4-summary-v5.csv
+company,ridgeline-property-services,"expected loss, half lost",expected_loss_half_case_mid_usd,435727,d4-summary-v5.csv
+company,trident-it-solutions,exit year,remaining_hold_n_years,1.00,connected-dataset-v4.csv; exit = report date + hold
+company,trident-it-solutions,"expected loss, everything lost",expected_loss_mid_usd,432966,d4-summary-v5.csv
+company,trident-it-solutions,"expected loss, half lost",expected_loss_half_case_mid_usd,432966,d4-summary-v5.csv
+line,sterling-precision-manufacturing,carbon price (mid scenario),impact_usd,166086,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,carbon price (mid scenario),impact_pct_ebitda,0.55,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,carbon price (mid scenario),expected_loss_mid_usd,8304,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,energy price shock,impact_usd,360000,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,energy price shock,impact_pct_ebitda,1.19,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,energy price shock,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,energy price shock,expected_loss_mid_usd,180000,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,physical weather events,impact_usd,113750,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,physical weather events,impact_pct_ebitda,0.38,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,physical weather events,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,physical weather events,expected_loss_mid_usd,56875,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,supplier concentration (sole-source superalloy),impact_usd,4603425,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,supplier concentration (sole-source superalloy),impact_pct_ebitda,15.24,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,supplier concentration (sole-source superalloy),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,supplier concentration (sole-source superalloy),expected_loss_mid_usd,230171,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,insurance premium increase,impact_usd,34375,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,insurance premium increase,impact_pct_ebitda,0.11,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,insurance premium increase,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,insurance premium increase,expected_loss_mid_usd,7734,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,customer carbon-data requirement (R12),case_half_lost_impact_usd,5443750,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,customer carbon-data requirement (R12),impact_usd,10887500,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,customer carbon-data requirement (R12),impact_pct_ebitda,36.05,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,customer carbon-data requirement (R12),p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,sterling-precision-manufacturing,customer carbon-data requirement (R12),expected_loss_mid_usd,5443750,exposure-lines-v6.csv
+line,harvest-ridge-foods,carbon price (mid scenario),impact_usd,182118,exposure-lines-v6.csv
+line,harvest-ridge-foods,carbon price (mid scenario),impact_pct_ebitda,0.80,exposure-lines-v6.csv
+line,harvest-ridge-foods,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,harvest-ridge-foods,carbon price (mid scenario),expected_loss_mid_usd,2869,exposure-lines-v6.csv
+line,harvest-ridge-foods,energy price shock,impact_usd,380000,exposure-lines-v6.csv
+line,harvest-ridge-foods,energy price shock,impact_pct_ebitda,1.67,exposure-lines-v6.csv
+line,harvest-ridge-foods,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,harvest-ridge-foods,energy price shock,expected_loss_mid_usd,28835,exposure-lines-v6.csv
+line,harvest-ridge-foods,physical weather events,impact_usd,92680,exposure-lines-v6.csv
+line,harvest-ridge-foods,physical weather events,impact_pct_ebitda,0.41,exposure-lines-v6.csv
+line,harvest-ridge-foods,physical weather events,p_hold_midpoint,0.825,exposure-lines-v6.csv
+line,harvest-ridge-foods,physical weather events,expected_loss_mid_usd,38650,exposure-lines-v6.csv
+line,harvest-ridge-foods,supplier concentration (sole-source flavor system),impact_usd,4135233,exposure-lines-v6.csv
+line,harvest-ridge-foods,supplier concentration (sole-source flavor system),impact_pct_ebitda,18.14,exposure-lines-v6.csv
+line,harvest-ridge-foods,supplier concentration (sole-source flavor system),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,harvest-ridge-foods,supplier concentration (sole-source flavor system),expected_loss_mid_usd,65150,exposure-lines-v6.csv
+line,harvest-ridge-foods,insurance premium increase,impact_usd,31102,exposure-lines-v6.csv
+line,harvest-ridge-foods,insurance premium increase,impact_pct_ebitda,0.14,exposure-lines-v6.csv
+line,harvest-ridge-foods,insurance premium increase,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,harvest-ridge-foods,insurance premium increase,expected_loss_mid_usd,2360,exposure-lines-v6.csv
+line,harvest-ridge-foods,customer carbon-data requirement (R12),case_half_lost_impact_usd,5627000,exposure-lines-v6.csv
+line,harvest-ridge-foods,customer carbon-data requirement (R12),impact_usd,11254000,exposure-lines-v6.csv
+line,harvest-ridge-foods,customer carbon-data requirement (R12),impact_pct_ebitda,49.36,exposure-lines-v6.csv
+line,harvest-ridge-foods,customer carbon-data requirement (R12),p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,harvest-ridge-foods,customer carbon-data requirement (R12),expected_loss_mid_usd,2173521,exposure-lines-v6.csv
+line,meridian-business-solutions,carbon price (mid scenario),impact_usd,55922,exposure-lines-v6.csv
+line,meridian-business-solutions,carbon price (mid scenario),impact_pct_ebitda,0.15,exposure-lines-v6.csv
+line,meridian-business-solutions,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,meridian-business-solutions,carbon price (mid scenario),expected_loss_mid_usd,2796,exposure-lines-v6.csv
+line,meridian-business-solutions,energy price shock,impact_usd,118000,exposure-lines-v6.csv
+line,meridian-business-solutions,energy price shock,impact_pct_ebitda,0.31,exposure-lines-v6.csv
+line,meridian-business-solutions,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,meridian-business-solutions,energy price shock,expected_loss_mid_usd,26550,exposure-lines-v6.csv
+line,meridian-business-solutions,supplier concentration,impact_usd,1417100,exposure-lines-v6.csv
+line,meridian-business-solutions,supplier concentration,impact_pct_ebitda,3.70,exposure-lines-v6.csv
+line,meridian-business-solutions,supplier concentration,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,meridian-business-solutions,supplier concentration,expected_loss_mid_usd,318848,exposure-lines-v6.csv
+line,meridian-business-solutions,insurance premium increase,impact_usd,46038,exposure-lines-v6.csv
+line,meridian-business-solutions,insurance premium increase,impact_pct_ebitda,0.12,exposure-lines-v6.csv
+line,meridian-business-solutions,insurance premium increase,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,meridian-business-solutions,insurance premium increase,expected_loss_mid_usd,10359,exposure-lines-v6.csv
+line,meridian-business-solutions,customer carbon-data requirement (R12),case_half_lost_impact_usd,465517,exposure-lines-v6.csv
+line,meridian-business-solutions,customer carbon-data requirement (R12),impact_usd,931034,exposure-lines-v6.csv
+line,meridian-business-solutions,customer carbon-data requirement (R12),impact_pct_ebitda,2.43,exposure-lines-v6.csv
+line,meridian-business-solutions,customer carbon-data requirement (R12),p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,meridian-business-solutions,customer carbon-data requirement (R12),expected_loss_mid_usd,209483,exposure-lines-v6.csv
+line,clearview-environmental,carbon price (mid scenario),impact_usd,100760,exposure-lines-v6.csv
+line,clearview-environmental,carbon price (mid scenario),impact_pct_ebitda,0.32,exposure-lines-v6.csv
+line,clearview-environmental,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,clearview-environmental,carbon price (mid scenario),expected_loss_mid_usd,4115,exposure-lines-v6.csv
+line,clearview-environmental,physical weather events,impact_usd,8000,exposure-lines-v6.csv
+line,clearview-environmental,physical weather events,impact_pct_ebitda,0.03,exposure-lines-v6.csv
+line,clearview-environmental,physical weather events,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,clearview-environmental,physical weather events,expected_loss_mid_usd,3446,exposure-lines-v6.csv
+line,clearview-environmental,supplier concentration,impact_usd,2308800,exposure-lines-v6.csv
+line,clearview-environmental,supplier concentration,impact_pct_ebitda,7.40,exposure-lines-v6.csv
+line,clearview-environmental,supplier concentration,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,clearview-environmental,supplier concentration,expected_loss_mid_usd,432131,exposure-lines-v6.csv
+line,clearview-environmental,energy price shock,impact_usd,81000,exposure-lines-v6.csv
+line,clearview-environmental,energy price shock,impact_pct_ebitda,0.26,exposure-lines-v6.csv
+line,clearview-environmental,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,clearview-environmental,energy price shock,expected_loss_mid_usd,15161,exposure-lines-v6.csv
+line,clearview-environmental,insurance premium increase,impact_usd,33605,exposure-lines-v6.csv
+line,clearview-environmental,insurance premium increase,impact_pct_ebitda,0.11,exposure-lines-v6.csv
+line,clearview-environmental,insurance premium increase,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,clearview-environmental,insurance premium increase,expected_loss_mid_usd,14477,exposure-lines-v6.csv
+line,clearview-environmental,customer carbon-data requirement (R12),case_half_lost_impact_usd,485000,exposure-lines-v6.csv
+line,clearview-environmental,customer carbon-data requirement (R12),impact_usd,970000,exposure-lines-v6.csv
+line,clearview-environmental,customer carbon-data requirement (R12),impact_pct_ebitda,3.11,exposure-lines-v6.csv
+line,clearview-environmental,customer carbon-data requirement (R12),p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,clearview-environmental,customer carbon-data requirement (R12),expected_loss_mid_usd,181552,exposure-lines-v6.csv
+line,keystone-behavioral-health,carbon price (mid scenario),impact_usd,30165,exposure-lines-v6.csv
+line,keystone-behavioral-health,carbon price (mid scenario),impact_pct_ebitda,0.12,exposure-lines-v6.csv
+line,keystone-behavioral-health,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,keystone-behavioral-health,carbon price (mid scenario),expected_loss_mid_usd,561,exposure-lines-v6.csv
+line,keystone-behavioral-health,energy price shock,impact_usd,54061,exposure-lines-v6.csv
+line,keystone-behavioral-health,energy price shock,impact_pct_ebitda,0.22,exposure-lines-v6.csv
+line,keystone-behavioral-health,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,keystone-behavioral-health,energy price shock,expected_loss_mid_usd,4819,exposure-lines-v6.csv
+line,keystone-behavioral-health,physical weather events,impact_usd,37883,exposure-lines-v6.csv
+line,keystone-behavioral-health,physical weather events,impact_pct_ebitda,0.16,exposure-lines-v6.csv
+line,keystone-behavioral-health,physical weather events,p_hold_midpoint,0.825,exposure-lines-v6.csv
+line,keystone-behavioral-health,physical weather events,expected_loss_mid_usd,17877,exposure-lines-v6.csv
+line,keystone-behavioral-health,supplier concentration,impact_usd,1790800,exposure-lines-v6.csv
+line,keystone-behavioral-health,supplier concentration,impact_pct_ebitda,7.40,exposure-lines-v6.csv
+line,keystone-behavioral-health,supplier concentration,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,keystone-behavioral-health,supplier concentration,expected_loss_mid_usd,401552,exposure-lines-v6.csv
+line,keystone-behavioral-health,insurance premium increase,impact_usd,19950,exposure-lines-v6.csv
+line,keystone-behavioral-health,insurance premium increase,impact_pct_ebitda,0.08,exposure-lines-v6.csv
+line,keystone-behavioral-health,insurance premium increase,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,keystone-behavioral-health,insurance premium increase,expected_loss_mid_usd,1778,exposure-lines-v6.csv
+line,novacare-health-partners,carbon price (mid scenario),impact_usd,52389,exposure-lines-v6.csv
+line,novacare-health-partners,carbon price (mid scenario),impact_pct_ebitda,0.19,exposure-lines-v6.csv
+line,novacare-health-partners,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,novacare-health-partners,carbon price (mid scenario),expected_loss_mid_usd,2619,exposure-lines-v6.csv
+line,novacare-health-partners,energy price shock,impact_usd,89829,exposure-lines-v6.csv
+line,novacare-health-partners,energy price shock,impact_pct_ebitda,0.32,exposure-lines-v6.csv
+line,novacare-health-partners,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,novacare-health-partners,energy price shock,expected_loss_mid_usd,20211,exposure-lines-v6.csv
+line,novacare-health-partners,physical weather events,impact_usd,40800,exposure-lines-v6.csv
+line,novacare-health-partners,physical weather events,impact_pct_ebitda,0.15,exposure-lines-v6.csv
+line,novacare-health-partners,physical weather events,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,novacare-health-partners,physical weather events,expected_loss_mid_usd,20400,exposure-lines-v6.csv
+line,novacare-health-partners,supplier concentration,impact_usd,2072000,exposure-lines-v6.csv
+line,novacare-health-partners,supplier concentration,impact_pct_ebitda,7.40,exposure-lines-v6.csv
+line,novacare-health-partners,supplier concentration,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,novacare-health-partners,supplier concentration,expected_loss_mid_usd,466200,exposure-lines-v6.csv
+line,novacare-health-partners,insurance premium increase,impact_usd,18184,exposure-lines-v6.csv
+line,novacare-health-partners,insurance premium increase,impact_pct_ebitda,0.06,exposure-lines-v6.csv
+line,novacare-health-partners,insurance premium increase,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,novacare-health-partners,insurance premium increase,expected_loss_mid_usd,9092,exposure-lines-v6.csv
+line,patriot-staffing-solutions,carbon price (mid scenario),impact_usd,53938,exposure-lines-v6.csv
+line,patriot-staffing-solutions,carbon price (mid scenario),impact_pct_ebitda,0.23,exposure-lines-v6.csv
+line,patriot-staffing-solutions,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,patriot-staffing-solutions,carbon price (mid scenario),expected_loss_mid_usd,1104,exposure-lines-v6.csv
+line,patriot-staffing-solutions,energy price shock,impact_usd,3600,exposure-lines-v6.csv
+line,patriot-staffing-solutions,energy price shock,impact_pct_ebitda,0.02,exposure-lines-v6.csv
+line,patriot-staffing-solutions,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,patriot-staffing-solutions,energy price shock,expected_loss_mid_usd,352,exposure-lines-v6.csv
+line,patriot-staffing-solutions,physical weather events,impact_usd,35640,exposure-lines-v6.csv
+line,patriot-staffing-solutions,physical weather events,impact_pct_ebitda,0.15,exposure-lines-v6.csv
+line,patriot-staffing-solutions,physical weather events,p_hold_midpoint,0.825,exposure-lines-v6.csv
+line,patriot-staffing-solutions,physical weather events,expected_loss_mid_usd,17991,exposure-lines-v6.csv
+line,patriot-staffing-solutions,supplier concentration,impact_usd,880600,exposure-lines-v6.csv
+line,patriot-staffing-solutions,supplier concentration,impact_pct_ebitda,3.70,exposure-lines-v6.csv
+line,patriot-staffing-solutions,supplier concentration,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,patriot-staffing-solutions,supplier concentration,expected_loss_mid_usd,214721,exposure-lines-v6.csv
+line,patriot-staffing-solutions,insurance premium increase,impact_usd,63431,exposure-lines-v6.csv
+line,patriot-staffing-solutions,insurance premium increase,impact_pct_ebitda,0.27,exposure-lines-v6.csv
+line,patriot-staffing-solutions,insurance premium increase,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,patriot-staffing-solutions,insurance premium increase,expected_loss_mid_usd,6196,exposure-lines-v6.csv
+line,pinnacle-testing,carbon price (mid scenario),impact_usd,80374,exposure-lines-v6.csv
+line,pinnacle-testing,carbon price (mid scenario),impact_pct_ebitda,0.40,exposure-lines-v6.csv
+line,pinnacle-testing,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,pinnacle-testing,carbon price (mid scenario),expected_loss_mid_usd,1496,exposure-lines-v6.csv
+line,pinnacle-testing,energy price shock,impact_usd,32967,exposure-lines-v6.csv
+line,pinnacle-testing,energy price shock,impact_pct_ebitda,0.16,exposure-lines-v6.csv
+line,pinnacle-testing,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,pinnacle-testing,energy price shock,expected_loss_mid_usd,2939,exposure-lines-v6.csv
+line,pinnacle-testing,physical weather events,impact_usd,960686,exposure-lines-v6.csv
+line,pinnacle-testing,physical weather events,impact_pct_ebitda,4.78,exposure-lines-v6.csv
+line,pinnacle-testing,physical weather events,p_hold_midpoint,0.825,exposure-lines-v6.csv
+line,pinnacle-testing,physical weather events,expected_loss_mid_usd,453338,exposure-lines-v6.csv
+line,pinnacle-testing,supplier concentration,impact_usd,1487400,exposure-lines-v6.csv
+line,pinnacle-testing,supplier concentration,impact_pct_ebitda,7.40,exposure-lines-v6.csv
+line,pinnacle-testing,supplier concentration,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,pinnacle-testing,supplier concentration,expected_loss_mid_usd,333521,exposure-lines-v6.csv
+line,pinnacle-testing,insurance premium increase,impact_usd,215000,exposure-lines-v6.csv
+line,pinnacle-testing,insurance premium increase,impact_pct_ebitda,1.07,exposure-lines-v6.csv
+line,pinnacle-testing,insurance premium increase,p_hold_midpoint,1.0,exposure-lines-v6.csv
+line,pinnacle-testing,insurance premium increase,expected_loss_mid_usd,215000,exposure-lines-v6.csv
+line,pinnacle-testing,customer carbon-data requirement (R12),case_half_lost_impact_usd,4203000,exposure-lines-v6.csv
+line,pinnacle-testing,customer carbon-data requirement (R12),impact_usd,8406000,exposure-lines-v6.csv
+line,pinnacle-testing,customer carbon-data requirement (R12),impact_pct_ebitda,41.82,exposure-lines-v6.csv
+line,pinnacle-testing,customer carbon-data requirement (R12),p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,pinnacle-testing,customer carbon-data requirement (R12),expected_loss_mid_usd,749319,exposure-lines-v6.csv
+line,ridgeline-property-services,carbon price (mid scenario),impact_usd,16725,exposure-lines-v6.csv
+line,ridgeline-property-services,carbon price (mid scenario),impact_pct_ebitda,0.10,exposure-lines-v6.csv
+line,ridgeline-property-services,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,ridgeline-property-services,carbon price (mid scenario),expected_loss_mid_usd,263,exposure-lines-v6.csv
+line,ridgeline-property-services,energy price shock,impact_usd,17000,exposure-lines-v6.csv
+line,ridgeline-property-services,energy price shock,impact_pct_ebitda,0.10,exposure-lines-v6.csv
+line,ridgeline-property-services,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,ridgeline-property-services,energy price shock,expected_loss_mid_usd,1290,exposure-lines-v6.csv
+line,ridgeline-property-services,physical weather events,impact_usd,2000,exposure-lines-v6.csv
+line,ridgeline-property-services,physical weather events,impact_pct_ebitda,0.01,exposure-lines-v6.csv
+line,ridgeline-property-services,physical weather events,p_hold_midpoint,0.825,exposure-lines-v6.csv
+line,ridgeline-property-services,physical weather events,expected_loss_mid_usd,834,exposure-lines-v6.csv
+line,ridgeline-property-services,supplier concentration,impact_usd,1287600,exposure-lines-v6.csv
+line,ridgeline-property-services,supplier concentration,impact_pct_ebitda,7.40,exposure-lines-v6.csv
+line,ridgeline-property-services,supplier concentration,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,ridgeline-property-services,supplier concentration,expected_loss_mid_usd,248678,exposure-lines-v6.csv
+line,ridgeline-property-services,insurance premium increase,impact_usd,17000,exposure-lines-v6.csv
+line,ridgeline-property-services,insurance premium increase,impact_pct_ebitda,0.10,exposure-lines-v6.csv
+line,ridgeline-property-services,insurance premium increase,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,ridgeline-property-services,insurance premium increase,expected_loss_mid_usd,3283,exposure-lines-v6.csv
+line,ridgeline-property-services,customer carbon-data requirement (R12),case_half_lost_impact_usd,940500,exposure-lines-v6.csv
+line,ridgeline-property-services,customer carbon-data requirement (R12),impact_usd,1881000,exposure-lines-v6.csv
+line,ridgeline-property-services,customer carbon-data requirement (R12),impact_pct_ebitda,10.81,exposure-lines-v6.csv
+line,ridgeline-property-services,customer carbon-data requirement (R12),p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,ridgeline-property-services,customer carbon-data requirement (R12),expected_loss_mid_usd,363284,exposure-lines-v6.csv
+line,trident-it-solutions,carbon price (mid scenario),impact_usd,22770,exposure-lines-v6.csv
+line,trident-it-solutions,carbon price (mid scenario),impact_pct_ebitda,0.09,exposure-lines-v6.csv
+line,trident-it-solutions,carbon price (mid scenario),p_hold_midpoint,0.05,exposure-lines-v6.csv
+line,trident-it-solutions,carbon price (mid scenario),expected_loss_mid_usd,1138,exposure-lines-v6.csv
+line,trident-it-solutions,energy price shock,impact_usd,37142,exposure-lines-v6.csv
+line,trident-it-solutions,energy price shock,impact_pct_ebitda,0.15,exposure-lines-v6.csv
+line,trident-it-solutions,energy price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,trident-it-solutions,energy price shock,expected_loss_mid_usd,8357,exposure-lines-v6.csv
+line,trident-it-solutions,supplier concentration,impact_usd,1842600,exposure-lines-v6.csv
+line,trident-it-solutions,supplier concentration,impact_pct_ebitda,7.40,exposure-lines-v6.csv
+line,trident-it-solutions,supplier concentration,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,trident-it-solutions,supplier concentration,expected_loss_mid_usd,414585,exposure-lines-v6.csv
+line,trident-it-solutions,insurance premium increase,impact_usd,20049,exposure-lines-v6.csv
+line,trident-it-solutions,insurance premium increase,impact_pct_ebitda,0.08,exposure-lines-v6.csv
+line,trident-it-solutions,insurance premium increase,p_hold_midpoint,0.5,exposure-lines-v6.csv
+line,trident-it-solutions,insurance premium increase,expected_loss_mid_usd,10024,exposure-lines-v6.csv
+line,harvest-ridge-foods,water price shock,impact_usd,23320,exposure-lines-v6.csv
+line,harvest-ridge-foods,water price shock,impact_pct_ebitda,0.10,exposure-lines-v6.csv
+line,harvest-ridge-foods,water price shock,p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,harvest-ridge-foods,water price shock,expected_loss_mid_usd,1770,exposure-lines-v6.csv
+line,harvest-ridge-foods,water supply curtailment (drought),impact_usd,1533948,exposure-lines-v6.csv
+line,harvest-ridge-foods,water supply curtailment (drought),impact_pct_ebitda,6.73,exposure-lines-v6.csv
+line,harvest-ridge-foods,water supply curtailment (drought),p_hold_midpoint,0.225,exposure-lines-v6.csv
+line,harvest-ridge-foods,water supply curtailment (drought),expected_loss_mid_usd,116397,exposure-lines-v6.csv
+backlog,sterling-precision-manufacturing,compressed air system optimization,cost_low_usd,80000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,compressed air system optimization,cost_high_usd,80000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,compressed air system optimization,savings_low_usd,60000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,compressed air system optimization,savings_high_usd,70000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,compressed air system optimization,payback_years,1.33,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,compressed air system optimization,exit_value_effect_usd,540000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",cost_low_usd,120000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",cost_high_usd,120000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",savings_low_usd,80000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",savings_high_usd,80000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",payback_years,1.50,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",exit_value_effect_usd,720000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",cost_low_usd,250000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",cost_high_usd,250000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",savings_low_usd,60000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",savings_high_usd,80000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",payback_years,4.17,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",exit_value_effect_usd,540000,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",cost_low_usd,344510,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",cost_high_usd,344510,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",savings_low_usd,23120,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",savings_high_usd,55460,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",payback_years,14.90,d5-ranking-v6.csv
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",exit_value_effect_usd,208080,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Chattanooga",cost_low_usd,95000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Chattanooga",cost_high_usd,95000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Chattanooga",savings_low_usd,63333,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Chattanooga",savings_high_usd,95000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Chattanooga",payback_years,1.50,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Chattanooga",exit_value_effect_usd,538330,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,compressed air audit and optimization,cost_low_usd,50000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,compressed air audit and optimization,cost_high_usd,65000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,compressed air audit and optimization,savings_low_usd,40000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,compressed air audit and optimization,savings_high_usd,55000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,compressed air audit and optimization,payback_years,1.62,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,compressed air audit and optimization,exit_value_effect_usd,340000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,steam trap survey and repair program,cost_low_usd,25000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,steam trap survey and repair program,cost_high_usd,35000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,steam trap survey and repair program,savings_low_usd,15000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,steam trap survey and repair program,savings_high_usd,25000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,steam trap survey and repair program,payback_years,2.33,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,steam trap survey and repair program,exit_value_effect_usd,127500,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",cost_low_usd,240000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",cost_high_usd,240000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",savings_low_usd,70000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",savings_high_usd,90000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",payback_years,3.43,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",exit_value_effect_usd,595000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",cost_low_usd,344510,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",cost_high_usd,344510,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",savings_low_usd,23120,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",savings_high_usd,55460,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",payback_years,14.90,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",exit_value_effect_usd,196520,d5-ranking-v6.csv
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telematics),cost_low_usd,20000,d5-ranking-v6.csv
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telematics),cost_high_usd,20000,d5-ranking-v6.csv
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telematics),savings_low_usd,9710,d5-ranking-v6.csv
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telematics),savings_high_usd,19420,d5-ranking-v6.csv
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telematics),payback_years,2.06,d5-ranking-v6.csv
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telematics),exit_value_effect_usd,92245,d5-ranking-v6.csv
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,cost_low_usd,280000,d5-ranking-v6.csv
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,cost_high_usd,280000,d5-ranking-v6.csv
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,savings_low_usd,40020,d5-ranking-v6.csv
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,savings_high_usd,123020,d5-ranking-v6.csv
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,payback_years,7.00,d5-ranking-v6.csv
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,exit_value_effect_usd,400200,d5-ranking-v6.csv
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clinics,cost_low_usd,3000,d5-ranking-v6.csv
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clinics,cost_high_usd,5000,d5-ranking-v6.csv
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clinics,savings_low_usd,1240,d5-ranking-v6.csv
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clinics,savings_high_usd,2720,d5-ranking-v6.csv
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clinics,payback_years,4.03,d5-ranking-v6.csv
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clinics,exit_value_effect_usd,12400,d5-ranking-v6.csv
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),cost_low_usd,3000,d5-ranking-v6.csv
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),cost_high_usd,3000,d5-ranking-v6.csv
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),savings_low_usd,3340,d5-ranking-v6.csv
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),savings_high_usd,20980,d5-ranking-v6.csv
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),payback_years,0.90,d5-ranking-v6.csv
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),exit_value_effect_usd,35070,d5-ranking-v6.csv
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),cost_low_usd,18800,d5-ranking-v6.csv
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),cost_high_usd,56400,d5-ranking-v6.csv
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),savings_low_usd,5610,d5-ranking-v6.csv
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),savings_high_usd,5780,d5-ranking-v6.csv
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),payback_years,10.05,d5-ranking-v6.csv
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),exit_value_effect_usd,47685,d5-ranking-v6.csv
+backlog,ridgeline-property-services,Sustainability services offering (company growth plan),cost_high_usd,1800000,d5-ranking-v6.csv
+backlog,harvest-ridge-foods,"respond to the customers who asked for carbon data, in the f",cost_central_usd,54000,d5-value-protected-v6.csv
+backlog,harvest-ridge-foods,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_everything_lost_usd,2173521,d5-value-protected-v6.csv
+backlog,harvest-ridge-foods,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_half_lost_usd,1086760,d5-value-protected-v6.csv
+backlog,harvest-ridge-foods,"respond to the customers who asked for carbon data, in the f",payback_days_central_vs_half_lost,18,d5-value-protected-v6.csv
+backlog,harvest-ridge-foods,"respond to the customers who asked for carbon data, in the f",payback_days_high_cost_vs_half_lost,33,d5-value-protected-v6.csv
+backlog,sterling-precision-manufacturing,"respond to the customers who asked for carbon data, in the f",cost_central_usd,9000,d5-value-protected-v6.csv
+backlog,sterling-precision-manufacturing,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_everything_lost_usd,5443750,d5-value-protected-v6.csv
+backlog,sterling-precision-manufacturing,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_half_lost_usd,2721875,d5-value-protected-v6.csv
+backlog,sterling-precision-manufacturing,"respond to the customers who asked for carbon data, in the f",payback_days_central_vs_half_lost,1,d5-value-protected-v6.csv
+backlog,sterling-precision-manufacturing,"respond to the customers who asked for carbon data, in the f",payback_days_high_cost_vs_half_lost,2,d5-value-protected-v6.csv
+backlog,pinnacle-testing,"respond to the customers who asked for carbon data, in the f",cost_central_usd,9000,d5-value-protected-v6.csv
+backlog,pinnacle-testing,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_everything_lost_usd,749319,d5-value-protected-v6.csv
+backlog,pinnacle-testing,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_half_lost_usd,374659,d5-value-protected-v6.csv
+backlog,pinnacle-testing,"respond to the customers who asked for carbon data, in the f",payback_days_central_vs_half_lost,9,d5-value-protected-v6.csv
+backlog,pinnacle-testing,"respond to the customers who asked for carbon data, in the f",payback_days_high_cost_vs_half_lost,18,d5-value-protected-v6.csv
+backlog,ridgeline-property-services,"respond to the customers who asked for carbon data, in the f",cost_central_usd,45000,d5-value-protected-v6.csv
+backlog,ridgeline-property-services,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_everything_lost_usd,363284,d5-value-protected-v6.csv
+backlog,ridgeline-property-services,"respond to the customers who asked for carbon data, in the f",value_protected_per_year_half_lost_usd,181642,d5-value-protected-v6.csv
+backlog,ridgeline-property-services,"respond to the customers who asked for carbon data, in the f",payback_days_central_vs_half_lost,90,d5-value-protected-v6.csv
+backlog,ridgeline-property-services,"respond to the customers who asked for carbon data, in the f",payback_days_high_cost_vs_half_lost,161,d5-value-protected-v6.csv
+company,trident-it-solutions,forcing date,term_loan_outstanding,28.0,explorer-inputs-v1.csv; line 218 of the company's Q4 2025 board deck
+company,trident-it-solutions,forcing date,term_loan_maturity,January 2027,explorer-inputs-v1.csv; line 219 of the company's Q4 2025 board deck
+backlog,pinnacle-testing,"respond to the customers who asked for carbon data, in the f",decision holder / lead / first move,"Director of Quality & Safety / One person, to be named by the company / Decide who signs off one response to all three refinery clients, and treat the combined revenue the file states for them (about $18M a year) as what it protects.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,harvest-ridge-foods,"respond to the customers who asked for carbon data, in the f",decision holder / lead / first move,"CFO (the company's point person for Northwood on the questionnaire) / One person, to be named by the company / Answer the top-3 customer's supplier assessment (carbon footprint, water, food waste) from the energy data already held, and agree with that customer what it will accept.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,ridgeline-property-services,"respond to the customers who asked for carbon data, in the f",decision holder / lead / first move,"VP Building Engineering / Building engineering team / Confirm with the REIT client what building-level data it will require by 2027 and in what format, then scope the data pull for its buildings.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,sterling-precision-manufacturing,"respond to the customers who asked for carbon data, in the f",decision holder / lead / first move,"Commercial lead (the RFPs are sales documents; role to be confirmed by the company) / One person, to be named by the company / Answer the three RFP formats once, in one reusable pack, before the next bid; this is revenue the company hopes to win, so treat it as a sales cost.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,sterling-precision-manufacturing,compressed air system optimization,decision holder / lead / first move,"CFO / Plant managers (one to be named) / Decide before exit: fund it so the run-rate saving is in front of buyers, or hand it over as upside. The exit value effect beside this item is the case for funding.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,harvest-ridge-foods,"complete LED lighting retrofit, Nashville, Bowling Green, Ch",decision holder / lead / first move,"CFO / Plant managers (one to be named) / Put the retrofit in the capital review with Harvest Ridge's other efficiency items, ranked against production equipment, using the Murfreesboro result as the case.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,harvest-ridge-foods,compressed air audit and optimization,decision holder / lead / first move,"CFO / Plant managers (one to be named) / Commission the formal audit, which has not been done; the vendor gave its cost and savings figures informally.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,sterling-precision-manufacturing,"complete LED lighting retrofit, Akron and Elyria",decision holder / lead / first move,"CFO / Facilities manager / Decide before exit: fund it so the saving shows in run-rate, or hand it to the buyer as upside; the payback estimate rests on the Canton results.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,clearview-environmental,fleet idle reduction (idle-time program on existing telemati,decision holder / lead / first move,"Whoever runs the fleet (role to be confirmed by the company) / One person, to be named by the company / Use the idle-time data the installed telematics can provide to set a target; the company puts it at about a $20K project effort, not capital. Payback is longer than the hold, so decide whether to run it before exit.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,harvest-ridge-foods,steam trap survey and repair program,decision holder / lead / first move,"CFO / Plant managers (one to be named) / Ask the company to explain its gas price, which is well above the benchmark, before the survey; the saving case depends on it.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,harvest-ridge-foods,"boiler economizers, Nashville and Bowling Green",decision holder / lead / first move,CFO / Plant managers (one to be named) / Do not run before exit: it pays back after the modelled exit and rests on an unexplained gas price. Record it as a buyer pitch point.,explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,sterling-precision-manufacturing,"heat recovery from heat treatment furnaces, Akron",decision holder / lead / first move,CFO / Plant managers (one to be named) / Do not refresh the quote before exit: it pays back after the modelled exit and rests on an unexplained gas price. Record it as a buyer pitch point.,explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,ridgeline-property-services,New service line for institutional clients (company growth p,decision holder / lead / first move,"The company's board (the plan is pending its approval) / Services lead, to be hired (planned in the company's file) / Take the board decision on the pilot (two to three clients, energy benchmarking) that the company's file plans for Q2 2026, and put the three-year investment and the unresolved net-EBITDA question before the board with it.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,sterling-precision-manufacturing,"solar PPA evaluation, Akron roof",decision holder / lead / first move,"CFO / One person, to be named by the company / Ask one PPA provider for an indicative price on the Akron roof (a PPA needs no capex); if none is offered, record it as a buyer pitch point. No feasibility study has been done.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,harvest-ridge-foods,"rooftop solar evaluation, Bowling Green",decision holder / lead / first move,"CFO / One person, to be named by the company / Ask one PPA provider for an indicative price on the Bowling Green roof; options in that utility territory have been limited, so if none is offered, record it as a buyer pitch point.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,meridian-business-solutions,no efficiency measure identified,decision holder / lead / first move,CFO (the finance team manages facility cost today) / No delivery needed / No action: energy is not a material cost against labor. Revisit if that changes.,explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,novacare-health-partners,HVAC replacement at the four PhysioFirst clinics,decision holder / lead / first move,"VP of Clinic Operations / VP of Clinic Operations / Make the replacement units' rated efficiency a purchase criterion for the budgeted 2026 replacement, so it carries a saving figure; the energy payback (about 2 to 7 years on a Kith estimate) is a pitch point for buyers, not the reason for the spend.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,keystone-behavioral-health,Energy Star appliances and LED fit-out standard for new clin,decision holder / lead / first move,"COO / The person who set the standard on the 2025 build-outs (named in the file) / Make the Energy Star and LED standard the default for future clinic build-outs; the incremental cost is stated, so no study is needed. The saving per clinic is small, so use it as a pitch point for buyers rather than a payback case.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,pinnacle-testing,LED lighting upgrades at Houston HQ and Pasadena depot (done,decision holder / lead / first move,"Director of Quality & Safety / One person, to be named by the company / Treat it as a proof point: record the actual cost and the measured lighting saving, then use it with customers and buyers.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,trident-it-solutions,Sub-metering of the Cleveland SOC (evaluating for 2026),decision holder / lead / first move,"VP of Operations / VP of Operations / Get one quote; if it comes with no saving case, close the item, since no cost or saving is stated.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+backlog,patriot-staffing-solutions,Electric vehicles for the branch manager fleet (evaluating),decision holder / lead / first move,"CFO (would normally handle the topic; Kith inference for fleet decisions) / Risk management lead (completed the questionnaire) / Require an electric-vehicle price in the fleet-contract renewal that the company's file plans for Q3 2026, and decide at that renewal; check the fleet's actual mileage first, since the reported fuel looks high for eight vehicles, and use the saving as a pitch point for buyers once confirmed.",explorer-owners-v6.csv; cited lines checked; approved 2026-10-11
+correction,,Sterling questionnaire line 43,page text,Sterling questionnaire line 45,explorer-page-corrections-v1.csv; F-170
+correction,,", so placed at some",page text,,explorer-page-corrections-v1.csv; F-164
+delivery,,01-client-deck-v2.html,page,130899,build-w4-final-v1.py
+delivery,,02-explorer-v7.html,page,190785,build-w4-final-v1.py
+delivery,,03-exposure-model-v2.html,page,111738,build-w4-final-v1.py
+delivery,,04-materiality-and-initiatives-v4.html,page,109830,build-w4-final-v1.py
+delivery,,05-data-book-v1.html,page,74918,build-w4-final-v1.py
+delivery,,06-re-run-guide-v2.html,page,104196,build-w4-final-v1.py
+delivery,,kith-climate-week4-portal-v1.html,page,56135,build-w4-final-v1.py
