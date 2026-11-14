@@ -49,3 +49,51 @@ ul.bul li{margin:0 0 8px;max-width:68ch}
 @media (max-width:600px){.nav,.edition{padding-left:16px;padding-right:16px}main{padding:0 16px 40px}}
 .more-files summary{cursor:pointer;color:var(--accent);font-weight:600;padding:10px 0}
 .position{font-size:20px;font-weight:600;color:var(--accent);margin:8px 0 0;max-width:60ch}
+/* Weeks 1-6 walkthrough (P-49). Still list by default; .on (JS, motion allowed) turns it into one stage. */
+.walk-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 22px 14px;margin:18px 0 8px}
+.walk-track{padding:0 7% 0}
+.walk-rail{position:relative;height:74px;margin:6px 0 4px}
+.walk-rail::before,.walk-fill{content:"";position:absolute;left:0;top:9px;height:3px;border-radius:2px;background:var(--line);width:100%}
+.walk-fill{background:var(--accent);width:100%}
+.walk-mark{position:absolute;left:calc(var(--i) * 20%);top:0;transform:translateX(-50%);text-align:center;text-decoration:none;color:var(--muted);width:110px}
+.walk-mark .dot{display:block;width:21px;height:21px;margin:0 auto 6px;border-radius:50%;background:var(--accent);border:3px solid var(--surface);box-shadow:0 0 0 2px var(--accent);box-sizing:border-box}
+.walk-mark .wl{display:block;font-size:13px;line-height:1.25}
+.walk-mark b{display:block;color:var(--ink);font-weight:600}
+.walk-mark:hover b{color:var(--accent)}
+.walk-tag{display:none}
+.walk-scenes{display:grid;gap:18px;margin-top:6px}
+.scene-open,.scene-close{display:none}
+.scene{border-top:1px solid var(--line);padding-top:16px}
+.scene-week{display:grid;grid-template-columns:1fr minmax(0,220px);gap:20px;align-items:start}
+.walk.on .scene-week{grid-template-columns:1fr minmax(0,300px)}
+.scene .label{margin:0 0 6px}
+.walk-head{font-size:clamp(22px,3vw,30px);line-height:1.2;font-weight:600;margin:0 0 10px;max-width:24ch}
+.walk-head em{font-style:normal;color:var(--accent)}
+.walk-fig{font-size:17px;margin:0 0 10px}
+.walk-hand{font-size:15px;color:var(--muted);margin:0}
+.walk-hand .label{display:block;margin:0 0 2px;color:var(--accent-2)}
+.scene .thumb{margin:0}
+.layers{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px;max-width:440px}
+.layers li{background:var(--tint);border-left:4px solid var(--accent);border-radius:6px;padding:7px 12px;font-size:15.5px}
+.walk-ctl{display:none}
+/* animated stage */
+.walk.on .walk-scenes{grid-template-columns:1fr;gap:0}
+.walk.on .scene{grid-area:1/1;border-top:0;padding-top:4px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease,visibility 0s linear .45s}
+.walk.on .scene.cur{opacity:1;visibility:visible;transform:none;transition:opacity .45s ease,transform .45s ease,visibility 0s}
+.walk.on .scene-open,.walk.on .scene-close{display:block}
+.walk.on .scene-open .walk-head,.walk.on .scene-close .walk-head{font-size:clamp(28px,4.4vw,42px);margin-top:28px}
+.walk.on .walk-fill{width:var(--fill,0%);transition:width .9s ease}
+.walk.on .walk-mark .dot{background:var(--surface);box-shadow:0 0 0 2px var(--line);transition:background .4s,box-shadow .4s}
+.walk.on .walk-mark.lit .dot{background:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.walk.on .walk-mark.now .dot{box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 22%,transparent)}
+.walk.on .walk-tag{display:block;position:absolute;top:-30px;left:var(--tag,0%);transform:translateX(-50%);max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;font-weight:600;color:var(--bg);background:var(--accent-2);border-radius:999px;padding:3px 10px;opacity:0;transition:left 1.3s ease,opacity .35s}
+.walk.on .walk-tag.go{opacity:1}
+.walk.on .scene-checks.cur .layers li{animation:walk-rise .5s ease both;animation-delay:calc((4 - var(--k)) * .22s)}
+@keyframes walk-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.walk.on .walk-ctl{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.walk-ctl button{font:inherit;font-size:14px;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 12px;cursor:pointer}
+.walk-ctl button:hover{color:var(--accent);border-color:var(--accent)}
+.walk-ctl button[hidden]{display:none}
+.walk .note{margin-top:8px}
+@media (max-width:760px){.walk-mark .wt{display:none}.walk-mark{width:64px}.walk-rail{height:52px}.scene-week{grid-template-columns:1fr}.walk.on .walk-tag{display:none}.walk-box{padding:16px 14px 12px}}
+@media (prefers-reduced-motion:reduce){.walk .scene,.walk .walk-fill,.walk .walk-tag{transition:none!important;animation:none!important}}
