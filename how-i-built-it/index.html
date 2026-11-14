@@ -84,8 +84,8 @@ th{font-weight:600;color:var(--muted)}
 <div class="stats">
 <div class="stat"><span class="figure">8 versions</span><span class="muted">of the project's standing instructions to Claude (CLAUDE.md), each one archived</span></div>
 <div class="stat"><span class="figure">6 reviewers</span><span class="muted">read-only AI agents, each with one job, none able to edit what it reviews</span></div>
-<div class="stat"><span class="figure">435 findings</span><span class="muted">raised by reviewers, code reviews and checks, Weeks 3 to 6; 21 not closed</span></div>
-<div class="stat"><span class="figure">34 of 79</span><span class="muted">gate-check runs failed before a final pass, Weeks 4 to 6</span></div>
+<div class="stat"><span class="figure">435 issues</span><span class="muted">caught by reviewers, code reviews and checks in Weeks 3 to 6; all but 21 closed</span></div>
+<div class="stat"><span class="figure">79 gate runs</span><span class="muted">in Weeks 4 to 6; each week's last run passed in full, after 34 earlier runs stopped a gate until a fix</span></div>
 </div>
 <p class="note" style="margin-top:12px;font-size:15px;color:var(--muted)">What the counts mean: a failed run is a check doing its job, since it stopped the gate until the problem was fixed, and the last run of each week passed in full. Of the 278 findings in Weeks 4 to 6, 82 were must-fix; the rest were should-fix.</p>
 
@@ -119,17 +119,7 @@ th{font-weight:600;color:var(--muted)}
 </ol>
 
 <h2>The operating system: CLAUDE.md</h2>
-<p>CLAUDE.md is the file Claude Code reads at the start of every session: the project's standing rules. Mine went through eight versions. It got shorter as it got stricter, because detail moved into reference files and every rule had to earn its place in the context window.</p>
-<div class="bars" role="img" aria-label="CLAUDE.md size by version: v1 13.2 KB, v2 4.1, v3 5.1, v4 5.6, v5 4.0, v6 4.3, v7 4.9, v8 5.3">
-<div class="bar"><span class="label">v1</span><div><span style="width:100%">13.2 KB</span></div></div>
-<div class="bar"><span class="label">v2</span><div><span style="width:31%">4.1</span></div></div>
-<div class="bar"><span class="label">v3</span><div><span style="width:39%">5.1</span></div></div>
-<div class="bar"><span class="label">v4</span><div><span style="width:42%">5.6</span></div></div>
-<div class="bar"><span class="label">v5</span><div><span style="width:30%">4.0</span></div></div>
-<div class="bar"><span class="label">v6</span><div><span style="width:33%">4.3</span></div></div>
-<div class="bar"><span class="label">v7</span><div><span style="width:37%">4.9</span></div></div>
-<div class="bar"><span class="label">v8</span><div><span style="width:41%">5.3</span></div></div>
-</div>
+<p>CLAUDE.md is the file Claude Code reads at the start of every session: the project's standing rules. Mine went through eight versions. It got shorter as it got stricter, because detail moved into reference files and every rule had to earn its place in the context window: from 13.2 KB at v1 to 5.3 KB at v8.</p>
 <ul class="vers">
 <li><strong>v1 to v2:</strong> 13 KB to 4 KB without losing a rule. Folder layout and week-by-week tooling moved to reference files.</li>
 <li><strong>v3:</strong> a dating convention, because the case data room runs on its own fictional clock while the residency runs on the real one.</li>
@@ -174,7 +164,7 @@ th{font-weight:600;color:var(--muted)}
 </ol>
 
 </main>
-<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate, September to November 2026; fictional client. Published November 2026.</footer>
 <script>
 (function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
 function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
