@@ -27,7 +27,7 @@
   }
   function step(){
     clearTimeout(timer);if(paused)return;
-    if(cur>=scenes.length-1){play.hidden=true;return}
+    if(cur>=scenes.length-1){if(document.activeElement===play)replay.focus();play.hidden=true;return}
     show(cur+1);timer=setTimeout(step,+scenes[cur].dataset.ms||4000);
   }
   function start(){started=true;paused=false;play.hidden=false;play.textContent='Pause';cur=-1;step()}
@@ -36,7 +36,12 @@
     if(paused)clearTimeout(timer);else timer=setTimeout(step,1200);
   };
   replay.onclick=function(){clearTimeout(timer);start()};
-  root.classList.add('on');show(0);
+  root.classList.add('on');root.querySelector('.walk-scenes').setAttribute('aria-hidden','true');show(0);
+  var held=false;  /* pause while the tab is hidden, resume when it returns */
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){if(started&&!paused&&cur<scenes.length-1){held=true;clearTimeout(timer)}}
+    else if(held){held=false;timer=setTimeout(step,800)}
+  });
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting&&!started){io.disconnect();start()}})},{threshold:.45});
     io.observe(root.querySelector('.walk-box'));

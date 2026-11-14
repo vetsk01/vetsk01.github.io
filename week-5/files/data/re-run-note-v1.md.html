@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Re-run note (markdown) (Week 5)</title>
+<meta name="description" content="Week 5 deliverable: Re-run note (markdown).">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Re-run note (markdown) (Week 5)">
+<meta property="og:description" content="Week 5 deliverable: Re-run note (markdown).">
+<meta property="og:url" content="https://vetsk01.github.io/week-5/files/data/re-run-note-v1.md.html">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vetsk01.github.io/week-5/files/data/re-run-note-v1.md.html">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(x){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/harvest-brand-v1.css">
+<link rel="stylesheet" href="../../../assets/site-v1.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
+
+<main id="main" class="narrow doc">
+<p class="kicker"><a href="../../../week-5/index.html">Week 5: Physical climate risk</a></p><p class="note">Reading view of a Markdown deliverable, shown as delivered. <a href="re-run-note-v1.md" download>Download the Markdown file</a>.</p>
+<article class="md"><h1>Re-running the physical-risk analysis next quarter (v1)</h1>
+<p>This note is for an analyst at Northwood with no Kith access. It covers what to update, the order to run the scripts in, and how to check the result. The method is in <code>my-work/week-5/fund-level/leave-behind/method-note-v1.md</code>.</p>
+<h2>What you need</h2>
+<ul><li><strong>Python 3.9 or later.</strong> The scripts use only the standard library. The kit helpers are in <code>my-work/framework/kernel-v2</code>.</li><li><strong>macOS</strong>, only for the page-script syntax check, which uses <code>osascript</code>. Every other step runs anywhere.</li><li><strong>The project folder</strong>, with the data room under <code>data/northwood-capital/</code>.</li><li><strong>Run every command from the project root.</strong> Each script refuses to overwrite its outputs. Before a re-run, move the previous outputs to <code>my-work/week-5/_archive/</code> in a folder named after the run that made them (the audit log, <code>my-work/week-5/record/audit-log-v1.jsonl</code>, gives the run id).</li></ul>
+<h2>What to update each quarter</h2>
+<div class="tablewrap"><table><thead><tr><th>Input</th><th>Where</th><th>Why it matters</th></tr></thead><tbody><tr><td>Revenue, EBITDA, debt, exit multiple</td><td><code>data/northwood-capital/_data/spine/csv/portfolio_companies.csv</code> and <code>portco_financials.csv</code></td><td>Every dollar figure, the covenant headroom and the exit-value lines</td></tr><tr><td>Exit timing</td><td><code>my-work/week-4/fund-level/exposure-lines-v6.csv</code> (<code>n_years</code>)</td><td>Hold years, lever timing</td></tr><tr><td>Report date</td><td>Manifest setting <code>report_date</code> (set with <code>kit_tools.py bump-manifest</code>)</td><td>Hold periods. While it is unset, outputs are marked provisional</td></tr><tr><td>Premiums and insurance schedules</td><td>Data request DR-1; then the premium history in <code>my-work/week-4/methodology/d2-inputs-v4.csv</code> and the programme rules A-17 to A-21 in <code>my-work/week-5/methodology/engine-parameters-v1.csv</code></td><td>Insured, retained and renewal split; recurring premium cost</td></tr><tr><td>New weather events the companies report</td><td>Add a row to <code>my-work/week-5/methodology/calibration-events-v1.csv</code> with its file, line and verbatim quote</td><td>Keeps the calibration current</td></tr><tr><td>Answers to data requests</td><td><code>my-work/week-5/fund-level/leave-behind/data/data-requests-v2.md</code> here; the live list is <code>my-work/week-5/fund-level/data-requests-v2.md</code></td><td>Narrows the ranges</td></tr><tr><td>Assumptions</td><td><code>my-work/week-5/methodology/engine-parameters-v1.csv</code> (numbers) and <code>assumptions-register-v2.csv</code> (basis)</td><td>Change a number only with a recorded decision, and keep low ≤ central ≤ high by loss</td></tr></tbody></table></div>
+<p>Public hazard data only needs re-fetching when its source publishes a new release. The vintages are in <code>my-work/week-5/fund-level/inputs/fetched/fetch-log-v1.csv</code>, <code>climate-fetch-log-v1.csv</code> and <code>downloads-log-v1.csv</code>; the last of these lists each download&#x27;s link and sha256.</p>
+<h2>Order of the scripts</h2>
+<p>All scripts are in <code>my-work/week-5/pipeline/</code>.</p>
+<div class="tablewrap"><table><thead><tr><th>Step</th><th>Script</th><th>Writes</th></tr></thead><tbody><tr><td>1</td><td><code>fetch-public-sources-v2.py</code>, <code>fetch-climate-cmra-v1.py</code> (only for a new data release)</td><td><code>my-work/week-5/fund-level/inputs/fetched/</code></td></tr><tr><td>2</td><td><code>extract-downloads-v1.py</code>, <code>extract-hazus-valuation-v1.py</code> (only after new downloads; pass the download folders as arguments, and run with <code>python3 -I</code>)</td><td>NOAA, Hazus and FAST extracts</td></tr><tr><td>3</td><td><code>build-join-key-map-v1.py</code>, <code>build-site-flood-status-v2.py</code></td><td>Join keys, flood status by site</td></tr><tr><td>4</td><td><code>build-synthesis-v1.py</code></td><td>Site exposure, supplier layers, logic notes</td></tr><tr><td>5</td><td><code>build-register-v1.py</code></td><td>Vulnerability register, regions, plausibility</td></tr><tr><td>6</td><td><code>engine-v1.py</code></td><td>Grid, presets, stack, expected loss, register v2 (ranked)</td></tr><tr><td>7</td><td><code>replay-calibration-v1.py</code></td><td>Calibration replay and groups</td></tr><tr><td>8</td><td><code>levers-v1.py</code></td><td>Lever results, captive flag, Target B screen</td></tr><tr><td>9</td><td><code>sensitivity-v1.py</code></td><td><code>my-work/week-5/fund-level/leave-behind/sensitivity-v1.csv</code></td></tr><tr><td>10</td><td><code>build-dashboard-v1.py</code></td><td><code>my-work/week-5/fund-level/physical-risk-dashboard-v1.html</code> and its data file</td></tr><tr><td>11</td><td><code>build-leave-behind-v1.py</code></td><td>Assumption ledger, reference-data index, <code>data/</code> copies, lineage</td></tr></tbody></table></div>
+<p>If only financials, the report date or assumptions changed, start at step 6.</p>
+<h2>How to check the result</h2>
+<ol><li>Run the checks for the Results gate: ``<code> python3 my-work/framework/kernel-v2/kit_tools.py --week-dir my-work/week-5 check --gate G2 --dry </code>`` These checks matter most:</li><li><code>calibration-band</code>: every tested event within 0.5 to 2 times;</li><li><code>page-matches-grid</code>: the page shows exactly what the engine wrote;</li><li><code>page-script-syntax</code>;</li><li><code>checks-independent</code>;</li><li><code>lint</code>.</li><li>Run the seeded tests: ``<code> python3 my-work/week-5/pipeline/test-calibration-band-v1.py python3 my-work/week-5/pipeline/test-page-checks-v1.py </code>`` Each must end &quot;ALL SEEDS CAUGHT&quot;. They show the checks still catch a corrupted input or output.</li><li>Open the page in a browser. Check that the draft banner is gone once the report date is set.</li><li>Record what changed in the week&#x27;s record:</li><li>each run cited in a journal entry;</li><li>each decision in the decision log, in the decider&#x27;s words;</li><li>each in-place edit in <code>my-work/week-5/record/changelog-v1.csv</code>.</li></ol>
+<h2>When a check fails</h2>
+<ul><li><strong>Calibration.</strong> A failure means the engine no longer reproduces what a company reported. Find the cause before touching a prior, and record any prior change as a decision.</li><li><strong>Any other check.</strong> A failure means an output and its source disagree. Re-run from the step that wrote the source.</li></ul></article></main>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
+function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
+function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
+if(m.addEventListener)m.addEventListener('change',s);s()})();
+</script>
+</body>
+</html>

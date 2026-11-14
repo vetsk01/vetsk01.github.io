@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method note (markdown) (Week 5)</title>
+<meta name="description" content="Week 5 deliverable: Method note (markdown).">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Method note (markdown) (Week 5)">
+<meta property="og:description" content="Week 5 deliverable: Method note (markdown).">
+<meta property="og:url" content="https://vetsk01.github.io/week-5/files/data/method-note-v1.md.html">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vetsk01.github.io/week-5/files/data/method-note-v1.md.html">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(x){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/harvest-brand-v1.css">
+<link rel="stylesheet" href="../../../assets/site-v1.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
+
+<main id="main" class="narrow doc">
+<p class="kicker"><a href="../../../week-5/index.html">Week 5: Physical climate risk</a></p><p class="note">Reading view of a Markdown deliverable, shown as delivered. <a href="method-note-v1.md" download>Download the Markdown file</a>.</p>
+<article class="md"><h1>Physical climate risk for Northwood: method note (v1)</h1>
+<p>This note explains how the Week 5 physical-risk figures are built, so that Northwood can check, update or re-run them without Kith. It goes with the dashboard (<code>my-work/week-5/fund-level/physical-risk-dashboard-v1.html</code>), the assumption ledger (<code>my-work/week-5/fund-level/leave-behind/assumption-ledger-v1.csv</code>), the reference-data index (<code>my-work/week-5/fund-level/leave-behind/reference-data-index-v1.csv</code>), the result files in <code>data/</code>, and the re-run note (<code>my-work/week-5/fund-level/leave-behind/re-run-note-v1.md</code>). Every number on the dashboard is a row in one of those files; this note does not restate them.</p>
+<h2>1. What question each figure answers</h2>
+<p>The work answers Sarah Mitchell&#x27;s three investment-committee questions for all ten portfolio companies:</p>
+<ol><li><strong>What could one bad event cost before exit?</strong> Gross loss in a named event, who pays it (insured, retained, next renewal), and what it does to covenant headroom.</li><li><strong>What does physical risk cost on average each year, and is that rising?</strong> Expected loss over each company&#x27;s hold, and the recurring cost at exit on today&#x27;s climate and on the buyer&#x27;s horizon.</li><li><strong>Will the companies stay insurable at an acceptable price?</strong> The premium path above a 3% non-climate trend, in the current and a hardened market, and the retained loss a captive could pool.</li></ol>
+<p>For each material risk the lever library gives a dollar value protected, a cost, the timing against the exit date, and a named Northwood owner.</p>
+<h2>2. Dating convention</h2>
+<ul><li><strong>Report date.</strong> The figures carry the deliverable&#x27;s real date, held as the manifest setting <code>report_date</code> and never typed into a script. Until it is recorded, the engine uses the run date and marks every output provisional (D-5-42).</li><li><strong>Hold.</strong> Each company&#x27;s exit date comes from the Week 4 model: the Week 4 report date (9 October 2026) plus the company&#x27;s <code>n_years</code> (D-4-170, D-4-174). The hold is the exit date minus the report date, with a one-year floor.</li><li><strong>Age of a figure.</strong> A figure&#x27;s age runs from the end of the period it covers. Financials are the last twelve months to 31 January 2026, the data room&#x27;s own date.</li><li><strong>Reference data.</strong> Public data carries its vintage (in the fetch logs) and is not flagged as stale. The cohort runs on the real calendar; the data room is fictional and its &quot;today&quot; is about 31 January 2026.</li></ul>
+<h2>3. The chain: hazard, exposure, vulnerability, cost</h2>
+<p>The analysis starts from what each company depends on, not from hazard scores.</p>
+<p><strong>Vulnerability register.</strong> One row per dependency: each own site, each supplier, each client base, the workforce where heat matters, and shared infrastructure (Bowling Green&#x27;s water). Each row carries:</p>
+<ul><li>the revenue that depends on it (seeded where the data room has it, otherwise synthesised by rule);</li><li>one of four archetypes assigned by written rule: can&#x27;t produce, can&#x27;t serve, can reroute, exposed through clients&#x27; assets;</li><li>its region, hazards and flood status;</li><li>its worst plausible 1-in-50 loss.</li></ul>
+<p>The data room&#x27;s 1 to 5 hazard scores are the &quot;before&quot; picture only.</p>
+<p><strong>Hazards and regions.</strong> There are seven hazards: hurricane, flood, winter and ice, extreme heat, wildfire and smoke, drought, and severe convective storms. There are six regions: Gulf coast, Southeast Atlantic, Central Valley, Southwest, Mountain West, and Ohio Valley and Mid-Atlantic.</p>
+<ul><li>A hazard and region pair is plausible only if its NRI annual frequency is above 0.01 in at least one county with a site or supplier there (A-01).</li><li>Wildfire smoke is also allowed where a company&#x27;s questionnaire names it (D-5-62).</li><li>Severity has three levels: 1-in-10, 1-in-50 and 1-in-100. Base downtime is set at 1-in-50 and scaled by 0.4 and 1.6 (A-04).</li></ul>
+<p><strong>Exposure rules.</strong></p>
+<ul><li>Hurricane hits every site in its region at once. This overstates the Gulf and Southeast Atlantic presets.</li><li>A river flood hits each company&#x27;s worst county or its single worst supplier, whichever loses more.</li><li>A convective storm hits one site per company at 1-in-50 and the worst county at 1-in-100.</li><li>Facility coordinates are the case&#x27;s site locations. The FEMA flood zone at the coordinate sets flood status.</li><li>Where the map and the company disagree (13 sites), or a point has only a city (62 points), the site is carried as a range from &quot;not in zone&quot; to &quot;in zone&quot; (D-5-56).</li></ul>
+<p><strong>Vulnerability.</strong></p>
+<ul><li>Own-site downtime days come from priors by facility class and hazard (A-05), adjusted by event length.</li><li>Field operations add client-driven days: Pinnacle&#x27;s clients shut for 2 to 3 times the storm (A-06).</li><li>Supplier outages last 1 to 26 weeks by severity (A-07). Stock, substitution by alternate status, and requalification time then apply (A-08, A-09, A-12).</li><li>Physical damage uses FEMA Hazus depth-damage curves for flood and stated wind ratios (A-45).</li></ul>
+<p><strong>Cost.</strong> Loss is contribution never recovered, plus the cost of recovery.</p>
+<ul><li>Within the first four weeks of an outage (A-47), part of the lost revenue is recovered:</li><li>50 to 90% for manufacturing, food, and the deferrable-work services, Pinnacle, Patriot and Ridgeline (A-30, A-49);</li><li>0 to 20% for clinics and the other services.</li><li>Recovered revenue goes on a separate cash-timing line.</li><li>Recovery cost is 10 to 25% of the recovered contribution (A-31).</li><li>One company&#x27;s lost revenue in one event is capped at its revenue times the longest outage in that event.</li><li>Nothing is netted: upside, if evidenced, is a separate line.</li></ul>
+<h2>4. Who pays</h2>
+<p>No insurance schedules are in the data room (data request DR-1), so each company has a programme synthesised by rule (A-17 to A-21):</p>
+<ul><li>an all-risk deductible by size band;</li><li>a 2 to 5% named-storm deductible on coastal sites;</li><li>flood sublimits;</li><li>a 72-hour waiting period for business interruption;</li><li>contingent business-interruption cover on named sole suppliers.</li></ul>
+<p>A hardened-market toggle doubles deductibles, sets the named-storm deductible to 5%, halves flood sublimits and removes contingent cover. After a claim, the next renewal steps up by 10 to 25% (A-23).</p>
+<p>Insured and retained each report their own range, because cover only triggers in the worse cases. Gross = insured + retained holds within each case.</p>
+<p><strong>Covenants.</strong></p>
+<ul><li>Sterling, Trident and NovaCare have seeded covenants (D-5-49).</li><li>For the other seven, the covenant level is entry leverage divided by one minus a 25 to 35% cushion (A-32).</li><li>A scenario flags a breach when retained loss plus the renewal step exceeds the headroom. It also reports Northwood&#x27;s own trigger: a cushion under 15% (<code>_reference/risk-framework.md</code>).</li></ul>
+<h2>5. Recurring cost and exit value</h2>
+<p>Recurring cost a year at exit is the sum of four parts:</p>
+<ul><li>premium growth above a 3% non-climate trend (seeded histories where they exist; A-24, A-25);</li><li>heat productivity loss on outdoor and field labour (A-26, A-27, CMRA county hot-day projections);</li><li>cooling and water uplift (A-28, A-46);</li><li>in the hardened market only, higher retained deductibles.</li></ul>
+<p>It is shown on two horizons: the hold, to each exit, and the buyer&#x27;s horizon (about 2035 to 2040). It is also multiplied by each company&#x27;s exit multiple, as value a buyer may normalise away. One-off event cash and recurring cost times the multiple are always shown apart.</p>
+<h2>6. Presets, the do-nothing figures and the builder</h2>
+<p><strong>Presets.</strong> Seven presets are fixed settings of the same engine:</p>
+<ol><li>Gulf landfall</li><li>Southeast Atlantic landfall</li><li>Sterling superalloy supplier outage, 26 weeks (D-5-67)</li><li>Central Valley drought, two seasons</li><li>Ohio Valley and Mid-Atlantic winter storm</li><li>Southwest heat summer</li><li>Hold-period &quot;do nothing&quot;</li></ol>
+<p><strong>The do-nothing preset</strong> shows two figures that are never added together:</p>
+<ul><li><strong>The severe-but-plausible stack.</strong> The rule takes the two multi-company presets with the highest gross loss at 1-in-50, from different hazard families, counting a row hit by both once, and adds the chronic baseline over each hold (D-5-31, D-5-47).</li><li>The rule picks the Gulf landfall and the winter storm.</li><li>NRI ranks flood and convective higher by expected annual loss. Both are local hazards that do not stack across companies at 1-in-50, so their weight is in the expected loss (D-5-65).</li><li><strong>Expected loss over the hold.</strong> A trapezoid over 1-in-10, 1-in-50 and 1-in-100 for every plausible hazard and region, times each hold (spec s8).</li></ul>
+<p><strong>The builder</strong> reads a precomputed grid. Hazard-led settings cover hazard × region × severity × length × market (768 plausible settings). Dependency-led settings cover each site and supplier × 2 to 26 weeks × market (2,020 settings). The page looks results up and does no arithmetic of its own (D-5-12).</p>
+<h2>7. Calibration</h2>
+<p>Nine events the companies reported for 2023 to 2026 were replayed through the engine with their actual sites, hazard, storm length and a severity fixed before the replay (1-in-10). Modelled lost-plus-delayed revenue was compared with the reported figure. A pass is 0.5 to 2 times (A-33). The results are in <code>my-work/week-5/fund-level/leave-behind/data/calibration-groups-v1.csv</code>.</p>
+<ul><li><strong>First run:</strong> five of nine passed.</li><li><strong>Two priors were narrowed by decision:</strong> food-plant winter downtime (D-5-69) and clinic hurricane downtime (D-5-70).</li><li><strong>Two events are reported but not tested, by decision:</strong></li><li>Keystone (D-5-71): its session count and its reported revenue contradict each other, and data request DR-13 asks Keystone to resolve it.</li><li>Ridgeline (D-5-72): see limitations.</li><li><strong>Final run:</strong> all seven tested events pass.</li></ul>
+<p>An independent check (<code>my-work/week-5/checks/chk_calibration_band.py</code>) re-derives every replayed figure without using the engine.</p>
+<h2>8. Levers</h2>
+<p>Each lever in <code>my-work/week-5/fund-level/leave-behind/data/levers-v1.csv</code> names the input it changes and a cost range (A-35 to A-39, A-50; Akron&#x27;s HVAC cost is seeded). The engine is re-run with each lever applied, for the lever&#x27;s companies only (<code>my-work/week-5/fund-level/leave-behind/data/lever-results-v1.csv</code>).</p>
+<p>For each lever:</p>
+<ul><li><strong>Value protected</strong> is expected loss avoided over the part of the hold after the lever is in place, plus recurring cost avoided times the exit multiple if it is in place before exit.</li><li><strong>Ranking</strong> is by value protected per dollar of cost over the hold.</li><li><strong>Tail protection</strong>, the retained loss avoided in a 1-in-50 event, is shown beside the value and never added to it.</li><li><strong>Timing:</strong> a lever that cannot be in place before exit is listed for the buyer&#x27;s plan and earns no exit credit.</li></ul>
+<p>Two portfolio overlays sit beside the levers:</p>
+<ul><li><strong>Captive feasibility flag:</strong> retained expected loss across the ten against $2M a year (A-40).</li><li><strong>Pipeline screen:</strong> Clearview&#x27;s Target B (Houston), run through the Gulf preset as a synthesised Clearview field site.</li></ul>
+<h2>9. How far to trust it</h2>
+<ul><li><strong>Ranges.</strong> Every output has a low, central and high. The wide-range priors (group 3 in D-5-48) are carried to every figure.</li><li><strong>Sensitivity.</strong> <code>my-work/week-5/fund-level/leave-behind/sensitivity-v1.csv</code> moves each group 3 prior from end to end with everything else at central. Drought pass-through (A-15) and supplier outage weeks (A-07) move the answers most. The Harvest Ridge covenant breach holds across the full covenant-cushion range (A-32).</li><li><strong>Assumption ledger.</strong> <code>my-work/week-5/fund-level/leave-behind/assumption-ledger-v1.csv</code> gives each assumption&#x27;s treatment: calibrated, cited, a visible range with sensitivity, or accepted judgment.</li><li><strong>Data requests.</strong> <code>my-work/week-5/fund-level/leave-behind/data/data-requests-v2.md</code> lists every gap filled by a synthesised or assumed input, in priority order. The insurance schedules (DR-1), Sterling&#x27;s superalloy stock and requalification (DR-2) and street addresses (DR-10) would narrow the ranges most.</li></ul>
+<h2>10. Limitations</h2>
+<ul><li><strong>Hurricane hits every site in a region at once.</strong> This overstates the Gulf and Southeast Atlantic presets for companies spread along the coast.</li><li><strong>Project schedule slippage is not modelled.</strong> Ridgeline&#x27;s January 2026 storms deferred fit-out work for tenants by weeks, with no margin impact. The engine models closure days, not project slippage, so that event is reported but not tested (D-5-72). The effect is cash timing, not loss.</li><li><strong>Insurance is synthesised.</strong> Insured and retained splits, and the contingent business-interruption cover behind Sterling&#x27;s superalloy result, are rules, not schedules (DR-1). Sterling&#x27;s cover is a question to ask, not a reassurance.</li><li><strong>Supplier layers for eight companies are synthesised</strong> from their cost lines by sector template (A-41). Sterling&#x27;s and Harvest Ridge&#x27;s supplier files are seeded.</li><li><strong>Flood status is a range</strong> for 75 points (D-5-56), so the central flood figure is a midpoint, not a probability.</li><li><strong>Each figure&#x27;s low, central and high are its own lowest, middle and highest of the three cases.</strong> For local floods and convective storms, a different county can be worst in each case. A company&#x27;s channels, insured and retained then need not add to its gross column by column. Within each case they always do.</li><li><strong>Keystone&#x27;s clinic closure cost</strong> rests on the spine revenue. The data room&#x27;s session count implies about a third of that (DR-13).</li><li><strong>Revenue per closure day uses calendar days.</strong> Clinics and offices open about 250 days a year, so a closure on a working day may cost more than shown.</li><li><strong>The buyer&#x27;s horizon changes recurring heat cost only.</strong> It uses CMRA county projections of days at or above 95°F for the 2030s and 2040s. The range runs across five model and scenario pairs: LOCA2 under SSP2-4.5, SSP3-7.0 and SSP5-8.5, and STAR under SSP2-4.5 and SSP5-8.5. The low case is the lowest of the five, the central case the median, the high case the highest. The hold period uses the 2020s. Event losses use today&#x27;s climate on both horizons (spec s3).</li><li><strong>Lever costs are stated judgment</strong> (D-5-74). Broker quotes should replace the insurance pricing (A-39, A-50) when DR-1 is answered.</li></ul></article></main>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
+function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
+function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
+if(m.addEventListener)m.addEventListener('change',s);s()})();
+</script>
+</body>
+</html>

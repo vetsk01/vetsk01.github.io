@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How I Built It</title>
+<title>How I built it with AI</title>
 <meta name="description" content="How Daniel Vetsko built six weeks of climate consulting work with Claude Code, and how the quality-assurance practice around it grew from nothing to gated, independently checked delivery.">
 <link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -15,7 +15,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vetsk01.github.io/how-i-built-it/">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(x){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/harvest-brand-v1.css">
 <style>
@@ -68,9 +71,10 @@ th{font-weight:600;color:var(--muted)}
 <link rel="stylesheet" href="../assets/site-v1.css">
 </head>
 <body>
-<div class="nav"><a class="wordmark" href="../index.html">Daniel <b>Vetsko</b></a><ul><li><a href="../index.html#work">Work</a></li><li><a href="../how-i-built-it/index.html" aria-current="page">How I built it</a></li><li><a href="../index.html#about">About</a></li><li><button class="theme" type="button" aria-label="Switch colour theme">Dark</button></li></ul></div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><a class="wordmark" href="../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../index.html#work">Work</a></li><li><a href="../how-i-built-it/index.html" aria-current="page">How I built it</a></li><li><a href="../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
 
-<main>
+<main id="main">
 <div class="hero">
 <p class="kicker">Capstone, Kith Climate's Climate Work Residency</p>
 <h1>How I built it with AI</h1>
@@ -170,12 +174,13 @@ th{font-weight:600;color:var(--muted)}
 </ol>
 
 </main>
-<div class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</div>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
 <script>
-(function(){var b=document.querySelector('.theme'),r=document.documentElement;
-try{var t=localStorage.getItem('theme');if(t)r.dataset.theme=t}catch(x){}
-function s(){var d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;b.textContent=d?'Light':'Dark'}
-b.onclick=function(){var t=b.textContent.toLowerCase();r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};s()})();
+(function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
+function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
+function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
+if(m.addEventListener)m.addEventListener('change',s);s()})();
 </script>
 </body>
 </html>

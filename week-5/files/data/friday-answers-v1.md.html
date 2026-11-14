@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four answers (markdown) (Week 5)</title>
+<meta name="description" content="Week 5 deliverable: Four answers (markdown).">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Four answers (markdown) (Week 5)">
+<meta property="og:description" content="Week 5 deliverable: Four answers (markdown).">
+<meta property="og:url" content="https://vetsk01.github.io/week-5/files/data/friday-answers-v1.md.html">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vetsk01.github.io/week-5/files/data/friday-answers-v1.md.html">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(x){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/harvest-brand-v1.css">
+<link rel="stylesheet" href="../../../assets/site-v1.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
+
+<main id="main" class="narrow doc">
+<p class="kicker"><a href="../../../week-5/index.html">Week 5: Physical climate risk</a></p><p class="note">Reading view of a Markdown deliverable, shown as delivered. <a href="friday-answers-v1.md" download>Download the Markdown file</a>.</p>
+<article class="md"><h1>Week 5 Friday answers (v1, report date 16 October 2026)</h1>
+<p>Answers to the four Friday questions in the Week 5 deck (<code>_teaching-materials/week-5/kith-climate-cohort-week5-physical-risk-deck-v2.html</code>, slide 8). Every figure is quoted from the frozen G2 outputs (<code>my-work/week-5/record/freeze-G2-v1.json</code>):</p>
+<ul><li>the dashboard: <code>my-work/week-5/fund-level/physical-risk-dashboard-v1.html</code>;</li><li>the data behind it: <code>my-work/week-5/fund-level/dashboard-data-v1.json</code>;</li><li>the engine outputs: <code>my-work/week-5/fund-level/engine/outputs-v1.csv</code>.</li></ul>
+<p>Ranges are low – central – high. All losses are gross loss, which here means contribution never recovered plus the cost of recovery.</p>
+<h2>1. Our number</h2>
+<p><strong>$18.2M over the hold, with a range of $6.6M – $18.2M – $40.7M.</strong> This is the severe-but-plausible &quot;do nothing&quot; figure across all ten companies:</p>
+<ul><li>a Gulf landfall at 1-in-50;</li><li>an Ohio Valley and Mid-Atlantic winter storm at 1-in-50;</li><li>the chronic cost to each company&#x27;s exit.</li></ul>
+<p>The two events were chosen by a written rule, not by hand: the two events that hit several companies at once with the highest loss, from different hazard families (D-5-31, D-5-47). Northwood&#x27;s ten companies earn $260.9M EBITDA a year between them.</p>
+<p>Beside it, never added to it:</p>
+<ul><li><strong>Expected loss a year: $6.04M ($1.95M – $13.1M).</strong> This is probability-weighted across every plausible hazard on today&#x27;s climate. Over each company&#x27;s hold it comes to $12.6M ($3.96M – $26.8M).</li><li><strong>Recurring cost at exit: $3.13M a year today ($1.74M – $4.91M), rising to $10.5M on a buyer&#x27;s horizon of about 2035 to 2040 ($5.83M – $17.2M).</strong> At exit multiples, today&#x27;s figure is $27.1M of value a buyer may normalise away.</li><li><strong>The worst single event: a two-season Central Valley drought, $11.1M ($4.66M – $21.0M).</strong></li><li>It falls on Harvest Ridge alone, through California input prices. It is 49% of Harvest Ridge&#x27;s EBITDA in the central case, and none of it is insured.</li><li>It breaches Harvest Ridge&#x27;s covenant in the central case. That covenant is assumed (A-32; terms requested in DR-7), but the breach holds whether the assumed cushion is 25%, 30% or 35%.</li></ul>
+<p><strong>The range we would stand behind.</strong></p>
+<ul><li><strong>The central figures.</strong> The engine reproduces seven of the companies&#x27; own 2023 to 2026 events within 0.5 to 2 times what they reported, so day-to-day downtime is calibrated.</li><li><strong>The high end is driven by assumptions, not by events.</strong> Two priors move it most:</li><li>drought pass-through (A-15) moves Harvest Ridge&#x27;s drought loss from $8.52M to $13.6M;</li><li>supplier outage weeks (A-07) move the Gulf landfall from $4.60M to $9.71M.</li><li><strong>The low end assumes everything goes well at once.</strong> Treat it as a floor, not a forecast.</li></ul>
+<h2>2. Monday morning</h2>
+<p>What Sarah does differently, from the lever table on the dashboard (each verdict follows one stated rule; owners are real Northwood roles):</p>
+<ol><li><strong>Ask each company for its insurance schedule and renewal dates (DR-1).</strong> This one request unlocks the top-ranked lever: a portfolio property programme, about $4.98M of exit value for a $75K design cost, if renewals can be aligned. It also unlocks:</li><li>the captive study: retained expected loss is $3.10M a year across the ten, against a $2M trigger (A-40);</li><li>the broker quotes for Pinnacle&#x27;s two transfer options.</li><li><strong>Harvest Ridge: qualify second sources for its two sole-source inputs</strong> (Nashville flavour, Fresno organic). Verdict &quot;Do now&quot;:</li><li>value protected $979K for a cost of $200K;</li><li>$2.21M of retained loss avoided in a 1-in-50 flood;</li><li>it removes a covenant flag.</li><li>Owner: Thomas Chen (deal lead). In place before the 2029 exit.</li><li><strong>Sterling: replace Akron&#x27;s R-22 HVAC unit</strong> at the company&#x27;s own $180K estimate. Verdict &quot;Do now&quot;. Owners: David Okafor and James Harrison.</li><li><strong>Sterling: hold more superalloy stock rather than qualify a second source.</strong></li><li>Sterling exits in about 12 months, and qualifying a second Inconel source takes 9 to 24 months, so that move goes to the buyer&#x27;s plan.</li><li>Eight more weeks of stock costs $277K over the hold and protects $325K of retained loss in a 26-week outage.</li><li><strong>Do not buy plant generators.</strong> $2.4M per company shows no benefit in the engine: in a regional winter storm the suppliers are down too.</li><li><strong>Price the climate exposure into Clearview&#x27;s Target B (Houston).</strong> It loses $1.40M ($537K – $2.65M) in a 1-in-50 Gulf landfall, which is 26% of its EBITDA in the central case. Its expected loss is $224K a year. Owner: Priya Kapoor.</li></ol>
+<h2>3. Our weakest assumption</h2>
+<p><strong>The insurance programme behind every &quot;who pays&quot; figure is synthesised, not seen (A-17 to A-21; DR-1).</strong> The data room has no insurance schedules. Deductibles, sublimits, waiting periods and contingent cover are set by rule for each company. That rule decides:</p>
+<ul><li>the insured and retained split in every scenario;</li><li>every covenant flag;</li><li>the captive trigger;</li><li>the value of the two Pinnacle transfer levers;</li><li>why Sterling&#x27;s superalloy outage looks mostly covered. Its gross loss is $2.19M, but only $436K is retained, because we assumed contingent business-interruption cover on a named sole supplier.</li></ul>
+<p>Gross losses do not depend on this assumption. Who pays them does. We would defend it last.</p>
+<h2>4. The data we wish existed</h2>
+<p><strong>First: the insurance schedules and renewal dates for all ten companies (DR-1).</strong></p>
+<ul><li><strong>What it closes:</strong> the weakest assumption above. It turns the transfer levers and the captive study into decisions.</li><li><strong>What it costs:</strong> a request from Northwood&#x27;s CFO to each company&#x27;s broker for documents they already hold. That is days of time, not money.</li></ul>
+<p>Next, in order of how far they would narrow the ranges:</p>
+<ul><li><strong>DR-2:</strong> Sterling&#x27;s superalloy stock and the time to qualify an alternate source. These set the 26-week outage.</li><li><strong>DR-7:</strong> covenant terms for the seven companies without them in the data room. These decide whether a flag is a breach.</li><li><strong>DR-10:</strong> street addresses for the 62 points the data room places only by city. These decide flood status.</li></ul>
+<p>The full list, with who holds each item, is in <code>my-work/week-5/fund-level/data-requests-v2.md</code>.</p></article></main>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
+function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
+function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
+if(m.addEventListener)m.addEventListener('change',s);s()})();
+</script>
+</body>
+</html>

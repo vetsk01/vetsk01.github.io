@@ -97,3 +97,28 @@ ul.bul li{margin:0 0 8px;max-width:68ch}
 .walk .note{margin-top:8px}
 @media (max-width:760px){.walk-mark .wt{display:none}.walk-mark{width:64px}.walk-rail{height:52px}.scene-week{grid-template-columns:1fr}.walk.on .walk-tag{display:none}.walk-box{padding:16px 14px 12px}}
 @media (prefers-reduced-motion:reduce){.walk .scene,.walk .walk-fill,.walk .walk-tag{transition:none!important;animation:none!important}}
+/* Accessibility and reading views (Part A, site review v1) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;z-index:10;background:var(--surface);color:var(--ink);padding:8px 14px;border:1px solid var(--line);border-radius:6px}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.nav nav{display:contents}
+.walk-sr{display:none}
+.walk.on .walk-sr{display:block;position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.walk{position:relative}
+a.kind{text-decoration:underline}
+@media (max-width:480px){.walk-mark{width:44px}.walk-mark .wk{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+.doc .kicker{margin:36px 0 6px}.doc .kicker a{text-decoration:none}
+.md{padding-bottom:16px}
+.md h1{font-size:clamp(28px,4vw,38px);margin:18px 0 14px}.md h2{font-size:24px;margin:34px 0 10px}.md h3{font-size:19px;margin:22px 0 6px}
+.md ul,.md ol{padding-left:22px;margin:0 0 14px;max-width:68ch}.md li{margin:0 0 6px}
+.md blockquote{margin:0 0 14px;padding:6px 16px;border-left:4px solid var(--accent);background:var(--tint);border-radius:6px}
+.md code{font-size:.9em;background:var(--tint);padding:1px 5px;border-radius:4px}
+.md pre{background:var(--tint);padding:12px 14px;border-radius:8px;overflow-x:auto}.md pre code{background:none;padding:0}
+.md hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+.md .tablewrap{overflow-x:auto;margin:0 0 16px}
+.md table{border-collapse:collapse;font-size:15px;min-width:100%}
+.md th,.md td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+.md th{background:var(--tint)}
+.md p,.md li{overflow-wrap:anywhere}
+.walk.on .scene-open,.walk.on .scene-close{align-self:center}.walk.on .scene-open .walk-head,.walk.on .scene-close .walk-head{margin-top:0}

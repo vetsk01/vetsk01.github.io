@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hand-off notes (markdown) (Week 5)</title>
+<meta name="description" content="Week 5 deliverable: Hand-off notes (markdown).">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Hand-off notes (markdown) (Week 5)">
+<meta property="og:description" content="Week 5 deliverable: Hand-off notes (markdown).">
+<meta property="og:url" content="https://vetsk01.github.io/week-5/files/data/handoff-notes-v1.md.html">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vetsk01.github.io/week-5/files/data/handoff-notes-v1.md.html">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(x){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/harvest-brand-v1.css">
+<link rel="stylesheet" href="../../../assets/site-v1.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
+
+<main id="main" class="narrow doc">
+<p class="kicker"><a href="../../../week-5/index.html">Week 5: Physical climate risk</a></p><p class="note">Reading view of a Markdown deliverable, shown as delivered. <a href="handoff-notes-v1.md" download>Download the Markdown file</a>.</p>
+<article class="md"><h1>Week 5 to Week 6 handoff (v1, 16 October 2026)</h1>
+<p>Week 6 writes an S2-style climate disclosure for Northwood from the Week 5 evidence. This note is for the fresh session that starts Week 6. It gives position, judgment and traps only. Facts are in the record: <code>python3 my-work/framework/kernel-v2/kit_tools.py --week-dir my-work/week-5 query &lt;id&gt;</code>. It supersedes the headline figures in <code>my-work/week-5/handover/build-kickoff-notes-v2.md</code>, which predate D-5-69 to D-5-77.</p>
+<h2>Position</h2>
+<ul><li><strong>G1 and G2 are signed and frozen</strong> (<code>my-work/week-5/record/freeze-G1-v1.json</code>, <code>my-work/week-5/record/freeze-G2-v1.json</code>, 46 files).</li><li><strong>G3 freezes this note and <code>my-work/week-5/fund-level/friday-answers-v1.md</code>.</strong></li><li><strong>Report date:</strong> 16 October 2026 (D-5-77, manifest v6). No output is provisional.</li><li><strong>Red team:</strong> stays deferred and may be dropped (D-5-16, D-5-76).</li><li><strong>Records:</strong> decisions D-5-1 to D-5-77; findings F-001 to F-014, all fixed.</li><li><strong>Process note:</strong> several calls were made by Claude under Daniel&#x27;s delegation and are logged that way: D-5-65, D-5-73, D-5-74, D-5-75, A-48 and the lever verdict rule. Week 6 should treat them as decided but open to Daniel.</li></ul>
+<h2>Where the evidence is</h2>
+<div class="tablewrap"><table><thead><tr><th>Disclosure need</th><th>Week 5 source</th></tr></thead><tbody><tr><td>Physical risks, by hazard and region, and which companies they touch</td><td><code>my-work/week-5/fund-level/register/vulnerability-register-v2.csv</code> (223 rows, ranked by 1-in-50 gross loss, archetype per row)</td></tr><tr><td>Scenario analysis and resilience</td><td>Seven presets and the builder grid. Figures in <code>my-work/week-5/fund-level/engine/outputs-v1.csv</code>; grid in <code>my-work/week-5/fund-level/engine/grid-hazard-v1.json</code> and <code>my-work/week-5/fund-level/engine/grid-dependency-v1.json</code></td></tr><tr><td>Current and anticipated financial effects</td><td>Event loss by channel; who pays (insured, retained, renewal); covenant flags; recurring cost at exit and × exit multiple (<code>outputs-v1.csv</code>, engine summary)</td></tr><tr><td>Time horizons</td><td>The hold period to each exit (Week 4 model) and the buyer&#x27;s horizon, about 2035 to 2040. The buyer&#x27;s horizon changes recurring heat cost only (method note, section 10)</td></tr><tr><td>Risk management: how risks are found and ranked</td><td><code>my-work/week-5/fund-level/leave-behind/method-note-v1.md</code>, sections 3 and 9; the plausibility rule A-01</td></tr><tr><td>Actions and transition of the response</td><td><code>my-work/week-5/fund-level/levers/lever-results-v1.csv</code> (verdicts, owners, timing against exits); captive flag and Target B screen in <code>my-work/week-5/fund-level/levers/portfolio-levers-v1.json</code></td></tr><tr><td>Assumptions, sources, sensitivity and limits</td><td><code>my-work/week-5/fund-level/leave-behind/assumption-ledger-v1.csv</code>, <code>reference-data-index-v1.csv</code>, <code>sensitivity-v1.csv</code>; calibration in <code>my-work/week-5/fund-level/engine/calibration-groups-v1.csv</code>; method note section 10</td></tr><tr><td>Data gaps to disclose</td><td><code>my-work/week-5/fund-level/data-requests-v2.md</code> (DR-1 to DR-13)</td></tr></tbody></table></div>
+<p><strong>Mapping to IFRS S2.</strong> The likely homes for this evidence:</p>
+<ul><li>physical risks and their time horizons: paragraphs 10 to 12;</li><li>current and anticipated financial effects: paragraphs 15 to 21;</li><li>climate resilience and scenario analysis: paragraph 22;</li><li>risk management: paragraph 25;</li><li>the cross-industry metric for assets or business activities vulnerable to physical risks: paragraph 29(b).</li></ul>
+<p>Check every paragraph reference against the standard&#x27;s text before citing it.</p>
+<h2>Headline figures (frozen, quote from the files)</h2>
+<ul><li><strong>&quot;Do nothing&quot; stack:</strong> $6.6M – $18.2M – $40.7M over the hold.</li><li><strong>Expected loss:</strong> $1.95M – $6.04M – $13.1M a year.</li><li><strong>Worst single event:</strong> the Central Valley drought, $11.1M, at Harvest Ridge. It breaches the assumed covenant in the central case.</li><li><strong>Gulf landfall:</strong> $6.97M across five companies. Pinnacle&#x27;s share is $3.53M; its high-case breach was removed by A-49 (D-5-73).</li><li><strong>Recurring cost at exit:</strong> $3.13M a year today, rising to $10.5M on the buyer&#x27;s horizon.</li><li><strong>Captive flag:</strong> on, with retained expected loss of $3.10M a year.</li></ul>
+<p>The Friday answers say which of these to lead with.</p>
+<h2>Judgment to carry</h2>
+<ul><li><strong>Disclose gross losses; label who pays as synthesised.</strong> Insurance is synthesised by rule (DR-1). In an S2 text, keep it separate from the gross losses, which do not depend on it.</li><li><strong>A covenant flag is a finding about headroom, not a statement about a lender.</strong> Seven of ten covenants are assumed (A-32). Say so wherever a flag appears.</li><li><strong>Keep these limitations visible</strong> (method note, section 10):</li><li>hurricane hits every site in a region at once;</li><li>Ridgeline&#x27;s project slippage is not modelled (D-5-72);</li><li>Keystone&#x27;s session data is inconsistent with its revenue (D-5-71, DR-13);</li><li>each figure&#x27;s own range need not add across columns.</li><li><strong>Northwood framing still governs</strong> (CLAUDE.md). The disclosure should read as a decision about money, not a compliance exercise. Every paragraph should tie to EBITDA, deal risk or exit readiness.</li></ul>
+<h2>Traps</h2>
+<ul><li><strong>Do not edit frozen G2 files.</strong> A change needs a new version, a decision, a downstream re-run and a fresh sign-off. The <code>frozen-unchanged</code> check enforces this. Week 6 should read the Week 5 outputs, not rebuild them.</li><li><strong>The dashboard HTML is about 830 thousand tokens. Never open it.</strong> Use <code>my-work/week-5/fund-level/dashboard-data-v1.json</code>, or a reading copy made from the rendered page (<code>my-work/week-5/packets/reading-copies/</code> holds the G2 ones).</li><li><strong>The preview server cannot read OneDrive.</strong> Serve a copy from <code>/tmp/northwood-preview</code> (the <code>static</code> launch configuration). That server also accepts a POST to <code>/save-reading-copy</code>.</li><li><strong>The re-run order and the clean re-run check depend on the table in <code>my-work/week-5/fund-level/leave-behind/re-run-note-v1.md</code>.</strong> Keep its format if it is ever versioned.</li><li><strong>In zsh, <code>echo ====</code> fails.</strong> Quote globs. Python is 3.9.</li></ul></article></main>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
+function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
+function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
+if(m.addEventListener)m.addEventListener('change',s);s()})();
+</script>
+</body>
+</html>

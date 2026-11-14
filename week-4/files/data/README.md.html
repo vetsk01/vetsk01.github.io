@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data files guide (Week 4)</title>
+<meta name="description" content="Week 4 deliverable: Data files guide.">
+<link rel="icon" href="https://vetsk01.github.io/assets/favicon-v1.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Vetsko">
+<meta property="og:title" content="Data files guide (Week 4)">
+<meta property="og:description" content="Week 4 deliverable: Data files guide.">
+<meta property="og:url" content="https://vetsk01.github.io/week-4/files/data/README.md.html">
+<meta property="og:image" content="https://vetsk01.github.io/assets/share-v1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://vetsk01.github.io/week-4/files/data/README.md.html">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(x){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/harvest-brand-v1.css">
+<link rel="stylesheet" href="../../../assets/site-v1.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
+
+<main id="main" class="narrow doc">
+<p class="kicker"><a href="../../../week-4/index.html">Week 4: Materiality and initiatives</a></p><p class="note">Reading view of a Markdown deliverable, shown as delivered. <a href="README.md" download>Download the Markdown file</a>.</p>
+<article class="md"><h1>Week 4 data files</h1>
+<p>Portfolio edition: Kith Climate cohort case, fictional client. These are the CSV files delivered with the Week 4 work for Northwood Capital, unchanged, so the re-run steps still work. Report date 9 October 2026.</p>
+<h2>Read this first</h2>
+<ul><li><strong><code>carbon_expected_loss_usd</code> (in <code>exposure-summary-v6.csv</code>) is not a carbon cost.</strong> It is the customer carbon-data requirement line plus the small carbon-price scenario for that company. For example, Sterling&#x27;s 5,452,054 is 5,443,750 (customer requirement) plus 8,304 (carbon-price scenario). The pages show carbon price as a scenario, left out of every total.</li><li>Expected loss is chance-weighted: the dollar impact if the event happens, times its chance over the remaining hold, per year. The company total is the sum of its lines, excluding the carbon-price scenario.</li><li>&quot;Revenue not yet won&quot; appears in the files as <code>hope to win</code>; it is not in earnings and is never counted at exit.</li><li>Notes columns sometimes cite ids such as D-4-37 or A-19. These point to entries in the Week 4 decision and assumption logs, the project record behind the work.</li><li>Amounts are US dollars unless a column says otherwise. A dagger (†) on the pages marks a Kith estimate (grade C).</li></ul>
+<h2>Files</h2>
+<h3><a href="connected-dataset-lineage-v4.csv">connected-dataset-lineage-v4.csv</a></h3>
+<p>Where each value in the connected dataset came from: file, line and grade.</p>
+<p>Columns: <code>company_slug</code>, <code>field</code>, <code>value</code>, <code>unit</code>, <code>period</code>, <code>file</code>, <code>line</code>, <code>source_ref</code>, <code>file_sha256_12</code>, <code>data_grade</code>, <code>basis</code>, <code>note</code></p>
+<h3><a href="connected-dataset-v4.csv">connected-dataset-v4.csv</a></h3>
+<p>Each company&#x27;s Week 3 carbon footprint beside its financials (revenue, EBITDA, margin, exit multiple, remaining hold).</p>
+<p>Columns: <code>company_slug</code>, <code>week3_slug</code>, <code>spine_slug</code>, <code>sector</code>, <code>acq_date</code>, <code>priority_company</code>, <code>carbon_period</code>, <code>scope1_t_co2e</code>, <code>scope2_t_co2e</code>, <code>scope12_t_co2e_low</code>, <code>scope12_t_co2e_base</code>, <code>scope12_t_co2e_high</code>, <code>scope12_t_co2e_base_ownership</code>, <code>carbon_label</code>, <code>financial_period</code>, <code>ltm_revenue_usd_m</code>, <code>ltm_adj_ebitda_usd_m</code>, <code>headcount</code>, <code>gross_margin_pct</code>, <code>gross_margin_period</code>, <code>exit_multiple</code>, <code>remaining_hold_n_years</code>, <code>gross_margin_pct_basis</code>, <code>exit_multiple_basis</code>, <code>remaining_hold_n_years_basis</code></p>
+<h3><a href="d4-matrix-v5.csv">d4-matrix-v5.csv</a></h3>
+<p>Each exposure placed on the materiality matrix (likelihood band, severity band, priority).</p>
+<p>Columns: <code>company_slug</code>, <code>risk</code>, <code>revenue_type</code>, <code>case</code>, <code>status</code>, <code>likelihood_band</code>, <code>severity_band</code>, <code>priority</code>, <code>impact_usd</code>, <code>p_annual_mid</code>, <code>expected_loss_mid_usd</code>, <code>expected_loss_low_edge_usd</code>, <code>expected_loss_high_edge_usd</code>, <code>note</code></p>
+<h3><a href="d4-summary-v5.csv">d4-summary-v5.csv</a></h3>
+<p>Company totals: expected loss (mid, low, high, half lost) and the efficiency measures&#x27; cost, saving and exit value.</p>
+<p>Columns: <code>company_slug</code>, <code>ltm_adj_ebitda_usd</code>, <code>measures_cost_usd</code>, <code>measures_saving_usd</code>, <code>measures_exit_value_usd</code>, <code>expected_loss_mid_usd</code>, <code>expected_loss_low_usd</code>, <code>expected_loss_high_usd</code>, <code>expected_loss_half_case_mid_usd</code>, <code>lines_not_quantified</code>, <code>company_plan_measure</code>, <code>note</code></p>
+<h3><a href="d5-initiatives-v6.csv">d5-initiatives-v6.csv</a></h3>
+<p>Every initiative considered, with its source, cost and saving ranges.</p>
+<p>Columns: <code>company_slug</code>, <code>initiative</code>, <code>source_kind</code>, <code>source_ref</code>, <code>status</code>, <code>fuel</code>, <code>cost_low_usd</code>, <code>cost_high_usd</code>, <code>savings_low_usd</code>, <code>savings_high_usd</code>, <code>eia_price_ratio</code>, <code>risk_addressed</code>, <code>risk_avoided_usd</code>, <code>risk_avoided_low_edge_usd</code>, <code>risk_avoided_high_edge_usd</code>, <code>exit_multiple</code>, <code>gas_flag</code>, <code>derivation</code>, <code>revenue_type</code></p>
+<h3><a href="d5-ranking-v6.csv">d5-ranking-v6.csv</a></h3>
+<p>The initiative ranking: payback, NPV at 8, 10 and 15 percent, risk avoided and exit value effect.</p>
+<p>Columns: <code>company_slug</code>, <code>rank</code>, <code>status</code>, <code>initiative</code>, <code>source_kind</code>, <code>n_years</code>, <code>cost_low_usd</code>, <code>cost_high_usd</code>, <code>savings_low_usd</code>, <code>savings_high_usd</code>, <code>case</code>, <code>cost_used_usd</code>, <code>savings_used_usd</code>, <code>savings_basis</code>, <code>escalation_rate</code>, <code>roi</code>, <code>payback_years</code>, <code>payback_exceeds_n</code>, <code>npv_8</code>, <code>npv_10</code>, <code>npv_15</code>, <code>risk_avoided_usd</code>, <code>exit_value_effect_usd</code>, <code>exit_lead</code>, <code>gas_flag</code>, <code>sensitivity_flag</code>, <code>npv_lineage</code></p>
+<h3><a href="d5-value-protected-v6.csv">d5-value-protected-v6.csv</a></h3>
+<p>Cost of answering customers&#x27; carbon-data requests, and the expected loss it reduces.</p>
+<p>Columns: <code>company_slug</code>, <code>action</code>, <code>revenue_type</code>, <code>what_the_customers_ask</code>, <code>components_in_base</code>, <code>optional_not_in_base</code>, <code>effort_days_low</code>, <code>effort_days_central</code>, <code>effort_days_high</code>, <code>day_rate_low_usd</code>, <code>day_rate_central_usd</code>, <code>day_rate_high_usd</code>, <code>cost_low_usd</code>, <code>cost_central_usd</code>, <code>cost_high_usd</code>, <code>value_protected_per_year_everything_lost_usd</code>, <code>value_protected_per_year_half_lost_usd</code>, <code>payback_days_central_vs_half_lost</code>, <code>payback_days_high_cost_vs_half_lost</code>, <code>exit_value_effect_what_if_usd</code>, <code>exit_value_effect_half_lost_what_if_usd</code>, <code>value_label</code>, <code>label</code>, <code>not_covered</code>, <code>source</code></p>
+<h3><a href="exposure-lines-v6.csv">exposure-lines-v6.csv</a></h3>
+<p>The exposure model&#x27;s workings: one row per company and risk (62 rows; Harvest Ridge has two extra water lines).</p>
+<p>Columns: <code>company_slug</code>, <code>risk</code>, <code>label</code>, <code>status</code>, <code>period</code>, <code>indicator_level</code>, <code>indicator_fact</code>, <code>grade</code>, <code>dollar_suffix</code>, <code>flag_impact</code>, <code>flag_probability</code>, <code>lineage</code>, <code>note</code>, <code>period_ebitda</code>, <code>ltm_adj_ebitda_usd</code>, <code>report_date</code>, <code>impact_usd</code>, <code>impact_pct_ebitda</code>, <code>severity_band</code>, <code>one_off</code>, <code>likelihood_band</code>, <code>n_years</code>, <code>p_hold_midpoint</code>, <code>p_annual_mid</code>, <code>p_annual_low_edge</code>, <code>p_annual_high_edge</code>, <code>expected_loss_mid_usd</code>, <code>expected_loss_low_edge_usd</code>, <code>expected_loss_high_edge_usd</code>, <code>value_at_risk_what_if_usd</code>, <code>freq_own</code>, <code>freq_pooled</code>, <code>freq_fema</code>, <code>freq_range_per_year</code>, <code>band_own</code>, <code>band_pooled</code>, <code>band_fema</code>, <code>band_rubric</code>, <code>disagreement_flag</code>, <code>stability</code>, <code>expected_loss_rate_low_usd</code>, <code>expected_loss_rate_high_usd</code>, <code>impact_high_scope_usd</code>, <code>impact_pct_ebitda_high_scope</code>, <code>severity_band_high_scope</code>, <code>expected_loss_high_scope_usd</code>, <code>value_at_risk_half_lost_what_if_usd</code>, <code>revenue_type</code>, <code>case_everything_lost_expected_loss_usd</code>, <code>case_half_lost_impact_usd</code>, <code>case_half_lost_expected_loss_usd</code>, <code>half_lost_label</code>, <code>impact_low_usd</code>, <code>impact_high_usd</code>, <code>expected_loss_range_usd</code>, <code>gas_flag</code>, <code>impact_upper_bound_usd</code>, <code>uses_simulated</code></p>
+<h3><a href="exposure-summary-v6.csv">exposure-summary-v6.csv</a></h3>
+<p>Expected loss a year per company, split by type of exposure.</p>
+<p>Columns: <code>company_slug</code>, <code>ltm_adj_ebitda_usd</code>, <code>lines_quantified</code>, <code>customer_requirement_expected_loss_usd</code>, <code>physical_expected_loss_usd</code>, <code>energy_expected_loss_usd</code>, <code>insurance_expected_loss_usd</code>, <code>supplier_expected_loss_usd</code>, <code>water_expected_loss_usd</code>, <code>carbon_expected_loss_usd</code>, <code>largest_line</code>, <code>largest_line_revenue_type</code>, <code>largest_line_expected_loss_usd</code>, <code>note</code></p>
+<h3><a href="revision-benchmarks-v1.csv">revision-benchmarks-v1.csv</a></h3>
+<p>Outside benchmarks used for grade C estimates, with source, URL and retrieval date.</p>
+<p>Columns: <code>id</code>, <code>value</code>, <code>unit</code>, <code>n</code>, <code>source</code>, <code>url</code>, <code>vintage</code>, <code>retrieved</code>, <code>quote</code>, <code>use</code></p>
+<h3><a href="revision-validation-v1.csv">revision-validation-v1.csv</a></h3>
+<p>How each benchmark estimate was cross-checked.</p>
+<p>Columns: <code>estimate</code>, <code>method</code>, <code>input</code>, <code>cross_check</code>, <code>result</code>, <code>reading</code></p>
+<h3><a href="simulated-extended-data-v1.csv">simulated-extended-data-v1.csv</a></h3>
+<p>A simulated water and site baseline for Harvest Ridge Foods, labelled SIMULATED and kept out of every other figure.</p>
+<p>Columns: <code>company_slug</code>, <code>plant</code>, <code>city</code>, <code>parameter</code>, <code>value</code>, <code>unit</code>, <code>central</code>, <code>range_low</code>, <code>range_high</code>, <code>anchor</code>, <code>label</code>, <code>seed</code>, <code>preregistered_by</code>, <code>preregistration_date</code></p></article></main>
+<footer class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</footer>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
+function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
+function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
+if(m.addEventListener)m.addEventListener('change',s);s()})();
+</script>
+</body>
+</html>
