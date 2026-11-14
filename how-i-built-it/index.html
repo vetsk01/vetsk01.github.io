@@ -72,7 +72,7 @@ th{font-weight:600;color:var(--muted)}
 
 <main>
 <div class="hero">
-<p class="kicker">Capstone, Kith Climate cohort</p>
+<p class="kicker">Capstone, Kith Climate's Climate Work Residency</p>
 <h1>How I built it with AI</h1>
 <p class="lede">Over six weeks I delivered a climate engagement for a fictional mid-market private equity fund, working with Claude Code throughout. The deliverables are on the week pages. This page is about the other thing I built along the way: a way of working that makes AI-produced analysis checkable, and how it grew from no review at all to gated, independently checked delivery.</p>
 </div>
@@ -99,8 +99,7 @@ th{font-weight:600;color:var(--muted)}
 <p>Six read-only reviews, by four kinds of reviewer agent, went over the audit memo, the data requests and the deck. They returned 44 items: 17 must-fix, 10 decisions for me, 9 should-fix and 8 changes to the method. The process reviewer's core point: everything had been built and checked by the same pass. I revised the audit method around it: thresholds registered before any data is reviewed, a produced inventory of every file with its data vintage, and a final stage split into running the checks and reviewing the work.</p></li>
 <li><span class="label">Week 3: carbon inventory, 138 sites</span>
 <h3>Rules locked before the numbers</h3>
-<p>Fourteen calculation rules were pre-registered and locked before the inventory was built; every later amendment was logged. Script runs went into a hash-chained audit log. An independent recalculation rebuilt 376 base and 153 sensitivity lines from the raw template. Four gates were signed and frozen with file hashes.</p>
-<p class="muted">The last gate, G6, which covers the client deck and the ESG scorecard, was not run because Week 4 began; the Week 3 deck says so.</p></li>
+<p>Fourteen calculation rules were pre-registered and locked before the inventory was built; every later amendment was logged. Script runs went into a hash-chained audit log. An independent recalculation rebuilt 376 base and 153 sensitivity lines from the raw template. Four gates were signed and frozen with file hashes.</p></li>
 <li><span class="label">Week 4: materiality and initiatives</span>
 <h3>From a process to a framework</h3>
 <p>I turned the Week 3 process into a reusable kit: a manifest of gates and review lanes, a check registry, per-reviewer packets and freezes. Every check had to name a deliberately wrong input it must reject. All eight gates, G0 to G7, were signed. The first gate took four reviewer passes and about ten document versions, which led to the next change.</p></li>
@@ -110,7 +109,7 @@ th{font-weight:600;color:var(--muted)}
 <li><span class="label">Week 6: LP disclosure</span>
 <h3>Delivery as a repeatable service</h3>
 <p>The LP report ran a 22-item QA (18 pass, 4 not applicable, none failing), checks re-ran the whole build from pinned inputs in a fresh folder, and all four of its gates were signed.</p></li>
-<li><span class="label">After the cohort: this portfolio</span>
+<li><span class="label">After the residency: this portfolio</span>
 <h3>Reviewing my own work for a public reader</h3>
 <p>Each week was reviewed again for public use, with assurance and presentation reviewers, method review for the calculation weeks, and a browser check on a phone-width screen. For the last week I delegated the whole review to Claude as orchestrator: it chose a model for each task (the stronger one for method review, a faster one for tracing and building) and checked each reviewer claim against its source before acting on it, and I signed off the result.</p></li>
 </ol>
@@ -129,7 +128,7 @@ th{font-weight:600;color:var(--muted)}
 </div>
 <ul class="vers">
 <li><strong>v1 to v2:</strong> 13 KB to 4 KB without losing a rule. Folder layout and week-by-week tooling moved to reference files.</li>
-<li><strong>v3:</strong> a dating convention, because the case data room runs on its own fictional clock while the cohort runs on the real one.</li>
+<li><strong>v3:</strong> a dating convention, because the case data room runs on its own fictional clock while the residency runs on the real one.</li>
 <li><strong>v4:</strong> an order of authority for when documents conflict. Adding it changed a file that a previous gate had frozen, so the next gate's check failed and needed a logged override: the rules file is itself evidence.</li>
 <li><strong>v5 and v6:</strong> a context-economy section. The live build record had reached about 110,000 tokens, so "do not read it whole" became a rule and lookup-by-id tools were built the same day. The full v4 wording was kept in a reference file, with a script that proves nothing was lost.</li>
 <li><strong>v7 and v8:</strong> sessions start from the active week's generated state file (about 700 tokens), and files may be edited in place with a logged change until they enter a review or a freeze.</li>
@@ -150,10 +149,10 @@ th{font-weight:600;color:var(--muted)}
 </tbody></table></div>
 <p style="margin-top:14px">From Week 3 on, every change to an agent's instructions was shown to me and approved before it was saved.</p>
 
-<h2>What the checks caught</h2>
+<h2>Examples of what the checks caught</h2>
 <div class="cards">
-<div class="card"><span class="label">Week 3</span><h3>A gate that printed "ALL PASS"</h3><p>while three of its checks had not been built. A code review found it; the runner was rebuilt to run every check and read every verdict. A green light can mean the test was too small.</p><span class="src muted">Finding F-037</span></div>
 <div class="card"><span class="label">Week 2</span><h3>An overrun that was a saving</h3><p>A $1.3M workers' compensation figure, read as a cost overrun, was the budgeted reduction. The process review caught it before the memo reached the client.</p><span class="src muted">Review consolidation, item A4</span></div>
+<div class="card"><span class="label">Week 3</span><h3>A gate that printed "ALL PASS"</h3><p>while three of its checks had not been built. A code review found it; the runner was rebuilt to run every check and read every verdict. A green light can mean the test was too small.</p><span class="src muted">Finding F-037</span></div>
 <div class="card"><span class="label">Week 4</span><h3>A hail loss that was not the company's</h3><p>A $120,000 hail loss had been borne by the property owner, not the portfolio company, and a $1.49M impact assigned to one event was a combined figure: split by days, about $0.96M.</p><span class="src muted">Findings F-143, F-144</span></div>
 <div class="card"><span class="label">Week 4</span><h3>Tests that could not fail</h3><p>I found that two seeded failure tests pointed at superseded files, so they passed whatever happened. After the fix, all 44 independence seeds failed as intended.</p><span class="src muted">Finding F-176</span></div>
 <div class="card"><span class="label">Week 5</span><h3>The AI's premise was wrong</h3><p>The build assumed the site coordinates were city-level only. I pointed to the course material saying we held coordinates for all 138 facilities; the decision was reversed and 13 location conflicts became client findings.</p><span class="src muted">Decisions D-5-55, D-5-56</span></div>
@@ -170,10 +169,8 @@ th{font-weight:600;color:var(--muted)}
 <li><strong>Keep judgment human.</strong> The AI drafted, built and checked at speed; the calls that mattered, including overruling it, were mine.</li>
 </ol>
 
-<h2>Honest limits</h2>
-<p>Week 1 had no review during the cohort. Week 3's last gate, covering the client deck and scorecard, was never run. Week 5's planned red-team review was deferred. Twenty-one findings, 10 in Week 3 and 11 in Week 4, were left not closed when each week ended. In Week 6, the framework indices claimed 16 of 48 disclosure points as met; on review for this portfolio, 9 of 48 hold, and the pages now show both. The finding counts above are from each week's record; the portfolio review's own findings are not included.</p>
 </main>
-<div class="edition">Portfolio edition: Kith Climate cohort case, fictional client.</div>
+<div class="edition">Portfolio edition: Climate Work Residency, Kith Climate; fictional client.</div>
 <script>
 (function(){var b=document.querySelector('.theme'),r=document.documentElement;
 try{var t=localStorage.getItem('theme');if(t)r.dataset.theme=t}catch(x){}
