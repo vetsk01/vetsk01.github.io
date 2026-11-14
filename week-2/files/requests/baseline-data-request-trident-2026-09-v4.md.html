@@ -26,7 +26,7 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button" aria-pressed="false">Dark theme</button></li></ul></nav></header>
+<header class="nav"><a class="wordmark" href="../../../index.html">Daniel <b>Vetsko</b></a><nav aria-label="Main"><ul><li><a href="../../../index.html#work" aria-current="true">Work</a></li><li><a href="../../../how-i-built-it/index.html">How I built it</a></li><li><a href="../../../index.html#about">About</a></li><li><button class="theme" type="button">Dark theme</button></li></ul></nav></header>
 
 <main id="main" class="narrow doc">
 <p class="kicker"><a href="../../../week-2/index.html">Week 2: Data audit</a></p><p class="note">Reading view of a Markdown deliverable, shown as delivered. <a href="baseline-data-request-trident-2026-09-v4.md" download>Download the Markdown file</a>.</p>
@@ -60,7 +60,7 @@
 <script>
 (function(){var b=document.querySelector('.theme'),r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)');
 function dark(){return r.dataset.theme?r.dataset.theme==='dark':m.matches}
-function s(){b.setAttribute('aria-pressed',dark()?'true':'false')}
+function s(){b.textContent=dark()?'Light theme':'Dark theme'}
 b.onclick=function(){var t=dark()?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(x){}s()};
 if(m.addEventListener)m.addEventListener('change',s);s()})();
 </script>
